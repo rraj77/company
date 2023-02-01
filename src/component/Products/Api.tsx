@@ -7,14 +7,12 @@ import { Product } from "./TableModel";
       category: "sdf",
       sub_category: "desad",
       description: "dsjf",
-     
       company_id: 1,
      
     },
     {
       
       product_name: "Ice ",
-      
       category:"dfg",
       sub_category: "cdvf",
       description: "sgjf",
@@ -24,7 +22,6 @@ import { Product } from "./TableModel";
     {
       
       product_name: "Eclair",
-      
       category: "fgf",
       sub_category: "fdvfdv",
       description: "dfn",
@@ -34,7 +31,6 @@ import { Product } from "./TableModel";
     {
       
       product_name: "Cupcake",
-     
       category: "fh",
       sub_category: "fvdgf",
       description: "dfn",

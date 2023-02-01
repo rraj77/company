@@ -8,14 +8,12 @@ import { formSchema } from "./Schema/schemas";
 import style from "../../styles/styles.module.scss";
 import { Product } from "./TableModel";
 import { useEffect} from "react";
-
 export interface AddProductFormPro {
   onSubmitProductForm: (inputs: Product) => void;
   userProducts: Product;
   setuserProducts: React.Dispatch<React.SetStateAction<Product>>;
  
 }
-
 export default function AddProductForm({
   onSubmitProductForm,
   userProducts,
@@ -47,7 +45,7 @@ export default function AddProductForm({
     handleChange(e);
   };
   const onFormSubmit = (values: Product) => {
-    //values.company_id = userProducts.company_id;
+    
     onSubmitProductForm(values);
 
     setuserProducts({
@@ -134,7 +132,6 @@ export default function AddProductForm({
         </Box>
       </Box>
 
-      {/* <div> */}
       <Box className={style.input_field}>
         <TextField
           size="small"
@@ -189,7 +186,6 @@ export default function AddProductForm({
 
           </Box>
         </Box>
-      {/* </div> */}
     </Box>
   );
 }

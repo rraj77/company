@@ -32,16 +32,6 @@ export default function Tablemodel() {
   const [productForm, setProductForm] = useState(false);
   const [id, setId] = useState("");
 
-  //   const [reload, setReload] = useState(false)
-  // useEffect(() => {
-  //      // Add your code here
-  //      setReload(true);
-  //     // console.log("reload")
-  // }, [productForm]);
-
-  // return (
-  //  <button onClick={() => setReload(!reload)} >Reload</button>
-  // );
   const [userProducts, setuserProducts] = useState<Product>({
     product_name: "",
     category: "",
