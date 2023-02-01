@@ -12,6 +12,7 @@ import SignUp from "../auth/sign-up/SignUp";
 import styles from "./../styles/styles.module.scss";
 import Vat from "../admin/vat/Vat";
 import CategorySubcategoryTable from "../category-subcategory/CategorySubcategoryTable";
+import Tablemodel from "./Products/TableModel";
 
 export default function NavBarList() {
   return (
@@ -37,6 +38,7 @@ export default function NavBarList() {
           <Route path="/" element={<Admin />} />
           <Route path="/company-list" element={<CompanyList />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/table-model" element={<Tablemodel />} />
           <Route path="/vat" element={<Vat />} />
           <Route
             path="/category-subcategory"
