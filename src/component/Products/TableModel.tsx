@@ -1,13 +1,10 @@
-import * as React from "react";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
+import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-import { Grid, inputClasses } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
@@ -139,7 +136,6 @@ export default function Tablemodel() {
                   </TableCell>
                   <TableCell sx={{display:"flex"}}>
                     <IconButton
-                      //setToggleSubmit='false'
                       color="primary"
                       onClick={() => {
                         editProduct(products.company_id);

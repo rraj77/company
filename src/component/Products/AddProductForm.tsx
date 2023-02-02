@@ -7,20 +7,18 @@ import { useFormik } from "formik";
 import { formSchema } from "./Schema/schemas";
 import style from "../../styles/styles.module.scss";
 import { Product } from "./TableModel";
-import { useEffect} from "react";
+import { useEffect } from "react";
 export interface AddProductFormPro {
   onSubmitProductForm: (inputs: Product) => void;
   userProducts: Product;
   setuserProducts: React.Dispatch<React.SetStateAction<Product>>;
- 
 }
 export default function AddProductForm({
   onSubmitProductForm,
   userProducts,
   setuserProducts,
- 
 }: AddProductFormPro) {
-  const initialValues: Product ={
+  const initialValues: Product = {
     product_name: userProducts.product_name,
     category: userProducts.category,
     sub_category: userProducts.sub_category,
@@ -28,16 +26,23 @@ export default function AddProductForm({
     company_id: userProducts.company_id,
   };
 
-  const { values, touched, errors, handleBlur, handleChange, handleSubmit ,resetForm,setErrors} =
-    useFormik({
-      initialValues,
-      validationSchema: formSchema,
-      onSubmit: (values, action) => {
-        onFormSubmit(values);
-        console.log(values);
-        action.resetForm();
-      },
-    });
+  const {
+    values,
+    touched,
+    errors,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    resetForm,
+    setErrors,
+  } = useFormik({
+    initialValues,
+    validationSchema: formSchema,
+    onSubmit: (values, action) => {
+      onFormSubmit(values);
+      action.resetForm();
+    },
+  });
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -45,9 +50,7 @@ export default function AddProductForm({
     handleChange(e);
   };
   const onFormSubmit = (values: Product) => {
-    
     onSubmitProductForm(values);
-
     setuserProducts({
       product_name: "",
       category: "",
@@ -68,26 +71,23 @@ export default function AddProductForm({
     handleSubmit();
   };
   useEffect(() => {
-    
-    console.log("reload")
-    setErrors({})
-}, [userProducts]);
-  const resetErrors = ()=>{
-  setErrors({})
- }
+    setErrors({});
+  }, [userProducts]);
+  const resetErrors = () => {
+    setErrors({});
+  };
 
- const handleReset=()=>{
- resetForm()
-
- setuserProducts({
+  const handleReset = () => {
+    resetForm();
+   setuserProducts({
       product_name: "",
       category: "",
       sub_category: "",
       description: "",
       company_id: "",
     });
-  console.log("handle")
- }
+    console.log("handle");
+  };
   return (
     <Box
       sx={{ paddingLeft: "1rem" }}
@@ -97,7 +97,11 @@ export default function AddProductForm({
       autoComplete="off"
     >
       <Box className={style.title}>
-      <Typography variant="h5"> {userProducts.company_id ? "Edit" + " " + userProducts.product_name: "Add company"}</Typography>
+        <Typography variant="h5">
+          {userProducts.company_id
+            ? "Edit" + " " + userProducts.product_name
+            : "Add company"}
+        </Typography>
       </Box>
       <Box sx={{ display: "flex" }}>
         <Box className={style.input_field} sx={{ paddingRight: "1rem" }}>
@@ -168,24 +172,33 @@ export default function AddProductForm({
         ) : null}
       </Box>
 
-      <Box className={style.input_field}  sx={{display: 'flex'}} >
-          <Box sx={{paddingRight:'1rem'}}>
-        <Button type="button" variant="contained"   onClick={handleReset} size="small">
+      <Box className={style.input_field} sx={{ display: "flex" }}>
+        <Box sx={{ paddingRight: "1rem" }}>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={handleReset}
+            size="small"
+          >
             RESET
           </Button>
-          </Box>
-          <Box  textAlign={"end"} sx={{paddingRight:'1rem'}}>
-        <Button type="button" variant="contained"  onClick={resetErrors} size="small" >
+        </Box>
+        <Box textAlign={"end"} sx={{ paddingRight: "1rem" }}>
+          <Button
+            type="button"
+            variant="contained"
+            onClick={resetErrors}
+            size="small"
+          >
             RESET ERRORS
           </Button>
-          </Box >
-          <Box textAlign={"end"}>
-          <Button type="submit" variant="contained"   size="small" >
-            Submit 
-          </Button>
-
-          </Box>
         </Box>
+        <Box textAlign={"end"}>
+          <Button type="submit" variant="contained" size="small">
+            Submit
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
 }
