@@ -4,7 +4,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Grid } from "@mui/material";
+import { Grid, Paper, styled } from "@mui/material";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
@@ -43,7 +43,7 @@ export default function Tablemodel() {
   };
 
   useEffect(() => {
-    console.log("product list", ProductList);
+   
     return setState(ProductList);
   }, []);
 
@@ -68,7 +68,7 @@ export default function Tablemodel() {
     let edit = state.find((products) => products.company_id === id);
     if (edit !== undefined) {
       setuserProducts(edit);
-      console.log(edit);
+     
     }
   };
 
@@ -80,15 +80,45 @@ export default function Tablemodel() {
       description: "",
       company_id: "",
     });
-    console.log("handle");
+   
   };
+  
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={7}>
+    <>
+
+{/* 
+<Box sx={{ flexGrow: 1,background:'red' }}>
+<Grid container spacing={2} sx={{width:'100%'}}>
+  <Grid item xs={8} md={12} sm={4}>
+    <Item>xs=8</Item>
+  </Grid>
+  <Grid item xs={4}>
+    <Item>xs=4</Item>
+  </Grid>
+  <Grid item xs={4}>
+    <Item>xs=4</Item>
+  </Grid>
+  <Grid item xs={8}>
+    <Item>xs=8</Item>
+  </Grid>
+</Grid>
+</Box> */}
+<Box sx={{ flexGrow: 1 }} >
+
+    <Grid container spacing={2} >
+      <Grid item xs={12} sm={12} md={8}>
         <Box className={style.title}>
           <Typography variant="h5">products</Typography>
           <Button
+           
             variant="contained"
             className={style.margin_left}
             onClick={handleReset}
@@ -117,6 +147,9 @@ export default function Tablemodel() {
           <TableBody>
             {state?.map((products: Product) => {
               return (
+
+
+
                 <TableRow key={products.company_id}>
                   <TableCell className={style.tableCellBody}>
                     {products.product_name}
@@ -164,7 +197,7 @@ export default function Tablemodel() {
           </TableBody>
         </Table>
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={12} sm={12} md={4}>
         <AddProductForm
           onSubmitProductForm={onSubmitProductForm}
           userProducts={userProducts}
@@ -172,5 +205,7 @@ export default function Tablemodel() {
         />
       </Grid>
     </Grid>
+    </Box>
+</>
   );
 }

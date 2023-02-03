@@ -7,7 +7,8 @@ export const NavLinks: Links[] = [
     to: "/company-list",
   },
   { name: "Users", to: "/users" },
-  {name:"Product",to:"/table-model"},
+  {name:"Product",to:"/product-list"},
+  {name:"Customer", to:"/customer-table"},
   { name: "Vat", to: "/vat" },
   { name: "Category and subcategy", to: "/category-subcategory" },
 ];
