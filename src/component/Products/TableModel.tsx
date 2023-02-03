@@ -43,8 +43,7 @@ export default function Tablemodel() {
   };
 
   useEffect(() => {
-   
-    return setState(ProductList);
+   return setState(ProductList);
   }, []);
 
   function onSubmitProductForm(inputs: Product) {
@@ -83,34 +82,9 @@ export default function Tablemodel() {
    
   };
   
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
-
   return (
     <>
 
-{/* 
-<Box sx={{ flexGrow: 1,background:'red' }}>
-<Grid container spacing={2} sx={{width:'100%'}}>
-  <Grid item xs={8} md={12} sm={4}>
-    <Item>xs=8</Item>
-  </Grid>
-  <Grid item xs={4}>
-    <Item>xs=4</Item>
-  </Grid>
-  <Grid item xs={4}>
-    <Item>xs=4</Item>
-  </Grid>
-  <Grid item xs={8}>
-    <Item>xs=8</Item>
-  </Grid>
-</Grid>
-</Box> */}
 <Box sx={{ flexGrow: 1 }} >
 
     <Grid container spacing={2} >
@@ -147,9 +121,6 @@ export default function Tablemodel() {
           <TableBody>
             {state?.map((products: Product) => {
               return (
-
-
-
                 <TableRow key={products.company_id}>
                   <TableCell className={style.tableCellBody}>
                     {products.product_name}
