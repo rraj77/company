@@ -13,6 +13,7 @@ import styles from "./../styles/styles.module.scss";
 import Vat from "../admin/vat/Vat";
 import CategorySubcategoryTable from "../category-subcategory/CategorySubcategoryTable";
 import Tablemodel from "./Products/TableModel";
+import Customertable from "../customer/CustomerTable";
 
 export default function NavBarList() {
   return (
@@ -39,6 +40,7 @@ export default function NavBarList() {
           <Route path="/company-list" element={<CompanyList />} />
           <Route path="/users" element={<Users />} />
           <Route path="/product-list" element={<Tablemodel />} />
+          <Route path="/customer" element={<Customertable/>}/>
           <Route path="/vat" element={<Vat />} />
           <Route
             path="/category-subcategory"
