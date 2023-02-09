@@ -6,65 +6,59 @@ import { Button } from "@mui/material";
 import { useFormik } from "formik";
 import { formSchema } from "./Schema/schemas";
 import style from "../styles/styles.module.scss";
-import {Customer } from "./CustomerTable";
-import { useEffect ,useState} from "react";
+import { Customer } from "./CustomerTable";
+import { useEffect, useState } from "react";
 export interface AddCustomerFormPro {
-    onSubmitCustomerForm: (inputs: Customer, file:any ) => void;
-  userCustomer: Customer ;
+  onSubmitCustomerForm: (inputs: Customer, file: string) => void;
+  userCustomer: Customer;
   setuserCustomer: React.Dispatch<React.SetStateAction<Customer>>;
-  
-  file:string;
- setFile:any;
+  file: string;
+  setFile:(setFile:string)=>void;
 }
 
 export default function AddCustomerForm({
   onSubmitCustomerForm,
   userCustomer,
   setuserCustomer,
- 
   file,
-  setFile
+  setFile,
 }: AddCustomerFormPro) {
-  const initialValues: Customer  = {
+  const initialValues: Customer = {
     avatar: userCustomer.avatar,
     first_name: userCustomer.first_name,
-    last_name: userCustomer. last_name,
-    email: userCustomer. email,
+    last_name: userCustomer.last_name,
+    email: userCustomer.email,
     phone_no: userCustomer.phone_no,
     gst: userCustomer.gst,
     id: userCustomer.id,
   };
 
-  const [fileName, setFileName] = useState('');
-
-
+  const [fileName, setFileName] = useState("");
   const image = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       return;
     }
     setFile(URL.createObjectURL(e.target.files[0]));
-   
-    setFileName(e.target.value)
+    setFileName(e.target.value);
   };
-const formik=useFormik({
-  initialValues,
-  validationSchema: formSchema,
-  onSubmit: (values, action) => {
-    onFormSubmit(values);
-    action.resetForm();
-  },
-});
+  const formik = useFormik({
+    initialValues,
+    validationSchema: formSchema,
+    onSubmit: (values, action) => {
+      onFormSubmit(values);
+      action.resetForm();
+    },
+  });
 
   const {
     values,
     touched,
     errors,
-    handleBlur,
     handleChange,
     handleSubmit,
     resetForm,
     setErrors,
-  } = formik
+  } = formik;
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -72,23 +66,20 @@ const formik=useFormik({
     handleChange(e);
   };
   const onFormSubmit = (values: Customer) => {
-    onSubmitCustomerForm(values,file);
-    //resetForm()
-    
+    onSubmitCustomerForm(values, file);
     setErrors({});
     setuserCustomer({
-        id: "",
-        avatar:"",
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_no: "",
-    gst:"",
+      id: "",
+      avatar: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_no: "",
+      gst: "",
     });
-    setFileName('')
-    setFile('')
-    handleReset()
-    //formik.resetForm()
+    setFileName("");
+    setFile("");
+    handleReset();
   };
 
   const CustomerSubmit = (e: React.FormEvent) => {
@@ -104,7 +95,6 @@ const formik=useFormik({
   };
   useEffect(() => {
     setErrors({});
-   
   }, [userCustomer]);
   const resetErrors = () => {
     setErrors({});
@@ -113,15 +103,14 @@ const formik=useFormik({
   const handleReset = () => {
     resetForm();
     setuserCustomer({
-        id: "",
-        avatar:"",
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_no: "",
-    gst:"",
+      id: "",
+      avatar: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      phone_no: "",
+      gst: "",
     });
-   
   };
   return (
     <Box
@@ -139,15 +128,23 @@ const formik=useFormik({
         </Typography>
       </Box>
       <Box component="form">
-            <Typography variant="h5">Upload photo</Typography>
-            {file !== "" ? (
-              <Box component="img" src={file} className={style.img} />
-             ) : ""} 
+        <Typography variant="h5">Upload photo</Typography>
+        {file !== "" ? (
+          <Box component="img" src={file} className={style.img} />
+        ) : (
+          ""
+        )}
 
-            <Box className={style.input_field}>
-              <TextField type="file" fullWidth size="small" onChange={image} value={fileName}/>
-            </Box>
-            </Box>
+        <Box className={style.input_field}>
+          <TextField
+            type="file"
+            fullWidth
+            size="small"
+            onChange={image}
+            value={fileName}
+          />
+        </Box>
+      </Box>
       <Box sx={{ display: "flex" }}>
         <Box className={style.input_field} sx={{ paddingRight: "1rem" }}>
           <TextField
@@ -158,7 +155,6 @@ const formik=useFormik({
             fullWidth
             value={userCustomer.first_name}
             onChange={handleValue}
-            onBlur={handleBlur}
           />
           {errors.first_name && touched.first_name ? (
             <p className={style.form_error}>{errors.first_name}</p>
@@ -173,7 +169,6 @@ const formik=useFormik({
             name="last_name"
             value={userCustomer.last_name}
             onChange={handleValue}
-            onBlur={handleBlur}
           />
           {errors.last_name && touched.last_name ? (
             <p className={style.form_error}>{errors.last_name}</p>
@@ -191,10 +186,9 @@ const formik=useFormik({
           name="email"
           value={userCustomer.email}
           onChange={handleValue}
-          onBlur={handleBlur}
         />
 
-        {errors.email&& touched.email ? (
+        {errors.email && touched.email ? (
           <p className={style.form_error}>{errors.email}</p>
         ) : null}
       </Box>
@@ -205,11 +199,9 @@ const formik=useFormik({
           id="outlined-required"
           label="phone_no"
           fullWidth
-          //type="number"
           name="phone_no"
           value={userCustomer.phone_no}
           onChange={handleValue}
-          onBlur={handleBlur}
         />
 
         {errors.phone_no && touched.phone_no ? (
@@ -223,11 +215,9 @@ const formik=useFormik({
           id="outlined-required"
           label="gst"
           fullWidth
-          //type="number"
           name="gst"
           value={userCustomer.gst}
           onChange={handleValue}
-          onBlur={handleBlur}
         />
 
         {errors.gst && touched.gst ? (

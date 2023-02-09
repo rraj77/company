@@ -8,7 +8,6 @@ import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import style from "../styles/styles.module.scss";
-
 import { CustomerList } from "./Api";
 import { useState, useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
@@ -17,39 +16,36 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddCustomerForm from "./AddCustomerForm";
 
 export interface Customer {
-  id: number|string;
-  avatar:string;
+  id: number | string;
+  avatar: string;
   first_name: string;
   last_name: string;
   email: string;
-  phone_no: number|string;
-  gst:number|string;
+  phone_no: number | string;
+  gst: number | string;
 }
 
 export default function Customertable() {
   const [data, setData] = useState<Customer[]>([]);
- 
   const [file, setFile] = useState("");
-
   const [userCustomer, setuserCustomer] = useState<Customer>({
     id: "",
-    avatar:"",
+    avatar: "",
     first_name: "",
     last_name: "",
     email: "",
     phone_no: "",
-    gst:"",
+    gst: "",
   });
   useEffect(() => {
     return setData(CustomerList);
   }, []);
 
-
-  function onSubmitCustomerForm(inputs: Customer, file:any) {
+  function onSubmitCustomerForm(inputs: Customer, file: string) {
     if (inputs.id === "") {
-      inputs.avatar=file
+      inputs.avatar = file;
       inputs.id = Math.random();
-      setData([...data,inputs])
+      setData([...data, inputs]);
     } else {
       data.map((Data) => {
         if (Data.id === inputs.id) {
@@ -67,32 +63,31 @@ export default function Customertable() {
   const editCustomer = (id: number | string) => {
     let edit = data.find((customer) => customer.id === id);
     if (edit !== undefined) {
-      setFile(edit.avatar)
+      setFile(edit.avatar);
       setuserCustomer(edit);
-      
-     //console.log("@@@",edit)
     }
   };
 
   const handleReset = () => {
     setuserCustomer({
       id: "",
-      avatar:"",
+      avatar: "",
       first_name: "",
       last_name: "",
       email: "",
       phone_no: "",
-      gst:"",
+      gst: "",
     });
-   
   };
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={8}>
         <Box className={style.title}>
           <Typography variant="h5">customers</Typography>
-          <Button variant="contained" className={style.margin_left}
-          onClick={handleReset}
+          <Button
+            variant="contained"
+            className={style.margin_left}
+            onClick={handleReset}
           >
             New
           </Button>
@@ -100,13 +95,12 @@ export default function Customertable() {
         <Table>
           <TableHead>
             <TableRow>
-            <TableCell className={style.tableCellHead}>Avatar</TableCell>
+              <TableCell className={style.tableCellHead}>Avatar</TableCell>
               <TableCell className={style.tableCellHead}>First_name</TableCell>
               <TableCell className={style.tableCellHead}>Last_name</TableCell>
               <TableCell className={style.tableCellHead}>Email</TableCell>
               <TableCell className={style.tableCellHead}>Phone_no</TableCell>
               <TableCell className={style.tableCellHead}>Gst</TableCell>
-
               <TableCell className={style.tableCellHead} align="center">
                 Action
               </TableCell>
@@ -118,12 +112,18 @@ export default function Customertable() {
               return (
                 <TableRow key={customers.id}>
                   <TableCell className={style.tableCellBody}>
-                  <img src={process.env.PUBLIC_URL+ customers.avatar} style={{ height: '30px', width: '40px' ,borderRadius:'100%'}}/>
+                    <img
+                      src={process.env.PUBLIC_URL + customers.avatar}
+                      style={{
+                        height: "30px",
+                        width: "40px",
+                        borderRadius: "100%",
+                      }}
+                    />
                   </TableCell>
                   <TableCell className={style.tableCellBody}>
                     {customers.first_name}
                   </TableCell>
-
                   <TableCell className={style.tableCellBody}>
                     {customers.last_name}
                   </TableCell>
@@ -136,25 +136,25 @@ export default function Customertable() {
                   <TableCell className={style.tableCellBody}>
                     {customers.gst}
                   </TableCell>
-
                   <TableCell sx={{ display: "flex" }}>
-                    <IconButton color="primary"
-                    onClick={() => {
-                      editCustomer(customers.id);
-                    }}
+                    <IconButton
+                      color="primary"
+                      onClick={() => {
+                        editCustomer(customers.id);
+                      }}
                     >
                       <EditIcon />
                     </IconButton>
 
-                    <IconButton color="error"
-                    onClick={() => {
-                      const customerCompany = data.filter(
-                        (Customer: any) =>
-                          Customer.id !== customers.id
-                      );
+                    <IconButton
+                      color="error"
+                      onClick={() => {
+                        const customerCompany = data.filter(
+                          (Customer) => Customer.id !== customers.id
+                        );
 
-                      setData(customerCompany);
-                    }}
+                        setData(customerCompany);
+                      }}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -166,22 +166,15 @@ export default function Customertable() {
         </Table>
       </Grid>
       <Grid item xs={12} sm={12} md={4}>
-        <AddCustomerForm 
+        <AddCustomerForm
           onSubmitCustomerForm={onSubmitCustomerForm}
           userCustomer={userCustomer}
-          setuserCustomer={setuserCustomer} 
-         
+          setuserCustomer={setuserCustomer}
           file={file}
           setFile={setFile}
-          />
+        />
       </Grid>
     </Grid>
   );
 }
 
-
-
-
-
-
-// 12DWWPB9503H1Z3

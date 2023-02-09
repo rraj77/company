@@ -30,7 +30,6 @@ export default function AddProductForm({
     values,
     touched,
     errors,
-    handleBlur,
     handleChange,
     handleSubmit,
     resetForm,
@@ -112,7 +111,6 @@ export default function AddProductForm({
             fullWidth
             value={userProducts.product_name}
             onChange={handleValue}
-            onBlur={handleBlur}
           />
           {errors.product_name && touched.product_name ? (
             <p className={style.form_error}>{errors.product_name}</p>
@@ -127,7 +125,6 @@ export default function AddProductForm({
             name="category"
             value={userProducts.category}
             onChange={handleValue}
-            onBlur={handleBlur}
           />
           {errors.category && touched.category ? (
             <p className={style.form_error}>{errors.category}</p>
@@ -145,7 +142,6 @@ export default function AddProductForm({
           name="sub_category"
           value={userProducts.sub_category}
           onChange={handleValue}
-          onBlur={handleBlur}
         />
 
         {errors.sub_category && touched.sub_category ? (
@@ -163,7 +159,6 @@ export default function AddProductForm({
           name="description"
           value={userProducts.description}
           onChange={handleValue}
-          onBlur={handleBlur}
         />
 
         {errors.description && touched.description ? (

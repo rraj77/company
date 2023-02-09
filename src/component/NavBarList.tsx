@@ -37,9 +37,9 @@ export default function NavBarList() {
       <Grid lg={10} md={10} xs={12} className={styles.company}>
         <Routes>
           <Route path="/" element={<Admin />} />
-          <Route path="/company-list" element={<CompanyList />} />
+          <Route path="/company" element={<CompanyList />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/product-list" element={<Tablemodel />} />
+          <Route path="/product" element={<Tablemodel />} />
           <Route path="/customer" element={<Customertable/>}/>
           <Route path="/vat" element={<Vat />} />
           <Route
