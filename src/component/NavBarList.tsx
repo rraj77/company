@@ -38,7 +38,7 @@ export default function NavBarList() {
           <Route path="/" element={<Admin />} />
           <Route path="/company-list" element={<CompanyList />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/table-model" element={<Tablemodel />} />
+          <Route path="/product-list" element={<Tablemodel />} />
           <Route path="/vat" element={<Vat />} />
           <Route
             path="/category-subcategory"

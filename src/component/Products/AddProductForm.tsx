@@ -66,7 +66,6 @@ export default function AddProductForm({
     values.sub_category = userProducts.sub_category;
     values.description = userProducts.description;
     values.company_id = userProducts.company_id;
-    console.log("%%%%%");
     e.preventDefault();
     handleSubmit();
   };
@@ -86,7 +85,7 @@ export default function AddProductForm({
       description: "",
       company_id: "",
     });
-    console.log("handle");
+   
   };
   return (
     <Box

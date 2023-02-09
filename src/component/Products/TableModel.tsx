@@ -4,7 +4,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Grid } from "@mui/material";
+import { Grid, Paper, styled } from "@mui/material";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
@@ -43,8 +43,7 @@ export default function Tablemodel() {
   };
 
   useEffect(() => {
-    console.log("product list", ProductList);
-    return setState(ProductList);
+   return setState(ProductList);
   }, []);
 
   function onSubmitProductForm(inputs: Product) {
@@ -68,7 +67,7 @@ export default function Tablemodel() {
     let edit = state.find((products) => products.company_id === id);
     if (edit !== undefined) {
       setuserProducts(edit);
-      console.log(edit);
+     
     }
   };
 
@@ -80,15 +79,20 @@ export default function Tablemodel() {
       description: "",
       company_id: "",
     });
-    console.log("handle");
+   
   };
-
+  
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={7}>
+    <>
+
+<Box sx={{ flexGrow: 1 }} >
+
+    <Grid container spacing={2} >
+      <Grid item xs={12} sm={12} md={8}>
         <Box className={style.title}>
           <Typography variant="h5">products</Typography>
           <Button
+           
             variant="contained"
             className={style.margin_left}
             onClick={handleReset}
@@ -164,7 +168,7 @@ export default function Tablemodel() {
           </TableBody>
         </Table>
       </Grid>
-      <Grid item xs={5}>
+      <Grid item xs={12} sm={12} md={4}>
         <AddProductForm
           onSubmitProductForm={onSubmitProductForm}
           userProducts={userProducts}
@@ -172,5 +176,7 @@ export default function Tablemodel() {
         />
       </Grid>
     </Grid>
+    </Box>
+</>
   );
 }
