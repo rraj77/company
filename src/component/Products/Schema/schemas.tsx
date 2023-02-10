@@ -5,4 +5,6 @@ export const formSchema=Yup.object({
     category:Yup.string().required("Please enter your category"),
     sub_category:Yup.string().required("Please enter your sub_category"),
     description: Yup.string().required("Please enter your description"),
+    tax: Yup.number().min(1).max(100).required("Please enter your tax"),
+    discount: Yup.number().min(1).max(100).required("Please enter your discount"),
 })

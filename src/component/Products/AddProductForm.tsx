@@ -23,6 +23,8 @@ export default function AddProductForm({
     category: userProducts.category,
     sub_category: userProducts.sub_category,
     description: userProducts.description,
+    tax: userProducts.tax,
+    discount: userProducts.discount,
     company_id: userProducts.company_id,
   };
 
@@ -45,7 +47,18 @@ export default function AddProductForm({
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    setuserProducts({ ...userProducts, [name]: value });
+    if (e.target.name === "discount"||e.target.name === "tax" ) {
+      const value=Number(e.target.value)
+      if(value<=100 ){
+
+        setuserProducts({ ...userProducts, [name]: value });
+      }
+    }
+    else{
+      setuserProducts({ ...userProducts, [name]: value });
+      
+    }
+
     handleChange(e);
   };
   const onFormSubmit = (values: Product) => {
@@ -56,6 +69,8 @@ export default function AddProductForm({
       sub_category: "",
       description: "",
       company_id: "",
+      tax: "",
+      discount: "",
     });
   };
 
@@ -64,6 +79,8 @@ export default function AddProductForm({
     values.category = userProducts.category;
     values.sub_category = userProducts.sub_category;
     values.description = userProducts.description;
+    values.tax = userProducts.tax;
+    values.discount = userProducts.discount;
     values.company_id = userProducts.company_id;
     e.preventDefault();
     handleSubmit();
@@ -77,14 +94,15 @@ export default function AddProductForm({
 
   const handleReset = () => {
     resetForm();
-   setuserProducts({
+    setuserProducts({
       product_name: "",
       category: "",
       sub_category: "",
       description: "",
+      tax: "",
+      discount: "",
       company_id: "",
     });
-   
   };
   return (
     <Box
@@ -98,7 +116,7 @@ export default function AddProductForm({
         <Typography variant="h5">
           {userProducts.company_id
             ? "Edit" + " " + userProducts.product_name
-            : "Add company"}
+            : "Add product"}
         </Typography>
       </Box>
       <Box sx={{ display: "flex" }}>
@@ -166,6 +184,40 @@ export default function AddProductForm({
         ) : null}
       </Box>
 
+      <Box className={style.input_field}>
+        <TextField
+          size="small"
+          id="outlined-required"
+          type="number"
+          label="tax"
+          fullWidth
+          InputProps={{ inputProps: { min: 0, max: 100 } }}
+          name="tax"
+          value={userProducts.tax}
+          onChange={handleValue}
+        />
+
+        {errors.tax && touched.tax ? (
+          <p className={style.form_error}>{errors.tax}</p>
+        ) : null}
+      </Box>
+      <Box className={style.input_field}>
+        <TextField
+          size="small"
+          id="outlined-required"
+          label="discount"
+          type="number"
+          InputProps={{ inputProps: { min: 0, max: 100 } }}
+          fullWidth
+          name="discount"
+          value={userProducts.discount}
+          onChange={handleValue}
+        />
+
+        {errors.discount && touched.discount ? (
+          <p className={style.form_error}>{errors.discount}</p>
+        ) : null}
+      </Box>
       <Box className={style.input_field} sx={{ display: "flex" }}>
         <Box sx={{ paddingRight: "1rem" }}>
           <Button

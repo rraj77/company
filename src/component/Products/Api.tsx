@@ -6,6 +6,8 @@ import { Product } from "./TableModel";
       category: "sdf",
       sub_category: "desad",
       description: "dsjf",
+      tax:4,
+      discount:5,
       company_id: 1,
      },
     {
@@ -13,6 +15,8 @@ import { Product } from "./TableModel";
       category:"dfg",
       sub_category: "cdvf",
       description: "sgjf",
+      tax:3,
+      discount:3,
       company_id: 2,
      },
     {
@@ -20,6 +24,8 @@ import { Product } from "./TableModel";
       category: "fgf",
       sub_category: "fdvfdv",
       description: "dfn",
+      tax:3,
+      discount:6,
       company_id: 3,
      },
     {
@@ -27,6 +33,8 @@ import { Product } from "./TableModel";
       category: "fh",
       sub_category: "fvdgf",
       description: "dfn",
+      tax:5,
+      discount:4,
       company_id: 4,
      },
     {
@@ -34,6 +42,8 @@ import { Product } from "./TableModel";
       category: "rt",
       sub_category: "fgfdh",
       description: "djfg",
+      tax:5,
+      discount:4,
       company_id: 5,
      },
   ];

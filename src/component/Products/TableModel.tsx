@@ -21,6 +21,8 @@ export interface Product {
   category: string;
   sub_category: string;
   description: string;
+  tax:number | string;
+  discount:number | string ;
   company_id: number | string;
 }
 
@@ -34,6 +36,8 @@ export default function Tablemodel() {
     category: "",
     sub_category: "",
     description: "",
+    tax:"",
+    discount:"",
     company_id: "",
   });
 
@@ -59,6 +63,8 @@ export default function Tablemodel() {
           data.category = inputs.category;
           data.sub_category = inputs.sub_category;
           data.description = inputs.description;
+          data.tax = inputs.tax;
+          data.discount = inputs.discount;
         }
       });
     }
@@ -77,6 +83,8 @@ export default function Tablemodel() {
       category: "",
       sub_category: "",
       description: "",
+      tax:"",
+    discount:"",
       company_id: "",
     });
    
@@ -111,7 +119,8 @@ export default function Tablemodel() {
                 sub_category
               </TableCell>
               <TableCell className={style.tableCellHead}>description</TableCell>
-              <TableCell className={style.tableCellHead}>company_id</TableCell>
+              <TableCell className={style.tableCellHead}>tax</TableCell>
+              <TableCell className={style.tableCellHead}>discount</TableCell>
               <TableCell className={style.tableCellHead} align="center">
                 Action
               </TableCell>
@@ -136,7 +145,10 @@ export default function Tablemodel() {
                     {products.description}
                   </TableCell>
                   <TableCell className={style.tableCellBody}>
-                    {products.company_id}
+                    {products.tax}
+                  </TableCell>
+                  <TableCell className={style.tableCellBody}>
+                    {products.discount}
                   </TableCell>
                   <TableCell sx={{display:"flex"}}>
                     <IconButton
@@ -152,7 +164,7 @@ export default function Tablemodel() {
                       color="error"
                       onClick={() => {
                         const productCompany = state.filter(
-                          (Product: any) =>
+                          (Product) =>
                             Product.company_id !== products.company_id
                         );
 
