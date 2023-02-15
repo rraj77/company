@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Box, Typography } from "@mui/material";
 import styles from "../styles/styles.module.scss";
-import { Category, TableDataProp } from "../interfaces/interfaces";
+import { ICategory, TableDataProp } from "../interfaces/category";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import TreeView from "@mui/lab/TreeView";
@@ -14,14 +14,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 export default function CategorySubcategoryTable() {
   const [tableData, setTableData] = useState<TableDataProp[]>([]);
   const [edit, setEdit] = useState<TableDataProp>({
-    id: "",
+    id: 0,
     category: "",
-    subCategory: [{ id: "", name: "", children: [] }],
+    subCategory: [{ id: 0, name: "", children: [] }],
   });
 
   const onAdd = (editData: TableDataProp) => {
-    let subCategories: Category[] = [];
-    let subSubCategory: Category[] = [];
+    let subCategories: ICategory[] = [];
+    let subSubCategory: ICategory[] = [];
     editData.subCategory.map((data, index) => {
       if (data.name !== "") {
         data.id = Math.random();
@@ -44,7 +44,7 @@ export default function CategorySubcategoryTable() {
   const onEditCategory = (
     e: React.MouseEvent,
     name: string,
-    data: TableDataProp | Category
+    data: TableDataProp | ICategory
   ) => {
     e.stopPropagation();
     setEditSubCategory(true);
@@ -68,7 +68,7 @@ export default function CategorySubcategoryTable() {
     } else {
       if (name === "subCategory") {
         setEditSubCategory(false);
-        copiedData.subCategory.map((data: Category, index: number) => {
+        copiedData.subCategory.map((data: ICategory, index: number) => {
           if (copiedData.subCategory[index].children[0] === undefined) {
             copiedData.subCategory[index].children.push({ name: "" });
           }
@@ -81,7 +81,7 @@ export default function CategorySubcategoryTable() {
   type StyledTreeItemProps = TreeItemProps & {
     name: string;
     labelText: string;
-    labelInfo: TableDataProp | Category;
+    labelInfo: TableDataProp | ICategory;
   };
 
   const onDeleteCategory = (id: number | string) => {

@@ -4,28 +4,26 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { useFormik } from "formik";
-import { formSchema } from "./Schema/schemas";
-import style from "../../styles/styles.module.scss";
-import { Product } from "./TableModel";
+import { formSchema } from "../schemas/schemas";
+import style from "../styles/styles.module.scss";
+
+
 import { useEffect } from "react";
-export interface AddProductFormPro {
-  onSubmitProductForm: (inputs: Product) => void;
-  userProducts: Product;
-  setuserProducts: React.Dispatch<React.SetStateAction<Product>>;
-}
+import { AddProductFormPro, IProduct } from "../interfaces/product";
+
 export default function AddProductForm({
   onSubmitProductForm,
   userProducts,
   setuserProducts,
 }: AddProductFormPro) {
-  const initialValues: Product = {
-    product_name: userProducts.product_name,
+  const initialValues: IProduct = {
+    id: userProducts.id,
+    name: userProducts.name,
     category: userProducts.category,
-    sub_category: userProducts.sub_category,
+    subCategory: userProducts.subCategory,
     description: userProducts.description,
     tax: userProducts.tax,
     discount: userProducts.discount,
-    company_id: userProducts.company_id,
   };
 
   const {
@@ -47,41 +45,38 @@ export default function AddProductForm({
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
-    if (e.target.name === "discount"||e.target.name === "tax" ) {
-      const value=Number(e.target.value)
-      if(value<=100 ){
-
+    if (e.target.name === "discount" || e.target.name === "tax") {
+      const value = Number(e.target.value);
+      if (value <= 100) {
         setuserProducts({ ...userProducts, [name]: value });
       }
-    }
-    else{
+    } else {
       setuserProducts({ ...userProducts, [name]: value });
-      
     }
 
     handleChange(e);
   };
-  const onFormSubmit = (values: Product) => {
+  const onFormSubmit = (values: IProduct) => {
     onSubmitProductForm(values);
     setuserProducts({
-      product_name: "",
+      id: 0,
+      name: "",
       category: "",
-      sub_category: "",
+      subCategory: "",
       description: "",
-      company_id: "",
-      tax: "",
-      discount: "",
+      tax: 0,
+      discount: 0,
     });
   };
 
   const ProductSubmit = (e: React.FormEvent) => {
-    values.product_name = userProducts.product_name;
+    values.id = userProducts.id;
+    values.name = userProducts.name;
     values.category = userProducts.category;
-    values.sub_category = userProducts.sub_category;
+    values.subCategory = userProducts.subCategory;
     values.description = userProducts.description;
     values.tax = userProducts.tax;
     values.discount = userProducts.discount;
-    values.company_id = userProducts.company_id;
     e.preventDefault();
     handleSubmit();
   };
@@ -95,13 +90,13 @@ export default function AddProductForm({
   const handleReset = () => {
     resetForm();
     setuserProducts({
-      product_name: "",
+      id: 0,
+      name: "",
       category: "",
-      sub_category: "",
+      subCategory: "",
       description: "",
-      tax: "",
-      discount: "",
-      company_id: "",
+      tax: 0,
+      discount: 0,
     });
   };
   return (
@@ -114,8 +109,8 @@ export default function AddProductForm({
     >
       <Box className={style.title}>
         <Typography variant="h5">
-          {userProducts.company_id
-            ? "Edit" + " " + userProducts.product_name
+          {userProducts.id
+            ? "Edit" + " " + userProducts.name
             : "Add product"}
         </Typography>
       </Box>
@@ -127,11 +122,11 @@ export default function AddProductForm({
             type="text"
             name="product_name"
             fullWidth
-            value={userProducts.product_name}
+            value={userProducts.name}
             onChange={handleValue}
           />
-          {errors.product_name && touched.product_name ? (
-            <p className={style.form_error}>{errors.product_name}</p>
+          {errors.name && touched.name ? (
+            <p className={style.form_error}>{errors.name}</p>
           ) : null}
         </Box>
         <Box className={style.input_field}>
@@ -158,12 +153,12 @@ export default function AddProductForm({
           fullWidth
           type="text"
           name="sub_category"
-          value={userProducts.sub_category}
+          value={userProducts.subCategory}
           onChange={handleValue}
         />
 
-        {errors.sub_category && touched.sub_category ? (
-          <p className={style.form_error}>{errors.sub_category}</p>
+        {errors.subCategory && touched.subCategory ? (
+          <p className={style.form_error}>{errors.subCategory}</p>
         ) : null}
       </Box>
 
@@ -193,7 +188,7 @@ export default function AddProductForm({
           fullWidth
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           name="tax"
-          value={userProducts.tax}
+          value={userProducts.tax===0?"":userProducts.tax}
           onChange={handleValue}
         />
 
@@ -210,7 +205,7 @@ export default function AddProductForm({
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           fullWidth
           name="discount"
-          value={userProducts.discount}
+          value={userProducts.discount===0?"":userProducts.discount}
           onChange={handleValue}
         />
 

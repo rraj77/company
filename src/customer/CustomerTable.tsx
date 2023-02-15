@@ -14,35 +14,27 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCustomerForm from "./AddCustomerForm";
+import { ICustomer } from "../interfaces/customer";
 
-export interface Customer {
-  id: number | string;
-  avatar: string;
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone_no: number | string;
-  gst: number | string;
-}
 
 export default function Customertable() {
-  const [data, setData] = useState<Customer[]>([]);
+  const [data, setData] = useState<ICustomer[]>([]);
   const [file, setFile] = useState("");
-  const [userCustomer, setuserCustomer] = useState<Customer>({
-    id: "",
+  const [userCustomer, setuserCustomer] = useState<ICustomer>({
+    id: 0,
     avatar: "",
     first_name: "",
     last_name: "",
     email: "",
-    phone_no: "",
+    phone_no: 0,
     gst: "",
   });
   useEffect(() => {
     return setData(CustomerList);
   }, []);
 
-  function onSubmitCustomerForm(inputs: Customer, file: string) {
-    if (inputs.id === "") {
+  function onSubmitCustomerForm(inputs: ICustomer, file: string) {
+    if (inputs.id ) {
       inputs.avatar = file;
       inputs.id = Math.random();
       setData([...data, inputs]);
@@ -70,12 +62,12 @@ export default function Customertable() {
 
   const handleReset = () => {
     setuserCustomer({
-      id: "",
+      id: 0,
       avatar: "",
       first_name: "",
       last_name: "",
       email: "",
-      phone_no: "",
+      phone_no: 0,
       gst: "",
     });
   };
@@ -108,7 +100,7 @@ export default function Customertable() {
           </TableHead>
 
           <TableBody>
-            {data?.map((customers: Customer) => {
+            {data?.map((customers: ICustomer) => {
               return (
                 <TableRow key={customers.id}>
                   <TableCell className={style.tableCellBody}>

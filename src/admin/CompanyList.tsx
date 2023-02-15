@@ -7,19 +7,19 @@ import { TableCell, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { CompanyTypes } from "../interfaces/interfaces";
+import { ICompanyType } from "../interfaces/company";
 import { Box } from "@mui/system";
 import { useState, useEffect, useRef } from "react";
 import { companyDetails } from "../api-calls/Api";
 import styles from "./../styles/styles.module.scss";
 import AddCompanyForm from "./add-company-form/AddCompanyForm";
 export default function CompanyList() {
-  const [companyList, setCompanyList] = useState<CompanyTypes[]>([]);
-  const [editCompany, setEditCompany] = useState<CompanyTypes>({
-    id: "",
+  const [companyList, setCompanyList] = useState<ICompanyType[]>([]);
+  const [editCompany, setEditCompany] = useState<ICompanyType>({
+    id: 0,
     name: "",
     email: "",
-    phone: "",
+    phone: 0,
     pan: "",
     gst: "",
     cin: "",
@@ -31,12 +31,11 @@ export default function CompanyList() {
   }, []);
   const newFormRef: any = useRef();
 
-  const onSubmitCompanyForm = (dataCompany: CompanyTypes): void => {
-    if (dataCompany.id === "") {
+  const onSubmitCompanyForm = (dataCompany: ICompanyType): void => {
+    if (dataCompany.id ) {
       dataCompany.id = Math.random();
-      const list = companyList;
-      list.push(dataCompany);
-      setCompanyList(list);
+      setCompanyList([...companyList,dataCompany]);
+
     } else {
       companyList.map((data) => {
         if (data.id === dataCompany.id) {

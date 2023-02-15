@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { AddCompanyFormProps, CompanyTypes } from "../../interfaces/interfaces";
+import { ICompanyType, IAddCompanyFormProp} from '../../interfaces/company';
 import { companySchema } from "./AddCompanyFormSchema";
 import styles from "../../styles/styles.module.scss";
 
 const { forwardRef, useImperativeHandle } = React;
 const AddCompanyForm = forwardRef(
   (
-    { onSubmitCompanyForm, editCompany, setEditCompany }: AddCompanyFormProps,
+    { onSubmitCompanyForm, editCompany, setEditCompany }: IAddCompanyFormProp,
     ref
   ) => {
-    const initialValues: CompanyTypes = {
+    const initialValues: ICompanyType = {
       name: editCompany.name,
       email: editCompany.email,
       phone: editCompany.phone,
@@ -25,14 +25,13 @@ const AddCompanyForm = forwardRef(
       initialValues,
       validationSchema: companySchema,
       onSubmit: (values, action) => {
-        // onSubmitForm(values);
         values.id = editCompany.id;
         onSubmitCompanyForm(values);
         setEditCompany({
-          id: "",
+          id: 0,
           name: "",
           email: "",
-          phone: "",
+          phone: 0,
           pan: "",
           gst: "",
           cin: "",
@@ -46,10 +45,10 @@ const AddCompanyForm = forwardRef(
     useImperativeHandle(ref, () => ({
       onNewForm() {
         setEditCompany({
-          id: "",
+          id: 0,
           name: "",
           email: "",
-          phone: "",
+          phone: 0,
           pan: "",
           gst: "",
           cin: "",
@@ -124,7 +123,7 @@ const AddCompanyForm = forwardRef(
               label=" Enter phone number"
               variant="outlined"
               size="small"
-              value={editCompany.phone}
+              value={editCompany.phone===0?"":editCompany.phone}
               onChange={onChangeValue}
               fullWidth
               onBlur={handleBlur}
