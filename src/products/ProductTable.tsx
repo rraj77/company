@@ -1,40 +1,35 @@
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Grid, Paper, styled } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
-import style from "../../styles/styles.module.scss";
+import style from "../styles/styles.module.scss";
 import AddProductForm from "./AddProductForm";
 import { ProductList } from "./Api";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { IProduct } from "../interfaces/product";
 
-export interface Product {
-  product_name: string;
-  category: string;
-  sub_category: string;
-  description: string;
-  company_id: number | string;
-}
 
-export default function Tablemodel() {
-  const [state, setState] = useState<Product[]>([]);
+export default function ProductTable() {
+  const [productData, setProductData] = useState<IProduct[]>([]);
   const [productForm, setProductForm] = useState(false);
   const [id, setId] = useState("");
 
-  const [userProducts, setuserProducts] = useState<Product>({
-    product_name: "",
+  const [userProducts, setuserProducts] = useState<IProduct>({
+    id: 0,
+    name: "",
     category: "",
-    sub_category: "",
+    subCategory: "",
     description: "",
-    company_id: "",
+    tax: 0,
+    discount: 0
   });
 
   const form = () => {
@@ -43,28 +38,30 @@ export default function Tablemodel() {
   };
 
   useEffect(() => {
-   return setState(ProductList);
+   return setProductData(ProductList);
   }, []);
 
-  function onSubmitProductForm(inputs: Product) {
-    if (inputs.company_id === "") {
-      inputs.company_id = Math.random();
-      const list = state;
+  function onSubmitProductForm(inputs: IProduct) {
+    if (inputs.id) {
+      inputs.id = Math.random();
+      const list = productData;
       list.push(inputs);
-      setState(list);
+      setProductData(list);
     } else {
-      state.map((data) => {
-        if (data.company_id === inputs.company_id) {
-          data.product_name = inputs.product_name;
+      productData.map((data) => {
+        if (data.id === inputs.id) {
+          data.name = inputs.name;
           data.category = inputs.category;
-          data.sub_category = inputs.sub_category;
+          data.subCategory = inputs.subCategory;
           data.description = inputs.description;
+          data.tax = inputs.tax;
+          data.discount = inputs.discount;
         }
       });
     }
   }
   const editProduct = (id: number | string) => {
-    let edit = state.find((products) => products.company_id === id);
+    let edit = productData.find((products) => products.id === id);
     if (edit !== undefined) {
       setuserProducts(edit);
      
@@ -73,11 +70,13 @@ export default function Tablemodel() {
 
   const handleReset = () => {
     setuserProducts({
-      product_name: "",
+      name: "",
       category: "",
-      sub_category: "",
+      subCategory: "",
       description: "",
-      company_id: "",
+      tax:0,
+      discount:0,
+      id: 0,
     });
    
   };
@@ -111,7 +110,8 @@ export default function Tablemodel() {
                 sub_category
               </TableCell>
               <TableCell className={style.tableCellHead}>description</TableCell>
-              <TableCell className={style.tableCellHead}>company_id</TableCell>
+              <TableCell className={style.tableCellHead}>tax</TableCell>
+              <TableCell className={style.tableCellHead}>discount</TableCell>
               <TableCell className={style.tableCellHead} align="center">
                 Action
               </TableCell>
@@ -119,30 +119,33 @@ export default function Tablemodel() {
           </TableHead>
 
           <TableBody>
-            {state?.map((products: Product) => {
+            {productData?.map((products: IProduct) => {
               return (
-                <TableRow key={products.company_id}>
+                <TableRow key={products.id}>
                   <TableCell className={style.tableCellBody}>
-                    {products.product_name}
+                    {products.name}
                   </TableCell>
 
                   <TableCell className={style.tableCellBody}>
                     {products.category}
                   </TableCell>
                   <TableCell className={style.tableCellBody}>
-                    {products.sub_category}
+                    {products.subCategory}
                   </TableCell>
                   <TableCell className={style.tableCellBody}>
                     {products.description}
                   </TableCell>
                   <TableCell className={style.tableCellBody}>
-                    {products.company_id}
+                    {products.tax}
+                  </TableCell>
+                  <TableCell className={style.tableCellBody}>
+                    {products.discount}
                   </TableCell>
                   <TableCell sx={{display:"flex"}}>
                     <IconButton
                       color="primary"
                       onClick={() => {
-                        editProduct(products.company_id);
+                        editProduct(products.id);
                       }}
                     >
                       <EditIcon />
@@ -151,12 +154,12 @@ export default function Tablemodel() {
                     <IconButton
                       color="error"
                       onClick={() => {
-                        const productCompany = state.filter(
-                          (Product: any) =>
-                            Product.company_id !== products.company_id
+                        const productCompany = productData.filter(
+                          (Product) =>
+                            Product.id !== products.id
                         );
 
-                        setState(productCompany);
+                        setProductData(productCompany);
                       }}
                     >
                       <DeleteIcon />

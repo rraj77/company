@@ -1,6 +1,8 @@
-import { Customer } from "./CustomerTable";
 
-export const CustomerList: Customer[] = [
+
+import { ICustomer } from "../interfaces/customer";
+
+export const CustomerList: ICustomer[] = [
   {
     id: 1,
     avatar: "default avatar.jpg",
@@ -8,7 +10,7 @@ export const CustomerList: Customer[] = [
     last_name: "kumari",
     email: "afg",
     phone_no: 12345,
-    gst: 4.0,
+    gst: "4.0",
   },
   {
     id: 2,
@@ -17,7 +19,7 @@ export const CustomerList: Customer[] = [
     last_name: "kumari",
     email: "fgfg",
     phone_no: 3456,
-    gst: 4.4,
+    gst: "4.4",
   },
   {
     id: 3,
@@ -26,7 +28,7 @@ export const CustomerList: Customer[] = [
     last_name: "kumar",
     email: "fgg",
     phone_no: 567889,
-    gst: 5.0,
+    gst: "5.0",
   },
   {
     id: 4,
@@ -35,7 +37,7 @@ export const CustomerList: Customer[] = [
     last_name: "kumar",
     email: "fgg",
     phone_no: 345676,
-    gst: 5.6,
+    gst: "5.6",
   },
   {
     id: 5,
@@ -44,6 +46,6 @@ export const CustomerList: Customer[] = [
     last_name: "kumari",
     email: "eefr",
     phone_no: 34567,
-    gst: 6.0,
+    gst: "6.0",
   },
 ];

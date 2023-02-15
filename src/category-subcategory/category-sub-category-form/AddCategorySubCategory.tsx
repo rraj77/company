@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import styles from "../../styles/styles.module.scss";
-import { Category, CategoryProp } from "../../interfaces/interfaces";
+import { ICategory, CategoryProp } from "../../interfaces/category";
 
 export default function AddCategorySubCategory({
   tableData,
@@ -34,13 +34,13 @@ export default function AddCategorySubCategory({
   let addFormFields = (name: string, index: number) => {
     if (name === "subCategory") {
       edit.subCategory.push({
-        id: "",
+        id: 0,
         name: "",
         children: [],
       });
     } else {
       edit.subCategory[index].children.push({
-        id: "",
+        id: 0,
         name: "",
         children: [],
       });
@@ -55,7 +55,7 @@ export default function AddCategorySubCategory({
   ) => {
     if (e.target.name === "subCategory") {
       edit.subCategory[index] = {
-        id: "",
+        id: 0,
         name: e.target.value,
         children: [...edit.subCategory[index].children],
       };
@@ -80,9 +80,9 @@ export default function AddCategorySubCategory({
 
   const onCancelForm = () => {
     setEdit({
-      id: "",
+      id: 0,
       category: "",
-      subCategory: [{ id: "", name: "", children: [] }],
+      subCategory: [{ id: 0, name: "", children: [] }],
     });
     setEditSubCategory(true);
   };
@@ -96,8 +96,8 @@ export default function AddCategorySubCategory({
       edit.id = Math.random();
       onAdd(edit);
     } else {
-      let subCategories: Category[] = [];
-      let subSubCategory: Category[] = [];
+      let subCategories: ICategory[] = [];
+      let subSubCategory: ICategory[] = [];
       edit.subCategory.map((data, index) => {
         if (data.name !== "") {
           subCategories.push(data);
@@ -116,7 +116,7 @@ export default function AddCategorySubCategory({
             if (d.id === data.id && d.name !== "") {
               list[index].subCategory[idx] = d;
             } else {
-              if (d.id === "") {
+              if (d.id) {
                 d.id = Math.random();
                 list[index].subCategory.push(d);
               }
@@ -127,7 +127,7 @@ export default function AddCategorySubCategory({
       } else {
         edit.subCategory = subCategories;
         edit.subCategory.map((data) => {
-          if (data.id === "") {
+          if (data.id ) {
             data.id = Math.random();
           }
         });
@@ -136,9 +136,9 @@ export default function AddCategorySubCategory({
       }
     }
     setEdit({
-      id: "",
+      id: 0,
       category: "",
-      subCategory: [{ id: "", name: "", children: [] }],
+      subCategory: [{ id: 0, name: "", children: [] }],
     });
     setEditSubCategory(true);
   };

@@ -9,18 +9,19 @@ import { vatTableSchema } from "./vatTableSchema";
 import styles from "../../styles/styles.module.scss";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { VatProp } from "../../interfaces/interfaces";
+import { IGst } from "../../interfaces/gst";
 
-export default function Vat() {
-  const [data, setData] = useState<VatProp[]>([]);
-  const [editData, setEditdata] = useState<VatProp>({
-    id: "",
+
+export default function Gst() {
+  const [data, setData] = useState<IGst[]>([]);
+  const [editData, setEditdata] = useState<IGst>({
+    id: 0,
     name: "",
     description: "",
-    tax: "",
+    tax: 0,
   });
 
-  const initialValues: VatProp = {
+  const initialValues: IGst = {
     id: editData.id,
     name: editData.name,
     tax: editData.tax,
@@ -31,7 +32,7 @@ export default function Vat() {
     initialValues,
     validationSchema: vatTableSchema,
     onSubmit: (values, action) => {
-      if (values.id === "") {
+      if (values.id ) {
         const list = data;
         values.id = Math.random();
         list.push(values);
@@ -69,10 +70,10 @@ export default function Vat() {
 
   const onNewForm = () => {
     setEditdata({
-      id: "",
+      id: 0,
       name: "",
       description: "",
-      tax: "",
+      tax: 0,
     });
     formik.resetForm();
   };
@@ -81,7 +82,7 @@ export default function Vat() {
     <Grid container spacing={2}>
       <Grid xs={12} lg={6} md={6}>
         <Box className={styles.title}>
-          <Typography variant="h5">Vat</Typography>
+          <Typography variant="h5">Gst</Typography>
           <Button
             variant="contained"
             size="small"
@@ -105,7 +106,7 @@ export default function Vat() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.map((d: any, index: number) => (
+            {data?.map((d, index: number) => (
               <TableRow key={index}>
                 <TableCell className={styles.tableCellBody}>{d.name}</TableCell>
                 <TableCell className={styles.tableCellBody}>
@@ -145,7 +146,7 @@ export default function Vat() {
       <Grid xs={6} lg={6} md={6}>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {editData.id ? "Edit" + " " + editData.name : "Add Vat"}
+            {editData.id ? "Edit" + " " + editData.name : "Add Gst"}
           </Typography>
         </Box>
         <Box component="form" onSubmit={onFormSubmit}>
@@ -174,7 +175,7 @@ export default function Vat() {
                 label="Enter tax"
                 size="small"
                 fullWidth
-                value={editData.tax}
+                value={editData.tax===0?"":editData.tax}
                 onBlur={handleBlur}
                 onChange={onValueChange}
               />

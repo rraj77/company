@@ -6,15 +6,9 @@ import { Button } from "@mui/material";
 import { useFormik } from "formik";
 import { formSchema } from "./Schema/schemas";
 import style from "../styles/styles.module.scss";
-import { Customer } from "./CustomerTable";
+
 import { useEffect, useState } from "react";
-export interface AddCustomerFormPro {
-  onSubmitCustomerForm: (inputs: Customer, file: string) => void;
-  userCustomer: Customer;
-  setuserCustomer: React.Dispatch<React.SetStateAction<Customer>>;
-  file: string;
-  setFile:(setFile:string)=>void;
-}
+import { AddCustomerFormPro, ICustomer } from "../interfaces/customer";
 
 export default function AddCustomerForm({
   onSubmitCustomerForm,
@@ -23,7 +17,7 @@ export default function AddCustomerForm({
   file,
   setFile,
 }: AddCustomerFormPro) {
-  const initialValues: Customer = {
+  const initialValues: ICustomer = {
     avatar: userCustomer.avatar,
     first_name: userCustomer.first_name,
     last_name: userCustomer.last_name,
@@ -65,16 +59,16 @@ export default function AddCustomerForm({
     setuserCustomer({ ...userCustomer, [name]: value });
     handleChange(e);
   };
-  const onFormSubmit = (values: Customer) => {
+  const onFormSubmit = (values: ICustomer) => {
     onSubmitCustomerForm(values, file);
     setErrors({});
     setuserCustomer({
-      id: "",
+      id: 0,
       avatar: "",
       first_name: "",
       last_name: "",
       email: "",
-      phone_no: "",
+      phone_no: 0,
       gst: "",
     });
     setFileName("");
@@ -103,12 +97,12 @@ export default function AddCustomerForm({
   const handleReset = () => {
     resetForm();
     setuserCustomer({
-      id: "",
+      id: 0,
       avatar: "",
       first_name: "",
       last_name: "",
       email: "",
-      phone_no: "",
+      phone_no: 0,
       gst: "",
     });
   };
@@ -200,7 +194,7 @@ export default function AddCustomerForm({
           label="phone_no"
           fullWidth
           name="phone_no"
-          value={userCustomer.phone_no}
+          value={userCustomer.phone_no === 0 ? '' : userCustomer.phone_no}
           onChange={handleValue}
         />
 
