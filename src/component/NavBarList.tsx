@@ -16,37 +16,37 @@ import Tablemodel from './Products/TableModel';
 import Customertable from '../customer/CustomerTable';
 
 export default function NavBarList() {
-  return (
-    <Grid container className={styles.navbar}>
-      <Grid lg={2} md={2} className={styles.navbar_item}>
-        <Box>
-          {NavLinks.map((links, index) => (
-            <NavLink
-              key={index}
-              to={links.to}
-              style={({ isActive }) => ({
-                color: isActive ? 'white' : 'black',
-                textDecorationLine: isActive ? 'underline' : 'none'
-              })}
-            >
-              <MenuItem sx={{ whiteSpace: 'pre-line' }}>{links.name}</MenuItem>
-            </NavLink>
-          ))}
-        </Box>
-      </Grid>
-      <Grid lg={10} md={10} xs={12} className={styles.company}>
-        <Routes>
-          <Route path="/" element={<Admin />} />
-          <Route path="/company" element={<CompanyList />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/product" element={<Tablemodel />} />
-          <Route path="/customer" element={<Customertable />} />
-          <Route path="/vat" element={<Vat />} />
-          <Route path="/category-subcategory" element={<CategorySubcategoryTable />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
-      </Grid>
-    </Grid>
-  );
+	return (
+		<Grid container className={styles.navbar}>
+			<Grid lg={2} md={2} className={styles.navbar_item}>
+				<Box>
+					{NavLinks.map((links, index) => (
+						<NavLink
+							key={index}
+							to={links.to}
+							style={({ isActive }) => ({
+								color: isActive ? 'white' : 'black',
+								textDecorationLine: isActive ? 'underline' : 'none'
+							})}
+						>
+							<MenuItem sx={{ whiteSpace: 'pre-line' }}>{links.name}</MenuItem>
+						</NavLink>
+					))}
+				</Box>
+			</Grid>
+			<Grid lg={10} md={10} xs={12} className={styles.company}>
+				<Routes>
+					<Route path="/" element={<Admin />} />
+					<Route path="/company" element={<CompanyList />} />
+					<Route path="/users" element={<Users />} />
+					<Route path="/product" element={<Tablemodel />} />
+					<Route path="/customer" element={<Customertable />} />
+					<Route path="/vat" element={<Vat />} />
+					<Route path="/category-subcategory" element={<CategorySubcategoryTable />} />
+					<Route path="/signin" element={<SignIn />} />
+					<Route path="/signup" element={<SignUp />} />
+				</Routes>
+			</Grid>
+		</Grid>
+	);
 }
