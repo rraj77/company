@@ -1,37 +1,37 @@
-import React, { useState } from "react";
-import Grid from "@mui/material/Unstable_Grid2";
-import { Button, IconButton, Table } from "@mui/material";
-import { TableBody, TableCell, Typography } from "@mui/material";
-import { TableHead, TableRow, TextField } from "@mui/material";
-import { Box } from "@mui/system";
-import { useFormik } from "formik";
-import { vatTableSchema } from "./vatTableSchema";
-import styles from "../../styles/styles.module.scss";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { VatProp } from "../../interfaces/interfaces";
+import React, { useState } from 'react';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Button, IconButton, Table } from '@mui/material';
+import { TableBody, TableCell, Typography } from '@mui/material';
+import { TableHead, TableRow, TextField } from '@mui/material';
+import { Box } from '@mui/system';
+import { useFormik } from 'formik';
+import { vatTableSchema } from './vatTableSchema';
+import styles from '../../styles/styles.module.scss';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { VatProp } from '../../interfaces/interfaces';
 
 export default function Vat() {
   const [data, setData] = useState<VatProp[]>([]);
   const [editData, setEditdata] = useState<VatProp>({
-    id: "",
-    name: "",
-    description: "",
-    tax: "",
+    id: '',
+    name: '',
+    description: '',
+    tax: ''
   });
 
   const initialValues: VatProp = {
     id: editData.id,
     name: editData.name,
     tax: editData.tax,
-    description: editData.description,
+    description: editData.description
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: vatTableSchema,
     onSubmit: (values, action) => {
-      if (values.id === "") {
+      if (values.id === '') {
         const list = data;
         values.id = Math.random();
         list.push(values);
@@ -47,11 +47,10 @@ export default function Vat() {
       }
       action.resetForm();
       onNewForm();
-    },
+    }
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
   const onFormSubmit = (e: React.FormEvent) => {
     values.id = editData.id;
@@ -69,10 +68,10 @@ export default function Vat() {
 
   const onNewForm = () => {
     setEditdata({
-      id: "",
-      name: "",
-      description: "",
-      tax: "",
+      id: '',
+      name: '',
+      description: '',
+      tax: ''
     });
     formik.resetForm();
   };
@@ -85,7 +84,7 @@ export default function Vat() {
           <Button
             variant="contained"
             size="small"
-            className={styles.margin_left + " " + styles.margin_left}
+            className={styles.margin_left + ' ' + styles.margin_left}
             onClick={onNewForm}
           >
             new
@@ -95,9 +94,7 @@ export default function Vat() {
           <TableHead>
             <TableRow>
               <TableCell className={styles.tableCellHead}>Name</TableCell>
-              <TableCell className={styles.tableCellHead}>
-                Description
-              </TableCell>
+              <TableCell className={styles.tableCellHead}>Description</TableCell>
               <TableCell className={styles.tableCellHead}>Tax</TableCell>
               <TableCell className={styles.tableCellHead} align="center">
                 Action
@@ -108,9 +105,7 @@ export default function Vat() {
             {data?.map((d: any, index: number) => (
               <TableRow key={index}>
                 <TableCell className={styles.tableCellBody}>{d.name}</TableCell>
-                <TableCell className={styles.tableCellBody}>
-                  {d.description}
-                </TableCell>
+                <TableCell className={styles.tableCellBody}>{d.description}</TableCell>
                 <TableCell className={styles.tableCellBody}>{d.tax}</TableCell>
                 <TableCell className={styles.tableCellBody}>
                   <Box className={styles.action}>
@@ -127,9 +122,7 @@ export default function Vat() {
                     <IconButton
                       color="error"
                       onClick={() => {
-                        const deleteData = data.filter(
-                          (datas) => datas.id !== d.id
-                        );
+                        const deleteData = data.filter((datas) => datas.id !== d.id);
                         setData(deleteData);
                       }}
                     >
@@ -145,12 +138,12 @@ export default function Vat() {
       <Grid xs={6} lg={6} md={6}>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {editData.id ? "Edit" + " " + editData.name : "Add Vat"}
+            {editData.id ? 'Edit' + ' ' + editData.name : 'Add Vat'}
           </Typography>
         </Box>
         <Box component="form" onSubmit={onFormSubmit}>
-          <Box className={styles.display_flex + " " + styles.input_field}>
-            <Box className={styles.padding_right + " " + styles.width_100}>
+          <Box className={styles.display_flex + ' ' + styles.input_field}>
+            <Box className={styles.padding_right + ' ' + styles.width_100}>
               <TextField
                 type="text"
                 variant="outlined"

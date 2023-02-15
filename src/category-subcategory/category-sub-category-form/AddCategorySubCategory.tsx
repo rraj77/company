@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { TextField, Button, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
-import styles from "../../styles/styles.module.scss";
-import { Category, CategoryProp } from "../../interfaces/interfaces";
+import React, { useState } from 'react';
+import { TextField, Button, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import styles from '../../styles/styles.module.scss';
+import { Category, CategoryProp } from '../../interfaces/interfaces';
 
 export default function AddCategorySubCategory({
   tableData,
@@ -13,9 +13,8 @@ export default function AddCategorySubCategory({
   setEdit,
   onAdd,
   setEditSubCategory,
-  editSubCategory,
+  editSubCategory
 }: CategoryProp) {
-  
   const [state, setstate] = useState<boolean>(true);
   const onCategoryValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEdit({ ...edit, [e.target.name]: e.target.value });
@@ -32,17 +31,17 @@ export default function AddCategorySubCategory({
   };
 
   let addFormFields = (name: string, index: number) => {
-    if (name === "subCategory") {
+    if (name === 'subCategory') {
       edit.subCategory.push({
-        id: "",
-        name: "",
-        children: [],
+        id: '',
+        name: '',
+        children: []
       });
     } else {
       edit.subCategory[index].children.push({
-        id: "",
-        name: "",
-        children: [],
+        id: '',
+        name: '',
+        children: []
       });
     }
     setEdit({ ...edit });
@@ -53,11 +52,11 @@ export default function AddCategorySubCategory({
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     i: number | null
   ) => {
-    if (e.target.name === "subCategory") {
+    if (e.target.name === 'subCategory') {
       edit.subCategory[index] = {
-        id: "",
+        id: '',
         name: e.target.value,
-        children: [...edit.subCategory[index].children],
+        children: [...edit.subCategory[index].children]
       };
       setEdit({ ...edit });
     } else {
@@ -70,7 +69,7 @@ export default function AddCategorySubCategory({
   };
 
   const removeFormFields = (name: string, index: number, i: number) => {
-    if (name === "subCategory") {
+    if (name === 'subCategory') {
       edit.subCategory.splice(index, 1);
     } else {
       edit.subCategory[index].children.splice(i, 1);
@@ -80,9 +79,9 @@ export default function AddCategorySubCategory({
 
   const onCancelForm = () => {
     setEdit({
-      id: "",
-      category: "",
-      subCategory: [{ id: "", name: "", children: [] }],
+      id: '',
+      category: '',
+      subCategory: [{ id: '', name: '', children: [] }]
     });
     setEditSubCategory(true);
   };
@@ -99,10 +98,10 @@ export default function AddCategorySubCategory({
       let subCategories: Category[] = [];
       let subSubCategory: Category[] = [];
       edit.subCategory.map((data, index) => {
-        if (data.name !== "") {
+        if (data.name !== '') {
           subCategories.push(data);
           data.children.map((d, i) => {
-            if (d.name !== "") {
+            if (d.name !== '') {
               subSubCategory.push(d);
             }
           });
@@ -113,10 +112,10 @@ export default function AddCategorySubCategory({
       if (editSubCategory === false) {
         list[index].subCategory.map((data, idx) => {
           edit.subCategory.map((d) => {
-            if (d.id === data.id && d.name !== "") {
+            if (d.id === data.id && d.name !== '') {
               list[index].subCategory[idx] = d;
             } else {
-              if (d.id === "") {
+              if (d.id === '') {
                 d.id = Math.random();
                 list[index].subCategory.push(d);
               }
@@ -127,7 +126,7 @@ export default function AddCategorySubCategory({
       } else {
         edit.subCategory = subCategories;
         edit.subCategory.map((data) => {
-          if (data.id === "") {
+          if (data.id === '') {
             data.id = Math.random();
           }
         });
@@ -136,9 +135,9 @@ export default function AddCategorySubCategory({
       }
     }
     setEdit({
-      id: "",
-      category: "",
-      subCategory: [{ id: "", name: "", children: [] }],
+      id: '',
+      category: '',
+      subCategory: [{ id: '', name: '', children: [] }]
     });
     setEditSubCategory(true);
   };
@@ -150,7 +149,7 @@ export default function AddCategorySubCategory({
           <>
             <Box className={styles.title}>
               <Typography variant="h5">
-                {edit.id ? "Edit " + edit.category : "Add category"}
+                {edit.id ? 'Edit ' + edit.category : 'Add category'}
               </Typography>
             </Box>
             <Box className={styles.input_field}>
@@ -162,9 +161,7 @@ export default function AddCategorySubCategory({
                 onChange={onCategoryValueChange}
                 fullWidth
               />
-              {state ? null : (
-                <div className={styles.form_error}>enter new category</div>
-              )}
+              {state ? null : <div className={styles.form_error}>enter new category</div>}
             </Box>
           </>
         ) : null}
@@ -173,10 +170,7 @@ export default function AddCategorySubCategory({
             <Box className={styles.title}>
               <Typography>Add sub category</Typography>
             </Box>
-            <Box
-              key={index}
-              className={styles.input_field + " " + styles.display_flex}
-            >
+            <Box key={index} className={styles.input_field + ' ' + styles.display_flex}>
               <Box className={styles.width_100}>
                 <TextField
                   type="text"
@@ -189,17 +183,17 @@ export default function AddCategorySubCategory({
                   className={styles.padding_right}
                 />
               </Box>
-              <Box className={styles.margin_left + " " + styles.display_flex}>
+              <Box className={styles.margin_left + ' ' + styles.display_flex}>
                 <Button
                   type="button"
                   className={styles.padding_right}
-                  onClick={() => removeFormFields("subCategory", index, index)}
+                  onClick={() => removeFormFields('subCategory', index, index)}
                   color="error"
                 >
                   <DeleteIcon />
                 </Button>
                 <Button
-                  onClick={() => addFormFields("subCategory", index)}
+                  onClick={() => addFormFields('subCategory', index)}
                   type="button"
                   color="primary"
                 >
@@ -208,10 +202,7 @@ export default function AddCategorySubCategory({
               </Box>
             </Box>
             {edit.subCategory[index]?.children?.map((d, i) => (
-              <Box
-                key={i}
-                className={styles.display_flex + " " + styles.input_field}
-              >
+              <Box key={i} className={styles.display_flex + ' ' + styles.input_field}>
                 <Box>
                   <TextField
                     type="text"
@@ -227,13 +218,13 @@ export default function AddCategorySubCategory({
                     type="button"
                     className={styles.padding_right}
                     color="error"
-                    onClick={() => removeFormFields("sCategory", index, i)}
+                    onClick={() => removeFormFields('sCategory', index, i)}
                   >
                     <DeleteIcon />
                   </Button>
                   <Button
                     type="button"
-                    onClick={() => addFormFields("sCategory", index)}
+                    onClick={() => addFormFields('sCategory', index)}
                     color="primary"
                   >
                     <AddIcon />
@@ -246,12 +237,7 @@ export default function AddCategorySubCategory({
         {state ? (
           edit.category ? (
             <Box className={styles.display_flex}>
-              <Button
-                type="button"
-                color="warning"
-                onClick={onCancelForm}
-                fullWidth
-              >
+              <Button type="button" color="warning" onClick={onCancelForm} fullWidth>
                 cancel
               </Button>
               <Button type="submit" variant="contained" fullWidth>
@@ -267,12 +253,7 @@ export default function AddCategorySubCategory({
           )
         ) : (
           <Box className={styles.display_flex}>
-            <Button
-              type="button"
-              color="warning"
-              onClick={onCancelForm}
-              fullWidth
-            >
+            <Button type="button" color="warning" onClick={onCancelForm} fullWidth>
               cancel
             </Button>
             <Button disabled type="submit" variant="contained" fullWidth>

@@ -1,17 +1,17 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import { Button, TextField } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { useFormik } from "formik";
-import styles from "./../../styles/styles.module.scss";
-import { signUpSchema } from "./SignUpSchema";
+import React from 'react';
+import Box from '@mui/material/Box';
+import { Button, TextField } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+import styles from './../../styles/styles.module.scss';
+import { signUpSchema } from './SignUpSchema';
 
 export default function SignUp() {
   const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   };
 
   const formik = useFormik({
@@ -19,11 +19,10 @@ export default function SignUp() {
     validationSchema: signUpSchema,
     onSubmit: (values, action) => {
       action.resetForm();
-    },
+    }
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
   const signUpForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
@@ -93,17 +92,15 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {values.password === "" &&
+            {values.password === '' &&
               touched.confirmPassword &&
               touched.password === true &&
-              values.password !== "" && (
-                <span className={styles.form_error}>
-                  {errors.confirmPassword}
-                </span>
+              values.password !== '' && (
+                <span className={styles.form_error}>{errors.confirmPassword}</span>
               )}
-            {values.password !== "" &&
+            {values.password !== '' &&
             values.password !== values.confirmPassword &&
-            values.confirmPassword !== "" &&
+            values.confirmPassword !== '' &&
             touched.confirmPassword ? (
               <span className={styles.form_error}>Password not match</span>
             ) : null}

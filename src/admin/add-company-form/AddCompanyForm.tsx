@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
-import { useFormik } from "formik";
-import { AddCompanyFormProps, CompanyTypes } from "../../interfaces/interfaces";
-import { companySchema } from "./AddCompanyFormSchema";
-import styles from "../../styles/styles.module.scss";
+import React, { useEffect } from 'react';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { useFormik } from 'formik';
+import { AddCompanyFormProps, CompanyTypes } from '../../interfaces/interfaces';
+import { companySchema } from './AddCompanyFormSchema';
+import styles from '../../styles/styles.module.scss';
 
 const { forwardRef, useImperativeHandle } = React;
 const AddCompanyForm = forwardRef(
-  (
-    { onSubmitCompanyForm, editCompany, setEditCompany }: AddCompanyFormProps,
-    ref
-  ) => {
+  ({ onSubmitCompanyForm, editCompany, setEditCompany }: AddCompanyFormProps, ref) => {
     const initialValues: CompanyTypes = {
       name: editCompany.name,
       email: editCompany.email,
@@ -18,7 +15,7 @@ const AddCompanyForm = forwardRef(
       pan: editCompany.pan,
       gst: editCompany.gst,
       cin: editCompany.cin,
-      id: editCompany.id,
+      id: editCompany.id
     };
 
     const formik = useFormik({
@@ -29,33 +26,32 @@ const AddCompanyForm = forwardRef(
         values.id = editCompany.id;
         onSubmitCompanyForm(values);
         setEditCompany({
-          id: "",
-          name: "",
-          email: "",
-          phone: "",
-          pan: "",
-          gst: "",
-          cin: "",
+          id: '',
+          name: '',
+          email: '',
+          phone: '',
+          pan: '',
+          gst: '',
+          cin: ''
         });
         action.resetForm();
-      },
+      }
     });
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-      formik;
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
     useImperativeHandle(ref, () => ({
       onNewForm() {
         setEditCompany({
-          id: "",
-          name: "",
-          email: "",
-          phone: "",
-          pan: "",
-          gst: "",
-          cin: "",
+          id: '',
+          name: '',
+          email: '',
+          phone: '',
+          pan: '',
+          gst: '',
+          cin: ''
         });
         formik.resetForm();
-      },
+      }
     }));
 
     useEffect(() => {
@@ -83,7 +79,7 @@ const AddCompanyForm = forwardRef(
       <Box>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {editCompany.id ? "Edit" + " " + editCompany.name : "Add company"}
+            {editCompany.id ? 'Edit' + ' ' + editCompany.name : 'Add company'}
           </Typography>
         </Box>
         <Box component="form" onSubmit={handleFormData} noValidate>

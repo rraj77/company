@@ -1,13 +1,13 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import { useFormik } from "formik";
-import { formSchema } from "./Schema/schemas";
-import style from "../../styles/styles.module.scss";
-import { Product } from "./TableModel";
-import { useEffect } from "react";
+import * as React from 'react';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import { useFormik } from 'formik';
+import { formSchema } from './Schema/schemas';
+import style from '../../styles/styles.module.scss';
+import { Product } from './TableModel';
+import { useEffect } from 'react';
 export interface AddProductFormPro {
   onSubmitProductForm: (inputs: Product) => void;
   userProducts: Product;
@@ -16,31 +16,23 @@ export interface AddProductFormPro {
 export default function AddProductForm({
   onSubmitProductForm,
   userProducts,
-  setuserProducts,
+  setuserProducts
 }: AddProductFormPro) {
   const initialValues: Product = {
     product_name: userProducts.product_name,
     category: userProducts.category,
     sub_category: userProducts.sub_category,
     description: userProducts.description,
-    company_id: userProducts.company_id,
+    company_id: userProducts.company_id
   };
 
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleSubmit,
-    resetForm,
-    setErrors,
-  } = useFormik({
+  const { values, touched, errors, handleChange, handleSubmit, resetForm, setErrors } = useFormik({
     initialValues,
     validationSchema: formSchema,
     onSubmit: (values, action) => {
       onFormSubmit(values);
       action.resetForm();
-    },
+    }
   });
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -51,11 +43,11 @@ export default function AddProductForm({
   const onFormSubmit = (values: Product) => {
     onSubmitProductForm(values);
     setuserProducts({
-      product_name: "",
-      category: "",
-      sub_category: "",
-      description: "",
-      company_id: "",
+      product_name: '',
+      category: '',
+      sub_category: '',
+      description: '',
+      company_id: ''
     });
   };
 
@@ -77,18 +69,17 @@ export default function AddProductForm({
 
   const handleReset = () => {
     resetForm();
-   setuserProducts({
-      product_name: "",
-      category: "",
-      sub_category: "",
-      description: "",
-      company_id: "",
+    setuserProducts({
+      product_name: '',
+      category: '',
+      sub_category: '',
+      description: '',
+      company_id: ''
     });
-   
   };
   return (
     <Box
-      sx={{ paddingLeft: "1rem" }}
+      sx={{ paddingLeft: '1rem' }}
       component="form"
       onSubmit={ProductSubmit}
       noValidate
@@ -96,13 +87,11 @@ export default function AddProductForm({
     >
       <Box className={style.title}>
         <Typography variant="h5">
-          {userProducts.company_id
-            ? "Edit" + " " + userProducts.product_name
-            : "Add company"}
+          {userProducts.company_id ? 'Edit' + ' ' + userProducts.product_name : 'Add company'}
         </Typography>
       </Box>
-      <Box sx={{ display: "flex" }}>
-        <Box className={style.input_field} sx={{ paddingRight: "1rem" }}>
+      <Box sx={{ display: 'flex' }}>
+        <Box className={style.input_field} sx={{ paddingRight: '1rem' }}>
           <TextField
             size="small"
             label="product_name"
@@ -166,28 +155,18 @@ export default function AddProductForm({
         ) : null}
       </Box>
 
-      <Box className={style.input_field} sx={{ display: "flex" }}>
-        <Box sx={{ paddingRight: "1rem" }}>
-          <Button
-            type="button"
-            variant="contained"
-            onClick={handleReset}
-            size="small"
-          >
+      <Box className={style.input_field} sx={{ display: 'flex' }}>
+        <Box sx={{ paddingRight: '1rem' }}>
+          <Button type="button" variant="contained" onClick={handleReset} size="small">
             RESET
           </Button>
         </Box>
-        <Box textAlign={"end"} sx={{ paddingRight: "1rem" }}>
-          <Button
-            type="button"
-            variant="contained"
-            onClick={resetErrors}
-            size="small"
-          >
+        <Box textAlign={'end'} sx={{ paddingRight: '1rem' }}>
+          <Button type="button" variant="contained" onClick={resetErrors} size="small">
             RESET ERRORS
           </Button>
         </Box>
-        <Box textAlign={"end"}>
+        <Box textAlign={'end'}>
           <Button type="submit" variant="contained" size="small">
             Submit
           </Button>

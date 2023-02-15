@@ -1,15 +1,15 @@
-import React from "react";
-import { Button, TextField } from "@mui/material";
-import Box from "@mui/material/Box";
-import { NavLink } from "react-router-dom";
-import { useFormik } from "formik";
-import styles from "./../../styles/styles.module.scss";
-import { signInSchema } from "./SignInSchema";
+import React from 'react';
+import { Button, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+import styles from './../../styles/styles.module.scss';
+import { signInSchema } from './SignInSchema';
 
 export default function SignIn() {
   const initialValues = {
-    email: "",
-    password: "",
+    email: '',
+    password: ''
   };
 
   const formik = useFormik({
@@ -17,11 +17,10 @@ export default function SignIn() {
     validationSchema: signInSchema,
     onSubmit: (values, action) => {
       action.resetForm();
-    },
+    }
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
   const signInForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
