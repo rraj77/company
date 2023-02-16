@@ -100,7 +100,7 @@ export default function AddCategorySubCategory({
 			edit.subCategory.map((data, index) => {
 				if (data.name !== '') {
 					subCategories.push(data);
-					data.children.map((d, i) => {
+					data.children.map((d) => {
 						if (d.name !== '') {
 							subSubCategory.push(d);
 						}
