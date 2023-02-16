@@ -30,6 +30,5 @@ module.exports = {
                 "allowNumber" : false
             }
         ],
-        "no-inlint-comments": "error"
     }
 }
