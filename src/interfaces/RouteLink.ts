@@ -1,12 +1,4 @@
 export interface ILinks {
-  name: string;
-  to: string;
+	name: string;
+	to: string;
 }
-
-
-
-
-
-
-
-

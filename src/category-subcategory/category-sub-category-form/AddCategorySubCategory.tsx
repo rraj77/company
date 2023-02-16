@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { TextField, Button, Typography } from "@mui/material";
-import { Box } from "@mui/system";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
-import styles from "../../styles/styles.module.scss";
-import { ICategory, CategoryProp } from "../../interfaces/category";
+import React, { useState } from 'react';
+import { TextField, Button, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import styles from '../../styles/styles.module.scss';
+import { ICategory, CategoryProp } from '../../interfaces/category';
 
 export default function AddCategorySubCategory({
 	tableData,
@@ -30,38 +30,38 @@ export default function AddCategorySubCategory({
 		}
 	};
 
-  let addFormFields = (name: string, index: number) => {
-    if (name === "subCategory") {
-      edit.subCategory.push({
-        id: 0,
-        name: "",
-        children: [],
-      });
-    } else {
-      edit.subCategory[index].children.push({
-        id: 0,
-        name: "",
-        children: [],
-      });
-    }
-    setEdit({ ...edit });
-  };
+	let addFormFields = (name: string, index: number) => {
+		if (name === 'subCategory') {
+			edit.subCategory.push({
+				id: 0,
+				name: '',
+				children: []
+			});
+		} else {
+			edit.subCategory[index].children.push({
+				id: 0,
+				name: '',
+				children: []
+			});
+		}
+		setEdit({ ...edit });
+	};
 
-  const onHandleValueChange = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    i: number | null
-  ) => {
-    if (e.target.name === "subCategory") {
-      edit.subCategory[index] = {
-        id: 0,
-        name: e.target.value,
-        children: [...edit.subCategory[index].children],
-      };
-      setEdit({ ...edit });
-    } else {
-      if (i !== null) {
-        edit.subCategory[index].children[i].name = e.target.value;
+	const onHandleValueChange = (
+		index: number,
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+		i: number | null
+	) => {
+		if (e.target.name === 'subCategory') {
+			edit.subCategory[index] = {
+				id: 0,
+				name: e.target.value,
+				children: [...edit.subCategory[index].children]
+			};
+			setEdit({ ...edit });
+		} else {
+			if (i !== null) {
+				edit.subCategory[index].children[i].name = e.target.value;
 
 				setEdit({ ...edit });
 			}
@@ -77,70 +77,70 @@ export default function AddCategorySubCategory({
 		setEdit({ ...edit });
 	};
 
-  const onCancelForm = () => {
-    setEdit({
-      id: 0,
-      category: "",
-      subCategory: [{ id: 0, name: "", children: [] }],
-    });
-    setEditSubCategory(true);
-  };
+	const onCancelForm = () => {
+		setEdit({
+			id: 0,
+			category: '',
+			subCategory: [{ id: 0, name: '', children: [] }]
+		});
+		setEditSubCategory(true);
+	};
 
-  const onFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const list = [...tableData];
-    const d = list.find((data) => data.id === edit.id);
-    const index = list.findIndex((data) => data.id === edit.id);
-    if (d === undefined) {
-      edit.id = Math.random();
-      onAdd(edit);
-    } else {
-      let subCategories: ICategory[] = [];
-      let subSubCategory: ICategory[] = [];
-      edit.subCategory.map((data, index) => {
-        if (data.name !== "") {
-          subCategories.push(data);
-          data.children.map((d, i) => {
-            if (d.name !== "") {
-              subSubCategory.push(d);
-            }
-          });
-          edit.subCategory[index].children = subSubCategory;
-          subSubCategory = [];
-        }
-      });
-      if (editSubCategory === false) {
-        list[index].subCategory.map((data, idx) => {
-          edit.subCategory.map((d) => {
-            if (d.id === data.id && d.name !== "") {
-              list[index].subCategory[idx] = d;
-            } else {
-              if (d.id) {
-                d.id = Math.random();
-                list[index].subCategory.push(d);
-              }
-            }
-          });
-        });
-        setTableData(list);
-      } else {
-        edit.subCategory = subCategories;
-        edit.subCategory.map((data) => {
-          if (data.id ) {
-            data.id = Math.random();
-          }
-        });
-        list[index] = edit;
-        setTableData(list);
-      }
-    }
-    setEdit({
-      id: 0,
-      category: "",
-      subCategory: [{ id: 0, name: "", children: [] }],
-    });
-    setEditSubCategory(true);
-  };
+	const onFormSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		const list = [...tableData];
+		const d = list.find((data) => data.id === edit.id);
+		const index = list.findIndex((data) => data.id === edit.id);
+		if (d === undefined) {
+			edit.id = Math.random();
+			onAdd(edit);
+		} else {
+			let subCategories: ICategory[] = [];
+			let subSubCategory: ICategory[] = [];
+			edit.subCategory.map((data, index) => {
+				if (data.name !== '') {
+					subCategories.push(data);
+					data.children.map((d, i) => {
+						if (d.name !== '') {
+							subSubCategory.push(d);
+						}
+					});
+					edit.subCategory[index].children = subSubCategory;
+					subSubCategory = [];
+				}
+			});
+			if (editSubCategory === false) {
+				list[index].subCategory.map((data, idx) => {
+					edit.subCategory.map((d) => {
+						if (d.id === data.id && d.name !== '') {
+							list[index].subCategory[idx] = d;
+						} else {
+							if (d.id) {
+								d.id = Math.random();
+								list[index].subCategory.push(d);
+							}
+						}
+					});
+				});
+				setTableData(list);
+			} else {
+				edit.subCategory = subCategories;
+				edit.subCategory.map((data) => {
+					if (data.id) {
+						data.id = Math.random();
+					}
+				});
+				list[index] = edit;
+				setTableData(list);
+			}
+		}
+		setEdit({
+			id: 0,
+			category: '',
+			subCategory: [{ id: 0, name: '', children: [] }]
+		});
+		setEditSubCategory(true);
+	};
 
 	return (
 		<Box>

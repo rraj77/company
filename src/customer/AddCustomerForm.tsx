@@ -1,14 +1,14 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import { useFormik } from "formik";
-import { formSchema } from "./Schema/schemas";
-import style from "../styles/styles.module.scss";
+import * as React from 'react';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import { useFormik } from 'formik';
+import { formSchema } from './Schema/schemas';
+import style from '../styles/styles.module.scss';
 
-import { useEffect, useState } from "react";
-import { AddCustomerFormPro, ICustomer } from "../interfaces/customer";
+import { useEffect, useState } from 'react';
+import { AddCustomerFormPro, ICustomer } from '../interfaces/customer';
 
 export default function AddCustomerForm({
 	onSubmitCustomerForm,
@@ -17,15 +17,15 @@ export default function AddCustomerForm({
 	file,
 	setFile
 }: AddCustomerFormPro) {
-  const initialValues: ICustomer = {
-    avatar: userCustomer.avatar,
-    first_name: userCustomer.first_name,
-    last_name: userCustomer.last_name,
-    email: userCustomer.email,
-    phone_no: userCustomer.phone_no,
-    gst: userCustomer.gst,
-    id: userCustomer.id,
-  };
+	const initialValues: ICustomer = {
+		avatar: userCustomer.avatar,
+		first_name: userCustomer.first_name,
+		last_name: userCustomer.last_name,
+		email: userCustomer.email,
+		phone_no: userCustomer.phone_no,
+		gst: userCustomer.gst,
+		id: userCustomer.id
+	};
 
 	const [fileName, setFileName] = useState('');
 	const image = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,37 +44,29 @@ export default function AddCustomerForm({
 		}
 	});
 
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleSubmit,
-    resetForm,
-    setErrors,
-  } = formik;
-  const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setuserCustomer({ ...userCustomer, [name]: value });
-    handleChange(e);
-  };
-  const onFormSubmit = (values: ICustomer) => {
-    onSubmitCustomerForm(values, file);
-    setErrors({});
-    setuserCustomer({
-      id: 0,
-      avatar: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone_no: 0,
-      gst: "",
-    });
-    setFileName("");
-    setFile("");
-    handleReset();
-  };
+	const { values, touched, errors, handleChange, handleSubmit, resetForm, setErrors } = formik;
+	const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const name = e.target.name;
+		const value = e.target.value;
+		setuserCustomer({ ...userCustomer, [name]: value });
+		handleChange(e);
+	};
+	const onFormSubmit = (values: ICustomer) => {
+		onSubmitCustomerForm(values, file);
+		setErrors({});
+		setuserCustomer({
+			id: 0,
+			avatar: '',
+			first_name: '',
+			last_name: '',
+			email: '',
+			phone_no: 0,
+			gst: ''
+		});
+		setFileName('');
+		setFile('');
+		handleReset();
+	};
 
 	const CustomerSubmit = (e: React.FormEvent) => {
 		values.avatar = userCustomer.avatar;
@@ -94,40 +86,34 @@ export default function AddCustomerForm({
 		setErrors({});
 	};
 
-  const handleReset = () => {
-    resetForm();
-    setuserCustomer({
-      id: 0,
-      avatar: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone_no: 0,
-      gst: "",
-    });
-  };
-  return (
-    <Box
-      sx={{ paddingLeft: "1rem" }}
-      component="form"
-      onSubmit={CustomerSubmit}
-      noValidate
-      autoComplete="off"
-    >
-      <Box className={style.title}>
-        <Typography variant="h5">
-          {userCustomer.id
-            ? "Edit" + " " + userCustomer.first_name
-            : "Add Customer"}
-        </Typography>
-      </Box>
-      <Box component="form">
-        <Typography variant="h5">Upload photo</Typography>
-        {file !== "" ? (
-          <Box component="img" src={file} className={style.img} />
-        ) : (
-          ""
-        )}
+	const handleReset = () => {
+		resetForm();
+		setuserCustomer({
+			id: 0,
+			avatar: '',
+			first_name: '',
+			last_name: '',
+			email: '',
+			phone_no: 0,
+			gst: ''
+		});
+	};
+	return (
+		<Box
+			sx={{ paddingLeft: '1rem' }}
+			component="form"
+			onSubmit={CustomerSubmit}
+			noValidate
+			autoComplete="off"
+		>
+			<Box className={style.title}>
+				<Typography variant="h5">
+					{userCustomer.id ? 'Edit' + ' ' + userCustomer.first_name : 'Add Customer'}
+				</Typography>
+			</Box>
+			<Box component="form">
+				<Typography variant="h5">Upload photo</Typography>
+				{file !== '' ? <Box component="img" src={file} className={style.img} /> : ''}
 
 				<Box className={style.input_field}>
 					<TextField type="file" fullWidth size="small" onChange={image} value={fileName} />
@@ -179,16 +165,16 @@ export default function AddCustomerForm({
 				{errors.email && touched.email ? <p className={style.form_error}>{errors.email}</p> : null}
 			</Box>
 
-      <Box className={style.input_field}>
-        <TextField
-          size="small"
-          id="outlined-required"
-          label="phone_no"
-          fullWidth
-          name="phone_no"
-          value={userCustomer.phone_no === 0 ? '' : userCustomer.phone_no}
-          onChange={handleValue}
-        />
+			<Box className={style.input_field}>
+				<TextField
+					size="small"
+					id="outlined-required"
+					label="phone_no"
+					fullWidth
+					name="phone_no"
+					value={userCustomer.phone_no === 0 ? '' : userCustomer.phone_no}
+					onChange={handleValue}
+				/>
 
 				{errors.phone_no && touched.phone_no ? (
 					<p className={style.form_error}>{errors.phone_no}</p>
