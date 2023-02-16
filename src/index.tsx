@@ -8,13 +8,13 @@ import Context from './context/Context';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-	<Router>
-		<Context>
-			<React.StrictMode>
-				<App />
-			</React.StrictMode>
-		</Context>
-	</Router>
+  <Router>
+    <Context>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Context>
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

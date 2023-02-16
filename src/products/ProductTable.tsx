@@ -17,168 +17,168 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { IProduct } from '../interfaces/product';
 
 export default function ProductTable() {
-	const [productData, setProductData] = useState<IProduct[]>([]);
-	const [productForm, setProductForm] = useState(false);
-	const [id, setId] = useState('');
+  const [productData, setProductData] = useState<IProduct[]>([]);
+  const [productForm, setProductForm] = useState(false);
+  const [id, setId] = useState('');
 
-	const [userProducts, setuserProducts] = useState<IProduct>({
-		id: 0,
-		name: '',
-		category: '',
-		subCategory: '',
-		description: '',
-		tax: 0,
-		discount: 0
-	});
+  const [userProducts, setuserProducts] = useState<IProduct>({
+    id: 0,
+    name: '',
+    category: '',
+    subCategory: '',
+    description: '',
+    tax: 0,
+    discount: 0
+  });
 
-	const form = () => {
-		setProductForm(true);
-		setId(id);
-	};
+  const form = () => {
+    setProductForm(true);
+    setId(id);
+  };
 
-	useEffect(() => {
-		return setProductData(ProductList);
-	}, []);
+  useEffect(() => {
+    return setProductData(ProductList);
+  }, []);
 
-	function onSubmitProductForm(inputs: IProduct) {
-		if (inputs.id) {
-			inputs.id = Math.random();
-			const list = productData;
-			list.push(inputs);
-			setProductData(list);
-		} else {
-			productData.map((data) => {
-				if (data.id === inputs.id) {
-					data.name = inputs.name;
-					data.category = inputs.category;
-					data.subCategory = inputs.subCategory;
-					data.description = inputs.description;
-					data.tax = inputs.tax;
-					data.discount = inputs.discount;
-				}
-			});
-		}
-	}
-	const editProduct = (id: number | string) => {
-		const edit = productData.find((products) => products.id === id);
-		if (edit !== undefined) {
-			setuserProducts(edit);
-		}
-	};
+  function onSubmitProductForm(inputs: IProduct) {
+    if (inputs.id) {
+      inputs.id = Math.random();
+      const list = productData;
+      list.push(inputs);
+      setProductData(list);
+    } else {
+      productData.map((data) => {
+        if (data.id === inputs.id) {
+          data.name = inputs.name;
+          data.category = inputs.category;
+          data.subCategory = inputs.subCategory;
+          data.description = inputs.description;
+          data.tax = inputs.tax;
+          data.discount = inputs.discount;
+        }
+      });
+    }
+  }
+  const editProduct = (id: number | string) => {
+    const edit = productData.find((products) => products.id === id);
+    if (edit !== undefined) {
+      setuserProducts(edit);
+    }
+  };
 
-	const handleReset = () => {
-		setuserProducts({
-			name: '',
-			category: '',
-			subCategory: '',
-			description: '',
-			tax: 0,
-			discount: 0,
-			id: 0
-		});
-	};
+  const handleReset = () => {
+    setuserProducts({
+      name: '',
+      category: '',
+      subCategory: '',
+      description: '',
+      tax: 0,
+      discount: 0,
+      id: 0
+    });
+  };
 
-	return (
-		<Box sx={{ flexGrow: 1 }}>
-			<Grid container spacing={2}>
-				<Grid item xs={12} sm={12} md={8}>
-					<Box className={style.title}>
-						<Typography variant="h5">products</Typography>
-						<Button variant="contained" className={style.margin_left} onClick={handleReset}>
-							New
-						</Button>
-					</Box>
-					<Table>
-						<TableHead>
-							<TableRow>
-								<TableCell className={style.tableCellHead}>product_name</TableCell>
-								<TableCell className={style.tableCellHead}>category</TableCell>
-								<TableCell className={style.tableCellHead}>sub_category</TableCell>
-								<TableCell className={style.tableCellHead}>description</TableCell>
-								<TableCell className={style.tableCellHead}>company_id</TableCell>
-								<TableCell className={style.tableCellHead} align="center">
-									Action
-								</TableCell>
-							</TableRow>
-						</TableHead>
-					</Table>
-					<Grid container spacing={2}>
-						<Grid item xs={12} sm={12} md={8}>
-							<Box className={style.title}>
-								<Typography variant="h5">products</Typography>
-								<Button variant="contained" className={style.margin_left} onClick={handleReset}>
-									New
-								</Button>
-							</Box>
-							<Table>
-								<TableHead>
-									<TableRow>
-										<TableCell className={style.tableCellHead}>product_name</TableCell>
-										<TableCell className={style.tableCellHead}>category</TableCell>
-										<TableCell className={style.tableCellHead}>sub_category</TableCell>
-										<TableCell className={style.tableCellHead}>description</TableCell>
-										<TableCell className={style.tableCellHead}>tax</TableCell>
-										<TableCell className={style.tableCellHead}>discount</TableCell>
-										<TableCell className={style.tableCellHead} align="center">
-											Action
-										</TableCell>
-									</TableRow>
-								</TableHead>
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} md={8}>
+          <Box className={style.title}>
+            <Typography variant="h5">products</Typography>
+            <Button variant="contained" className={style.margin_left} onClick={handleReset}>
+              New
+            </Button>
+          </Box>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className={style.tableCellHead}>product_name</TableCell>
+                <TableCell className={style.tableCellHead}>category</TableCell>
+                <TableCell className={style.tableCellHead}>sub_category</TableCell>
+                <TableCell className={style.tableCellHead}>description</TableCell>
+                <TableCell className={style.tableCellHead}>company_id</TableCell>
+                <TableCell className={style.tableCellHead} align="center">
+                  Action
+                </TableCell>
+              </TableRow>
+            </TableHead>
+          </Table>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={12} md={8}>
+              <Box className={style.title}>
+                <Typography variant="h5">products</Typography>
+                <Button variant="contained" className={style.margin_left} onClick={handleReset}>
+                  New
+                </Button>
+              </Box>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell className={style.tableCellHead}>product_name</TableCell>
+                    <TableCell className={style.tableCellHead}>category</TableCell>
+                    <TableCell className={style.tableCellHead}>sub_category</TableCell>
+                    <TableCell className={style.tableCellHead}>description</TableCell>
+                    <TableCell className={style.tableCellHead}>tax</TableCell>
+                    <TableCell className={style.tableCellHead}>discount</TableCell>
+                    <TableCell className={style.tableCellHead} align="center">
+                      Action
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
 
-								<TableBody>
-									{productData?.map((products: IProduct) => {
-										return (
-											<TableRow key={products.id}>
-												<TableCell className={style.tableCellBody}>{products.name}</TableCell>
+                <TableBody>
+                  {productData?.map((products: IProduct) => {
+                    return (
+                      <TableRow key={products.id}>
+                        <TableCell className={style.tableCellBody}>{products.name}</TableCell>
 
-												<TableCell className={style.tableCellBody}>{products.category}</TableCell>
-												<TableCell className={style.tableCellBody}>
-													{products.subCategory}
-												</TableCell>
-												<TableCell className={style.tableCellBody}>
-													{products.description}
-												</TableCell>
-												<TableCell className={style.tableCellBody}>{products.tax}</TableCell>
-												<TableCell className={style.tableCellBody}>{products.discount}</TableCell>
-												<TableCell sx={{ display: 'flex' }}>
-													<IconButton
-														color="primary"
-														onClick={() => {
-															editProduct(products.id);
-														}}
-													>
-														<EditIcon />
-													</IconButton>
+                        <TableCell className={style.tableCellBody}>{products.category}</TableCell>
+                        <TableCell className={style.tableCellBody}>
+                          {products.subCategory}
+                        </TableCell>
+                        <TableCell className={style.tableCellBody}>
+                          {products.description}
+                        </TableCell>
+                        <TableCell className={style.tableCellBody}>{products.tax}</TableCell>
+                        <TableCell className={style.tableCellBody}>{products.discount}</TableCell>
+                        <TableCell sx={{ display: 'flex' }}>
+                          <IconButton
+                            color="primary"
+                            onClick={() => {
+                              editProduct(products.id);
+                            }}
+                          >
+                            <EditIcon />
+                          </IconButton>
 
-													<IconButton
-														color="error"
-														onClick={() => {
-															const productCompany = productData.filter(
-																(Product) => Product.id !== products.id
-															);
+                          <IconButton
+                            color="error"
+                            onClick={() => {
+                              const productCompany = productData.filter(
+                                (Product) => Product.id !== products.id
+                              );
 
-															setProductData(productCompany);
-														}}
-													>
-														<DeleteIcon />
-													</IconButton>
-												</TableCell>
-											</TableRow>
-										);
-									})}
-								</TableBody>
-							</Table>
-						</Grid>
-						<Grid item xs={12} sm={12} md={4}>
-							<AddProductForm
-								onSubmitProductForm={onSubmitProductForm}
-								userProducts={userProducts}
-								setuserProducts={setuserProducts}
-							/>
-						</Grid>
-					</Grid>
-				</Grid>
-			</Grid>
-		</Box>
-	);
+                              setProductData(productCompany);
+                            }}
+                          >
+                            <DeleteIcon />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </Grid>
+            <Grid item xs={12} sm={12} md={4}>
+              <AddProductForm
+                onSubmitProductForm={onSubmitProductForm}
+                userProducts={userProducts}
+                setuserProducts={setuserProducts}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Box>
+  );
 }
