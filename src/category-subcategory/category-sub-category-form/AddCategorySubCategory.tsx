@@ -30,7 +30,7 @@ export default function AddCategorySubCategory({
 		}
 	};
 
-	let addFormFields = (name: string, index: number) => {
+	const addFormFields = (name: string, index: number) => {
 		if (name === 'subCategory') {
 			edit.subCategory.push({
 				id: 0,
@@ -95,7 +95,7 @@ export default function AddCategorySubCategory({
 			edit.id = Math.random();
 			onAdd(edit);
 		} else {
-			let subCategories: ICategory[] = [];
+			const subCategories: ICategory[] = [];
 			let subSubCategory: ICategory[] = [];
 			edit.subCategory.map((data, index) => {
 				if (data.name !== '') {
