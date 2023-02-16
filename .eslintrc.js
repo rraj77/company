@@ -22,5 +22,14 @@ module.exports = {
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
+        "no-console": "error",
+        "@typescript-eslint/strict-boolean-expressions": [
+            2,
+            {
+                "allowString" : false,
+                "allowNumber" : false
+            }
+        ],
+        "no-inlint-comments": "error"
     }
 }
