@@ -61,7 +61,7 @@ export default function Customertable() {
 	}
 
 	const editCustomer = (id: number | string) => {
-		let edit = data.find((customer) => customer.id === id);
+		const edit = data.find((customer) => customer.id === id);
 		if (edit !== undefined) {
 			setFile(edit.avatar);
 			setuserCustomer(edit);

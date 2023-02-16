@@ -49,7 +49,7 @@ export default function CategorySubcategoryTable() {
 			const da = tableData.find((data) => {
 				return data.subCategory.find((d) => d.id === copiedData.id);
 			});
-			let copied = JSON.parse(JSON.stringify(da));
+			const copied = JSON.parse(JSON.stringify(da));
 
 			copied.subCategory = [copiedData];
 			copiedData = copied;

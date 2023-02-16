@@ -63,7 +63,7 @@ export default function Tablemodel() {
 		}
 	}
 	const editProduct = (id: number | string) => {
-		let edit = state.find((products) => products.company_id === id);
+		const edit = state.find((products) => products.company_id === id);
 		if (edit !== undefined) {
 			setuserProducts(edit);
 		}
