@@ -1,84 +1,88 @@
-import React, { useState } from 'react';
-import Grid from '@mui/material/Unstable_Grid2';
-import { Box, Typography } from '@mui/material';
-import styles from '../styles/styles.module.scss';
-import { Category, TableDataProp } from '../interfaces/interfaces';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import TreeView from '@mui/lab/TreeView';
-import TreeItem, { TreeItemProps } from '@mui/lab/TreeItem';
-import EditIcon from '@mui/icons-material/Edit';
-import AddCategorySubCategory from './category-sub-category-form/AddCategorySubCategory';
-import DeleteIcon from '@mui/icons-material/Delete';
+import React, { useState } from "react";
+import Grid from "@mui/material/Unstable_Grid2";
+import { Box, Typography } from "@mui/material";
+import styles from "../styles/styles.module.scss";
+import { ICategory, TableDataProp } from "../interfaces/category";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import TreeView from "@mui/lab/TreeView";
+import TreeItem, { TreeItemProps } from "@mui/lab/TreeItem";
+import EditIcon from "@mui/icons-material/Edit";
+import AddCategorySubCategory from "./category-sub-category-form/AddCategorySubCategory";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function CategorySubcategoryTable() {
-	const [tableData, setTableData] = useState<TableDataProp[]>([]);
-	const [edit, setEdit] = useState<TableDataProp>({
-		id: '',
-		category: '',
-		subCategory: [{ id: '', name: '', children: [] }]
-	});
+  const [tableData, setTableData] = useState<TableDataProp[]>([]);
+  const [edit, setEdit] = useState<TableDataProp>({
+    id: 0,
+    category: "",
+    subCategory: [{ id: 0, name: "", children: [] }],
+  });
 
-	const onAdd = (editData: TableDataProp) => {
-		let subCategories: Category[] = [];
-		let subSubCategory: Category[] = [];
-		editData.subCategory.map((data, index) => {
-			if (data.name !== '') {
-				data.id = Math.random();
-				subCategories.push(data);
-				data.children.map((d, i) => {
-					if (d.name !== '') {
-						d.id = Math.random();
-						subSubCategory.push(d);
-					}
-				});
-				editData.subCategory[index].children = subSubCategory;
-				subSubCategory = [];
-			}
-		});
-		editData.subCategory = subCategories;
-		setTableData([...tableData, editData]);
-		subCategories = [];
-	};
-	const [editSubCategory, setEditSubCategory] = useState<boolean>(true);
-	const onEditCategory = (e: React.MouseEvent, name: string, data: TableDataProp | Category) => {
-		e.stopPropagation();
-		setEditSubCategory(true);
-		let copiedData = JSON.parse(JSON.stringify(data));
-		if (name === 'subCategory') {
-			const da = tableData.find((data) => {
-				return data.subCategory.find((d) => d.id === copiedData.id);
-			});
-			const copied = JSON.parse(JSON.stringify(da));
+  const onAdd = (editData: TableDataProp) => {
+    let subCategories: ICategory[] = [];
+    let subSubCategory: ICategory[] = [];
+    editData.subCategory.map((data, index) => {
+      if (data.name !== "") {
+        data.id = Math.random();
+        subCategories.push(data);
+        data.children.map((d, i) => {
+          if (d.name !== "") {
+            d.id = Math.random();
+            subSubCategory.push(d);
+          }
+        });
+        editData.subCategory[index].children = subSubCategory;
+        subSubCategory = [];
+      }
+    });
+    editData.subCategory = subCategories;
+    setTableData([...tableData, editData]);
+    subCategories = [];
+  };
+  const [editSubCategory, setEditSubCategory] = useState<boolean>(true);
+  const onEditCategory = (
+    e: React.MouseEvent,
+    name: string,
+    data: TableDataProp | ICategory
+  ) => {
+    e.stopPropagation();
+    setEditSubCategory(true);
+    let copiedData = JSON.parse(JSON.stringify(data));
+    if (name === "subCategory") {
+      const da = tableData.find((data) => {
+        return data.subCategory.find((d) => d.id === copiedData.id);
+      });
+      let copied = JSON.parse(JSON.stringify(da));
 
-			copied.subCategory = [copiedData];
-			copiedData = copied;
-		}
-		if (copiedData.subCategory[0] === undefined) {
-			copiedData.subCategory.push({
-				name: '',
-				id: '',
-				children: []
-			});
-			setEdit(copiedData);
-		} else {
-			if (name === 'subCategory') {
-				setEditSubCategory(false);
-				copiedData.subCategory.map((data: Category, index: number) => {
-					if (copiedData.subCategory[index].children[0] === undefined) {
-						copiedData.subCategory[index].children.push({ name: '' });
-					}
-				});
-			}
-			setEdit(copiedData);
-		}
-	};
+      copied.subCategory = [copiedData];
+      copiedData = copied;
+    }
+    if (copiedData.subCategory[0] === undefined) {
+      copiedData.subCategory.push({
+        name: "",
+        id: "",
+        children: [],
+      });
+      setEdit(copiedData);
+    } else {
+      if (name === "subCategory") {
+        setEditSubCategory(false);
+        copiedData.subCategory.map((data: ICategory, index: number) => {
+          if (copiedData.subCategory[index].children[0] === undefined) {
+            copiedData.subCategory[index].children.push({ name: "" });
+          }
+        });
+      }
+      setEdit(copiedData);
+    }
+  };
 
-	type StyledTreeItemProps = TreeItemProps & {
-		name: string;
-		labelText: string;
-		labelInfo: TableDataProp | Category;
-	};
+  type StyledTreeItemProps = TreeItemProps & {
+    name: string;
+    labelText: string;
+    labelInfo: TableDataProp | ICategory;
+  };
 
 	const onDeleteCategory = (id: number | string) => {
 		const tableCategory = tableData.filter((data) => data.id !== id);
