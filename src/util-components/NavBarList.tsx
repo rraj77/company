@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Routes, Route, NavLink } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import { Box } from "@mui/system";
@@ -16,9 +16,11 @@ import CategorySubcategoryTable from "../category-subcategory/CategorySubcategor
 import Customertable from "../customer/CustomerTable";
 import Gst from "../admin/gst/Gst";
 import ProductTable from "../products/ProductTable";
+import Invoice from "../invoice/Invoice";
 
 
-export default function NavBarList() {
+
+export default function   NavBarList() {
   return (
     <Grid container className={styles.navbar}>
       <Grid lg={2} md={2} className={styles.navbar_item}>
@@ -51,6 +53,8 @@ export default function NavBarList() {
           />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/invoice" element={<Invoice/>} />
+
         </Routes>
       </Grid>
     </Grid>

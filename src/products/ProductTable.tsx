@@ -29,7 +29,8 @@ export default function ProductTable() {
     subCategory: "",
     description: "",
     tax: 0,
-    discount: 0
+    discount: 0,
+    price:0,
   });
 
   const form = () => {
@@ -77,6 +78,7 @@ export default function ProductTable() {
       tax:0,
       discount:0,
       id: 0,
+      price:0,
     });
    
   };

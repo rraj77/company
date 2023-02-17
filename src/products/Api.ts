@@ -2,6 +2,7 @@
 
 import { IProduct } from "../interfaces/product";
 
+
  export const ProductList:IProduct[] = [
     {
       id: 1,
@@ -11,6 +12,7 @@ import { IProduct } from "../interfaces/product";
       description: "dsjf",
       tax:4,
       discount:5,
+      price: 23,
      },
     {
       id: 2,
@@ -20,6 +22,7 @@ import { IProduct } from "../interfaces/product";
       description: "sgjf",
       tax:3,
       discount:3,
+      price: 21,
      },
     {
       id: 3,
@@ -29,6 +32,7 @@ import { IProduct } from "../interfaces/product";
       description: "dfn",
       tax:3,
       discount:6,
+      price: 27,
      },
     {
       id: 4,
@@ -38,6 +42,7 @@ import { IProduct } from "../interfaces/product";
       description: "dfn",
       tax:5,
       discount:4,
+      price: 22,
      },
     {
       id: 5,
@@ -47,5 +52,6 @@ import { IProduct } from "../interfaces/product";
       description: "djfg",
       tax:5,
       discount:4,
+      price: 25,
      },
   ];

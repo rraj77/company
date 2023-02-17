@@ -1,7 +1,3 @@
-
-
-
-
 export interface IProduct {
   id: number;
   name: string;
@@ -10,7 +6,10 @@ export interface IProduct {
   description: string;
   tax:number;
   discount:number;
-  
+  price:number;
+}
+export interface IInvoiceItem extends IProduct {
+  quantity:number;
 }
 
 export interface AddProductFormPro {

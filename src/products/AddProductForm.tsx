@@ -24,6 +24,7 @@ export default function AddProductForm({
     description: userProducts.description,
     tax: userProducts.tax,
     discount: userProducts.discount,
+    price:userProducts.price
   };
 
   const {
@@ -66,6 +67,7 @@ export default function AddProductForm({
       description: "",
       tax: 0,
       discount: 0,
+      price:0,
     });
   };
 
@@ -97,6 +99,7 @@ export default function AddProductForm({
       description: "",
       tax: 0,
       discount: 0,
+      price:0,
     });
   };
   return (
