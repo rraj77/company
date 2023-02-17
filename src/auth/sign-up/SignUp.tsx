@@ -17,7 +17,7 @@ export default function SignUp() {
   const formik = useFormik({
     initialValues,
     validationSchema: signUpSchema,
-    onSubmit: (values, action) => {
+    onSubmit: (__, action) => {
       action.resetForm();
     }
   });
