@@ -33,7 +33,7 @@ export default function Customertable() {
   }, []);
 
   function onSubmitCustomerForm(inputs: ICustomer, file: string) {
-    if (inputs.id) {
+    if (!Number.isNaN(inputs.id)) {
       inputs.avatar = file;
       inputs.id = Math.random();
       setData([...data, inputs]);

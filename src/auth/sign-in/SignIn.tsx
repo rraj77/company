@@ -15,7 +15,7 @@ export default function SignIn() {
   const formik = useFormik({
     initialValues,
     validationSchema: signInSchema,
-    onSubmit: (values, action) => {
+    onSubmit: (__, action) => {
       action.resetForm();
     }
   });

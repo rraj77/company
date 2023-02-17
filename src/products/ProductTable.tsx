@@ -18,8 +18,6 @@ import { IProduct } from '../interfaces/product';
 
 export default function ProductTable() {
   const [productData, setProductData] = useState<IProduct[]>([]);
-  const [productForm, setProductForm] = useState(false);
-  const [id, setId] = useState('');
 
   const [userProducts, setuserProducts] = useState<IProduct>({
     id: 0,
@@ -31,17 +29,13 @@ export default function ProductTable() {
     discount: 0
   });
 
-  const form = () => {
-    setProductForm(true);
-    setId(id);
-  };
 
   useEffect(() => {
     return setProductData(ProductList);
   }, []);
 
   function onSubmitProductForm(inputs: IProduct) {
-    if (inputs.id) {
+    if (!Number.isNaN(inputs.id)) {
       inputs.id = Math.random();
       const list = productData;
       list.push(inputs);

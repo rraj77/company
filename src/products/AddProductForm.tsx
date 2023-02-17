@@ -100,7 +100,7 @@ export default function AddProductForm({
     >
       <Box className={style.title}>
         <Typography variant="h5">
-          {userProducts.id ? 'Edit' + ' ' + userProducts.name : 'Add product'}
+          {(!Number.isNaN(userProducts.id)) ? 'Edit' + ' ' + userProducts.name : 'Add product'}
         </Typography>
       </Box>
       <Box sx={{ display: 'flex' }}>
@@ -114,7 +114,7 @@ export default function AddProductForm({
             value={userProducts.name}
             onChange={handleValue}
           />
-          {errors.name && touched.name ? <p className={style.form_error}>{errors.name}</p> : null}
+          {(errors.name != null) && (touched.name ?? false) ? <p className={style.form_error}>{errors.name}</p> : null}
         </Box>
         <Box className={style.input_field}>
           <TextField
@@ -126,7 +126,7 @@ export default function AddProductForm({
             value={userProducts.category}
             onChange={handleValue}
           />
-          {errors.category && touched.category ? (
+          {(errors.category != null) && (touched.category ?? false) ? (
             <p className={style.form_error}>{errors.category}</p>
           ) : null}
         </Box>
@@ -144,7 +144,7 @@ export default function AddProductForm({
           onChange={handleValue}
         />
 
-        {errors.subCategory && touched.subCategory ? (
+        {(errors.subCategory != null) && (touched.subCategory ?? false) ? (
           <p className={style.form_error}>{errors.subCategory}</p>
         ) : null}
       </Box>
@@ -161,7 +161,7 @@ export default function AddProductForm({
           onChange={handleValue}
         />
 
-        {errors.description && touched.description ? (
+        {(errors.description != null) && (touched.description ?? false) ? (
           <p className={style.form_error}>{errors.description}</p>
         ) : null}
       </Box>
@@ -179,7 +179,7 @@ export default function AddProductForm({
           onChange={handleValue}
         />
 
-        {errors.tax && touched.tax ? <p className={style.form_error}>{errors.tax}</p> : null}
+        {(errors.tax != null) && (touched.tax ?? false) ? <p className={style.form_error}>{errors.tax}</p> : null}
       </Box>
       <Box className={style.input_field}>
         <TextField
@@ -194,7 +194,7 @@ export default function AddProductForm({
           onChange={handleValue}
         />
 
-        {errors.discount && touched.discount ? (
+        {(errors.discount != null) && (touched.discount ?? false) ? (
           <p className={style.form_error}>{errors.discount}</p>
         ) : null}
       </Box>

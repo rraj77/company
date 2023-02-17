@@ -6,8 +6,9 @@ import { companySchema } from './AddCompanyFormSchema';
 import styles from '../../styles/styles.module.scss';
 
 const { forwardRef, useImperativeHandle } = React;
-const AddCompanyForm = forwardRef(
-  ({ onSubmitCompanyForm, editCompany, setEditCompany }: IAddCompanyFormProp, ref) => {
+const forwardRefComponent = (
+  ({ onSubmitCompanyForm, editCompany, setEditCompany }: IAddCompanyFormProp, ref: React.Ref<unknown> | undefined) => {
+    
     const initialValues: ICompanyType = {
       name: editCompany.name,
       email: editCompany.email,
@@ -154,7 +155,7 @@ const AddCompanyForm = forwardRef(
               fullWidth
               onBlur={handleBlur}
             />
-            {errors.gst && touched.gst ? (
+            {errors.gst && (touched.gst ?? false) ? (
               <span className={styles.form_error}>{errors.gst}</span>
             ) : null}
           </Box>
@@ -169,7 +170,7 @@ const AddCompanyForm = forwardRef(
               onChange={onChangeValue}
               onBlur={handleBlur}
             />
-            {errors.cin && touched.cin ? (
+            {(errors.cin != null) && (touched.cin ?? false) ? (
               <span className={styles.form_error}>{errors.cin}</span>
             ) : null}
           </Box>
@@ -181,5 +182,5 @@ const AddCompanyForm = forwardRef(
     );
   }
 );
-
+const AddCompanyForm = forwardRef(forwardRefComponent)
 export default AddCompanyForm;
