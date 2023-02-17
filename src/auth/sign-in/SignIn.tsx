@@ -42,7 +42,7 @@ export default function SignIn() {
               onChange={signInForm}
               onBlur={handleBlur}
             />
-            {errors.email && touched.email ? (
+            {errors.email != null && (touched.email ?? false) ? (
               <span className={styles.form_error}>{errors.email}</span>
             ) : null}
           </Box>
@@ -58,7 +58,7 @@ export default function SignIn() {
               onChange={signInForm}
               onBlur={handleBlur}
             />
-            {errors.password && touched.password ? (
+            {errors.password != null && (touched.password ?? false) ? (
               <span className={styles.form_error}>{errors.password}</span>
             ) : null}
           </Box>
@@ -70,7 +70,7 @@ export default function SignIn() {
           <b>Forgot password?</b>
         </p>
         <p>
-          <span>Don't have an account? &nbsp;</span>
+          <span>Don&apos;t have an account? &nbsp;</span>
           <b>
             <NavLink to="/SignUp">Sign up here</NavLink>
           </b>

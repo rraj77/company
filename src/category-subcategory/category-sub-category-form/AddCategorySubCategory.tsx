@@ -115,7 +115,7 @@ export default function AddCategorySubCategory({
             if (d.id === data.id && d.name !== '') {
               list[index].subCategory[idx] = d;
             } else {
-              if (d.id) {
+              if (!Number.isNaN(d.id)) {
                 d.id = Math.random();
                 list[index].subCategory.push(d);
               }
@@ -126,7 +126,7 @@ export default function AddCategorySubCategory({
       } else {
         edit.subCategory = subCategories;
         edit.subCategory.map((data) => {
-          if (data.id) {
+          if (!Number.isNaN(data.id)) {
             data.id = Math.random();
           }
         });
@@ -149,7 +149,7 @@ export default function AddCategorySubCategory({
           <>
             <Box className={styles.title}>
               <Typography variant="h5">
-                {edit.id ? 'Edit ' + edit.category : 'Add category'}
+                {!Number.isNaN(edit.id) ? 'Edit ' + edit.category : 'Add category'}
               </Typography>
             </Box>
             <Box className={styles.input_field}>
@@ -235,7 +235,7 @@ export default function AddCategorySubCategory({
           </Box>
         ))}
         {state ? (
-          edit.category ? (
+          edit.category.length > 0 ? (
             <Box className={styles.display_flex}>
               <Button type="button" color="warning" onClick={onCancelForm} fullWidth>
                 cancel

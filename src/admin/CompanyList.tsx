@@ -32,7 +32,7 @@ export default function CompanyList() {
   const newFormRef: any = useRef();
 
   const onSubmitCompanyForm = (dataCompany: ICompanyType): void => {
-    if (dataCompany.id) {
+    if (dataCompany.id !== 0) {
       dataCompany.id = Math.random();
       setCompanyList([...companyList, dataCompany]);
     } else {

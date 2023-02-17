@@ -21,6 +21,6 @@
     "noUnusedParameters": true,
     "strictNullChecks": true
   },
-  "include": ["src", "src/main/.tsx"],
+  "include": ["src", "src/main/.tsx", "./.eslintrc.js"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

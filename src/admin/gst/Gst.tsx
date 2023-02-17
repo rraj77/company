@@ -31,7 +31,7 @@ export default function Gst() {
     initialValues,
     validationSchema: vatTableSchema,
     onSubmit: (values, action) => {
-      if (values.id) {
+      if (!Number.isNaN(values.id)) {
         const list = data;
         values.id = Math.random();
         list.push(values);
@@ -138,7 +138,7 @@ export default function Gst() {
       <Grid xs={6} lg={6} md={6}>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {editData.id ? 'Edit' + ' ' + editData.name : 'Add Gst'}
+            {!Number.isNaN(editData.id) ? 'Edit' + ' ' + editData.name : 'Add Gst'}
           </Typography>
         </Box>
         <Box component="form" onSubmit={onFormSubmit}>
@@ -155,7 +155,7 @@ export default function Gst() {
                 onChange={onValueChange}
                 onBlur={handleBlur}
               />
-              {errors.name && touched.name ? (
+              {errors.name != null && (touched.name ?? false) ? (
                 <div className={styles.form_error}>{errors.name}</div>
               ) : null}
             </Box>
@@ -171,7 +171,7 @@ export default function Gst() {
                 onBlur={handleBlur}
                 onChange={onValueChange}
               />
-              {errors.tax && touched.tax ? (
+              {errors.tax != null && (touched.tax ?? false) ? (
                 <div className={styles.form_error}>{errors.tax}</div>
               ) : null}
             </Box>
@@ -188,7 +188,7 @@ export default function Gst() {
               onBlur={handleBlur}
               fullWidth
             />
-            {errors.description && touched.description ? (
+            {errors.description != null && (touched.description ?? false) ? (
               <div className={styles.form_error}>{errors.description}</div>
             ) : null}
           </Box>

@@ -27,7 +27,6 @@ export default function SignUp() {
   const signUpForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
   };
-  console.log(touched.password);
   return (
     <Box className={styles.sign}>
       <Box className={styles.sign_up}>
@@ -44,7 +43,7 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {errors.name && touched.name ? (
+            {errors.name != null && (touched.name ?? false) ? (
               <span className={styles.form_error}>{errors.name}</span>
             ) : null}
           </Box>
@@ -60,7 +59,7 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {errors.email && touched.email ? (
+            {errors.email != null && (touched.email ?? false) ? (
               <span className={styles.form_error}>{errors.email}</span>
             ) : null}
           </Box>
@@ -76,7 +75,7 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {errors.password && touched.password ? (
+            {errors.password != null && (touched.password ?? false) ? (
               <span className={styles.form_error}>{errors.password}</span>
             ) : null}
           </Box>
@@ -93,7 +92,7 @@ export default function SignUp() {
               onBlur={handleBlur}
             />
             {values.password === '' &&
-              touched.confirmPassword &&
+              (touched.confirmPassword ?? false) &&
               touched.password === true &&
               values.password !== '' && (
                 <span className={styles.form_error}>{errors.confirmPassword}</span>
@@ -101,7 +100,7 @@ export default function SignUp() {
             {values.password !== '' &&
             values.password !== values.confirmPassword &&
             values.confirmPassword !== '' &&
-            touched.confirmPassword ? (
+            (touched.confirmPassword ?? false) ? (
               <span className={styles.form_error}>Password not match</span>
             ) : null}
           </Box>

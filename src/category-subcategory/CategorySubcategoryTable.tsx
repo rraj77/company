@@ -26,7 +26,7 @@ export default function CategorySubcategoryTable() {
       if (data.name !== '') {
         data.id = Math.random();
         subCategories.push(data);
-        data.children.map((d, i) => {
+        data.children.map((d) => {
           if (d.name !== '') {
             d.id = Math.random();
             subSubCategory.push(d);
@@ -64,7 +64,7 @@ export default function CategorySubcategoryTable() {
     } else {
       if (name === 'subCategory') {
         setEditSubCategory(false);
-        copiedData.subCategory.map((data: ICategory, index: number) => {
+        copiedData.subCategory.map((_data: ICategory, index: number) => {
           if (copiedData.subCategory[index].children[0] === undefined) {
             copiedData.subCategory[index].children.push({ name: '' });
           }
