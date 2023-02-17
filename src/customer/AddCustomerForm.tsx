@@ -1,21 +1,21 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import { useFormik } from "formik";
-import { formSchema } from "./Schema/schemas";
-import style from "../styles/styles.module.scss";
+import * as React from 'react';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import { useFormik } from 'formik';
+import { formSchema } from './Schema/schemas';
+import style from '../styles/styles.module.scss';
 
-import { useEffect, useState } from "react";
-import { AddCustomerFormPro, ICustomer } from "../interfaces/customer";
+import { useEffect, useState } from 'react';
+import { AddCustomerFormPro, ICustomer } from '../interfaces/customer';
 
 export default function AddCustomerForm({
   onSubmitCustomerForm,
   userCustomer,
   setuserCustomer,
   file,
-  setFile,
+  setFile
 }: AddCustomerFormPro) {
   const initialValues: ICustomer = {
     avatar: userCustomer.avatar,
@@ -24,10 +24,10 @@ export default function AddCustomerForm({
     email: userCustomer.email,
     phone_no: userCustomer.phone_no,
     gst: userCustomer.gst,
-    id: userCustomer.id,
+    id: userCustomer.id
   };
 
-  const [fileName, setFileName] = useState("");
+  const [fileName, setFileName] = useState('');
   const image = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       return;
@@ -41,18 +41,10 @@ export default function AddCustomerForm({
     onSubmit: (values, action) => {
       onFormSubmit(values);
       action.resetForm();
-    },
+    }
   });
 
-  const {
-    values,
-    touched,
-    errors,
-    handleChange,
-    handleSubmit,
-    resetForm,
-    setErrors,
-  } = formik;
+  const { values, touched, errors, handleChange, handleSubmit, resetForm, setErrors } = formik;
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -64,15 +56,15 @@ export default function AddCustomerForm({
     setErrors({});
     setuserCustomer({
       id: 0,
-      avatar: "",
-      first_name: "",
-      last_name: "",
-      email: "",
+      avatar: '',
+      first_name: '',
+      last_name: '',
+      email: '',
       phone_no: 0,
-      gst: "",
+      gst: ''
     });
-    setFileName("");
-    setFile("");
+    setFileName('');
+    setFile('');
     handleReset();
   };
 
@@ -98,17 +90,17 @@ export default function AddCustomerForm({
     resetForm();
     setuserCustomer({
       id: 0,
-      avatar: "",
-      first_name: "",
-      last_name: "",
-      email: "",
+      avatar: '',
+      first_name: '',
+      last_name: '',
+      email: '',
       phone_no: 0,
-      gst: "",
+      gst: ''
     });
   };
   return (
     <Box
-      sx={{ paddingLeft: "1rem" }}
+      sx={{ paddingLeft: '1rem' }}
       component="form"
       onSubmit={CustomerSubmit}
       noValidate
@@ -116,31 +108,19 @@ export default function AddCustomerForm({
     >
       <Box className={style.title}>
         <Typography variant="h5">
-          {userCustomer.id
-            ? "Edit" + " " + userCustomer.first_name
-            : "Add Customer"}
+          {userCustomer.id ? 'Edit' + ' ' + userCustomer.first_name : 'Add Customer'}
         </Typography>
       </Box>
       <Box component="form">
         <Typography variant="h5">Upload photo</Typography>
-        {file !== "" ? (
-          <Box component="img" src={file} className={style.img} />
-        ) : (
-          ""
-        )}
+        {file !== '' ? <Box component="img" src={file} className={style.img} /> : ''}
 
         <Box className={style.input_field}>
-          <TextField
-            type="file"
-            fullWidth
-            size="small"
-            onChange={image}
-            value={fileName}
-          />
+          <TextField type="file" fullWidth size="small" onChange={image} value={fileName} />
         </Box>
       </Box>
-      <Box sx={{ display: "flex" }}>
-        <Box className={style.input_field} sx={{ paddingRight: "1rem" }}>
+      <Box sx={{ display: 'flex' }}>
+        <Box className={style.input_field} sx={{ paddingRight: '1rem' }}>
           <TextField
             size="small"
             label="first_name"
@@ -182,9 +162,7 @@ export default function AddCustomerForm({
           onChange={handleValue}
         />
 
-        {errors.email && touched.email ? (
-          <p className={style.form_error}>{errors.email}</p>
-        ) : null}
+        {errors.email && touched.email ? <p className={style.form_error}>{errors.email}</p> : null}
       </Box>
 
       <Box className={style.input_field}>
@@ -214,33 +192,21 @@ export default function AddCustomerForm({
           onChange={handleValue}
         />
 
-        {errors.gst && touched.gst ? (
-          <p className={style.form_error}>{errors.gst}</p>
-        ) : null}
+        {errors.gst && touched.gst ? <p className={style.form_error}>{errors.gst}</p> : null}
       </Box>
 
-      <Box className={style.input_field} sx={{ display: "flex" }}>
-        <Box sx={{ paddingRight: "1rem" }}>
-          <Button
-            type="button"
-            variant="contained"
-            onClick={handleReset}
-            size="small"
-          >
+      <Box className={style.input_field} sx={{ display: 'flex' }}>
+        <Box sx={{ paddingRight: '1rem' }}>
+          <Button type="button" variant="contained" onClick={handleReset} size="small">
             RESET
           </Button>
         </Box>
-        <Box textAlign={"end"} sx={{ paddingRight: "1rem" }}>
-          <Button
-            type="button"
-            variant="contained"
-            onClick={resetErrors}
-            size="small"
-          >
+        <Box textAlign={'end'} sx={{ paddingRight: '1rem' }}>
+          <Button type="button" variant="contained" onClick={resetErrors} size="small">
             RESET ERRORS
           </Button>
         </Box>
-        <Box textAlign={"end"}>
+        <Box textAlign={'end'}>
           <Button type="submit" variant="contained" size="small">
             Submit
           </Button>

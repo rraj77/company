@@ -1,15 +1,15 @@
-import React from "react";
-import { Button, TextField } from "@mui/material";
-import Box from "@mui/material/Box";
-import { NavLink } from "react-router-dom";
-import { useFormik } from "formik";
-import styles from "./../../styles/styles.module.scss";
-import { signInSchema } from "./SignInSchema";
+import React from 'react';
+import { Button, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+import styles from './../../styles/styles.module.scss';
+import { signInSchema } from './SignInSchema';
 
 export default function SignIn() {
   const initialValues = {
-    email: "",
-    password: "",
+    email: '',
+    password: ''
   };
 
   const formik = useFormik({
@@ -17,11 +17,10 @@ export default function SignIn() {
     validationSchema: signInSchema,
     onSubmit: (values, action) => {
       action.resetForm();
-    },
+    }
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
   const signInForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
@@ -43,7 +42,7 @@ export default function SignIn() {
               onChange={signInForm}
               onBlur={handleBlur}
             />
-            {errors.email && touched.email ? (
+            {errors.email != null && (touched.email ?? false) ? (
               <span className={styles.form_error}>{errors.email}</span>
             ) : null}
           </Box>
@@ -59,7 +58,7 @@ export default function SignIn() {
               onChange={signInForm}
               onBlur={handleBlur}
             />
-            {errors.password && touched.password ? (
+            {errors.password != null && (touched.password ?? false) ? (
               <span className={styles.form_error}>{errors.password}</span>
             ) : null}
           </Box>
@@ -71,7 +70,7 @@ export default function SignIn() {
           <b>Forgot password?</b>
         </p>
         <p>
-          <span>Don't have an account? &nbsp;</span>
+          <span>Don&apos;t have an account? &nbsp;</span>
           <b>
             <NavLink to="/SignUp">Sign up here</NavLink>
           </b>

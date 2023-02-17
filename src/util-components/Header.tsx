@@ -1,17 +1,17 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { Menu, MenuItem } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { AccountCircle } from "@mui/icons-material";
-import { NavLinks } from "../routes/Routers";
-import styles from "./../styles/styles.module.scss";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import MenuIcon from '@mui/icons-material/Menu';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { Menu, MenuItem } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { AccountCircle } from '@mui/icons-material';
+import { NavLinks } from '../routes/Routers';
+import styles from './../styles/styles.module.scss';
 export default function Header() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -36,11 +36,11 @@ export default function Header() {
             key={index}
             to={links.to}
             style={({ isActive }) => ({
-              color: isActive ? "blue" : "black",
-              textDecorationLine: isActive ? "underline" : "none",
+              color: isActive ? 'blue' : 'black',
+              textDecorationLine: isActive ? 'underline' : 'none'
             })}
           >
-            <MenuItem sx={{ whiteSpace: "pre-line" }}>{links.name}</MenuItem>
+            <MenuItem sx={{ whiteSpace: 'pre-line' }}>{links.name}</MenuItem>
           </NavLink>
         ))}
       </List>
@@ -78,13 +78,13 @@ export default function Header() {
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right'
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right'
               }}
               open={Boolean(anchorEl)}
               onClose={handleClose}
@@ -103,7 +103,7 @@ export default function Header() {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: true
           }}
         >
           {drawer}

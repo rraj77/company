@@ -1,17 +1,17 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import { Button, TextField } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { useFormik } from "formik";
-import styles from "./../../styles/styles.module.scss";
-import { signUpSchema } from "./SignUpSchema";
+import React from 'react';
+import Box from '@mui/material/Box';
+import { Button, TextField } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+import styles from './../../styles/styles.module.scss';
+import { signUpSchema } from './SignUpSchema';
 
 export default function SignUp() {
   const initialValues = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   };
 
   const formik = useFormik({
@@ -19,16 +19,14 @@ export default function SignUp() {
     validationSchema: signUpSchema,
     onSubmit: (values, action) => {
       action.resetForm();
-    },
+    }
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
   const signUpForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
   };
-  console.log(touched.password);
   return (
     <Box className={styles.sign}>
       <Box className={styles.sign_up}>
@@ -45,7 +43,7 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {errors.name && touched.name ? (
+            {errors.name != null && (touched.name ?? false) ? (
               <span className={styles.form_error}>{errors.name}</span>
             ) : null}
           </Box>
@@ -61,7 +59,7 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {errors.email && touched.email ? (
+            {errors.email != null && (touched.email ?? false) ? (
               <span className={styles.form_error}>{errors.email}</span>
             ) : null}
           </Box>
@@ -77,7 +75,7 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {errors.password && touched.password ? (
+            {errors.password != null && (touched.password ?? false) ? (
               <span className={styles.form_error}>{errors.password}</span>
             ) : null}
           </Box>
@@ -93,18 +91,16 @@ export default function SignUp() {
               onChange={signUpForm}
               onBlur={handleBlur}
             />
-            {values.password === "" &&
-              touched.confirmPassword &&
+            {values.password === '' &&
+              (touched.confirmPassword ?? false) &&
               touched.password === true &&
-              values.password !== "" && (
-                <span className={styles.form_error}>
-                  {errors.confirmPassword}
-                </span>
+              values.password !== '' && (
+                <span className={styles.form_error}>{errors.confirmPassword}</span>
               )}
-            {values.password !== "" &&
+            {values.password !== '' &&
             values.password !== values.confirmPassword &&
-            values.confirmPassword !== "" &&
-            touched.confirmPassword ? (
+            values.confirmPassword !== '' &&
+            (touched.confirmPassword ?? false) ? (
               <span className={styles.form_error}>Password not match</span>
             ) : null}
           </Box>
