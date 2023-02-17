@@ -12,6 +12,7 @@ import SignUp from "../auth/sign-up/SignUp";
 import styles from "./../styles/styles.module.scss";
 
 import CategorySubcategoryTable from "../category-subcategory/CategorySubcategoryTable";
+import Drive from "../drive/Drive";
 
 import Customertable from "../customer/CustomerTable";
 import Gst from "../admin/gst/Gst";
@@ -49,6 +50,7 @@ export default function NavBarList() {
             path="/category-subcategory"
             element={<CategorySubcategoryTable />}
           />
+          <Route path="/drive" element={<Drive />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>

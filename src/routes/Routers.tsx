@@ -1,4 +1,3 @@
-
 import { ILinks } from "../interfaces/RouteLink";
 
 export const NavLinks: ILinks[] = [
@@ -8,8 +7,9 @@ export const NavLinks: ILinks[] = [
     to: "/company",
   },
   { name: "Users", to: "/users" },
-  {name:"Product",to:"/product"},
-  {name:"Customer", to:"/customer"},
+  { name: "Product", to: "/product" },
+  { name: "Customer", to: "/customer" },
   { name: "Gst", to: "/gst" },
   { name: "Category and subcategy", to: "/category-subcategory" },
+  { name: "Drive", to: "/drive" },
 ];
