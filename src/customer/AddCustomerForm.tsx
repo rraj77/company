@@ -108,7 +108,7 @@ export default function AddCustomerForm({
     >
       <Box className={style.title}>
         <Typography variant="h5">
-          {(!Number.isNaN(userCustomer.id)) ? 'Edit' + ' ' + userCustomer.first_name : 'Add Customer'}
+          {!Number.isNaN(userCustomer.id) ? 'Edit' + ' ' + userCustomer.first_name : 'Add Customer'}
         </Typography>
       </Box>
       <Box component="form">
@@ -130,7 +130,7 @@ export default function AddCustomerForm({
             value={userCustomer.first_name}
             onChange={handleValue}
           />
-          {(errors.first_name != null) && (touched.first_name ?? false) ? (
+          {errors.first_name != null && (touched.first_name ?? false) ? (
             <p className={style.form_error}>{errors.first_name}</p>
           ) : null}
         </Box>
@@ -144,7 +144,7 @@ export default function AddCustomerForm({
             value={userCustomer.last_name}
             onChange={handleValue}
           />
-          {(errors.last_name != null) && (touched.last_name ?? false) ? (
+          {errors.last_name != null && (touched.last_name ?? false) ? (
             <p className={style.form_error}>{errors.last_name}</p>
           ) : null}
         </Box>
@@ -162,7 +162,9 @@ export default function AddCustomerForm({
           onChange={handleValue}
         />
 
-        {(errors.email != null) && (touched.email ?? false) ? <p className={style.form_error}>{errors.email}</p> : null}
+        {errors.email != null && (touched.email ?? false) ? (
+          <p className={style.form_error}>{errors.email}</p>
+        ) : null}
       </Box>
 
       <Box className={style.input_field}>
@@ -176,7 +178,7 @@ export default function AddCustomerForm({
           onChange={handleValue}
         />
 
-        {(errors.phone_no != null) && (touched.phone_no ?? false) ? (
+        {errors.phone_no != null && (touched.phone_no ?? false) ? (
           <p className={style.form_error}>{errors.phone_no}</p>
         ) : null}
       </Box>
@@ -192,7 +194,9 @@ export default function AddCustomerForm({
           onChange={handleValue}
         />
 
-        {(errors.gst != null) && (touched.gst ?? false) ? <p className={style.form_error}>{errors.gst}</p> : null}
+        {errors.gst != null && (touched.gst ?? false) ? (
+          <p className={style.form_error}>{errors.gst}</p>
+        ) : null}
       </Box>
 
       <Box className={style.input_field} sx={{ display: 'flex' }}>

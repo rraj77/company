@@ -6,15 +6,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Context from './context/Context';
 
-
 render(
-  (<Router>
+  <Router>
     <Context>
       <React.StrictMode>
         <App />
       </React.StrictMode>
     </Context>
-  </Router>), document.getElementById('root') as HTMLElement
+  </Router>,
+  document.getElementById('root') as HTMLElement
 );
 
 // If you want to start measuring performance in your app, pass a function

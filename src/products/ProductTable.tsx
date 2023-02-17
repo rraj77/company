@@ -29,7 +29,6 @@ export default function ProductTable() {
     discount: 0
   });
 
-
   useEffect(() => {
     return setProductData(ProductList);
   }, []);
