@@ -80,7 +80,7 @@ const forwardRefComponent = (
     <Box>
       <Box className={styles.title}>
         <Typography variant="h5">
-          {(!Number.isNaN(editCompany.id)) ? 'Edit' + ' ' + editCompany.name : 'Add company'}
+          {!Number.isNaN(editCompany.id) ? 'Edit' + ' ' + editCompany.name : 'Add company'}
         </Typography>
       </Box>
       <Box component="form" onSubmit={handleFormData} noValidate>
@@ -96,7 +96,7 @@ const forwardRefComponent = (
             id="name"
             fullWidth
           />
-          {((errors.name ?? "").length > 0) && (touched.name ?? false) ? (
+          {(errors.name ?? '').length > 0 && (touched.name ?? false) ? (
             <span className={styles.form_error}>{errors.name}</span>
           ) : null}
         </Box>
@@ -111,7 +111,7 @@ const forwardRefComponent = (
             fullWidth
             onBlur={handleBlur}
           />
-          {(errors.email != null) && (touched.email ?? false) ? (
+          {errors.email != null && (touched.email ?? false) ? (
             <span className={styles.form_error}>{errors.email}</span>
           ) : null}
         </Box>
@@ -126,7 +126,7 @@ const forwardRefComponent = (
             fullWidth
             onBlur={handleBlur}
           />
-          {(errors.phone != null) && (touched.phone ?? false) ? (
+          {errors.phone != null && (touched.phone ?? false) ? (
             <span className={styles.form_error}>{errors.phone}</span>
           ) : null}
         </Box>
@@ -141,7 +141,7 @@ const forwardRefComponent = (
             fullWidth
             onBlur={handleBlur}
           />
-          {(errors.pan != null) && (touched.pan ?? false) ? (
+          {errors.pan != null && (touched.pan ?? false) ? (
             <span className={styles.form_error}>{errors.pan}</span>
           ) : null}
         </Box>
@@ -156,7 +156,7 @@ const forwardRefComponent = (
             fullWidth
             onBlur={handleBlur}
           />
-          {(errors.gst != null) && (touched.gst ?? false) ? (
+          {errors.gst != null && (touched.gst ?? false) ? (
             <span className={styles.form_error}>{errors.gst}</span>
           ) : null}
         </Box>
