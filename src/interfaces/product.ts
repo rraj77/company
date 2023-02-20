@@ -13,7 +13,7 @@ export interface IInvoiceItem extends IProduct {
 }
 
 export interface AddProductFormPro {
-    onSubmitProductForm: (inputs: IProduct) => void;
-    userProducts: IProduct;
-    setuserProducts: React.Dispatch<React.SetStateAction<IProduct>>;
-  }
+  onSubmitProductForm: (inputs: IProduct) => void;
+  userProducts: IProduct;
+  setuserProducts: React.Dispatch<React.SetStateAction<IProduct>>;
+}

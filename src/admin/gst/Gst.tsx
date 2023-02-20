@@ -1,38 +1,37 @@
-import React, { useState } from "react";
-import Grid from "@mui/material/Unstable_Grid2";
-import { Button, IconButton, Table } from "@mui/material";
-import { TableBody, TableCell, Typography } from "@mui/material";
-import { TableHead, TableRow, TextField } from "@mui/material";
-import { Box } from "@mui/system";
-import { useFormik } from "formik";
-import { vatTableSchema } from "./vatTableSchema";
-import styles from "../../styles/styles.module.scss";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { IGst } from "../../interfaces/gst";
-
+import React, { useState } from 'react';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Button, IconButton, Table } from '@mui/material';
+import { TableBody, TableCell, Typography } from '@mui/material';
+import { TableHead, TableRow, TextField } from '@mui/material';
+import { Box } from '@mui/system';
+import { useFormik } from 'formik';
+import { vatTableSchema } from './vatTableSchema';
+import styles from '../../styles/styles.module.scss';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { IGst } from '../../interfaces/gst';
 
 export default function Gst() {
   const [data, setData] = useState<IGst[]>([]);
   const [editData, setEditdata] = useState<IGst>({
     id: 0,
-    name: "",
-    description: "",
-    tax: 0,
+    name: '',
+    description: '',
+    tax: 0
   });
 
   const initialValues: IGst = {
     id: editData.id,
     name: editData.name,
     tax: editData.tax,
-    description: editData.description,
+    description: editData.description
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: vatTableSchema,
     onSubmit: (values, action) => {
-      if (values.id ) {
+      if (!Number.isNaN(values.id)) {
         const list = data;
         values.id = Math.random();
         list.push(values);
@@ -48,11 +47,10 @@ export default function Gst() {
       }
       action.resetForm();
       onNewForm();
-    },
+    }
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = formik;
 
   const onFormSubmit = (e: React.FormEvent) => {
     values.id = editData.id;
@@ -71,9 +69,9 @@ export default function Gst() {
   const onNewForm = () => {
     setEditdata({
       id: 0,
-      name: "",
-      description: "",
-      tax: 0,
+      name: '',
+      description: '',
+      tax: 0
     });
     formik.resetForm();
   };
@@ -86,7 +84,7 @@ export default function Gst() {
           <Button
             variant="contained"
             size="small"
-            className={styles.margin_left + " " + styles.margin_left}
+            className={styles.margin_left + ' ' + styles.margin_left}
             onClick={onNewForm}
           >
             new
@@ -96,9 +94,7 @@ export default function Gst() {
           <TableHead>
             <TableRow>
               <TableCell className={styles.tableCellHead}>Name</TableCell>
-              <TableCell className={styles.tableCellHead}>
-                Description
-              </TableCell>
+              <TableCell className={styles.tableCellHead}>Description</TableCell>
               <TableCell className={styles.tableCellHead}>Tax</TableCell>
               <TableCell className={styles.tableCellHead} align="center">
                 Action
@@ -109,9 +105,7 @@ export default function Gst() {
             {data?.map((d, index: number) => (
               <TableRow key={index}>
                 <TableCell className={styles.tableCellBody}>{d.name}</TableCell>
-                <TableCell className={styles.tableCellBody}>
-                  {d.description}
-                </TableCell>
+                <TableCell className={styles.tableCellBody}>{d.description}</TableCell>
                 <TableCell className={styles.tableCellBody}>{d.tax}</TableCell>
                 <TableCell className={styles.tableCellBody}>
                   <Box className={styles.action}>
@@ -128,9 +122,7 @@ export default function Gst() {
                     <IconButton
                       color="error"
                       onClick={() => {
-                        const deleteData = data.filter(
-                          (datas) => datas.id !== d.id
-                        );
+                        const deleteData = data.filter((datas) => datas.id !== d.id);
                         setData(deleteData);
                       }}
                     >
@@ -146,12 +138,12 @@ export default function Gst() {
       <Grid xs={6} lg={6} md={6}>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {editData.id ? "Edit" + " " + editData.name : "Add Gst"}
+            {!Number.isNaN(editData.id) ? 'Edit' + ' ' + editData.name : 'Add Gst'}
           </Typography>
         </Box>
         <Box component="form" onSubmit={onFormSubmit}>
-          <Box className={styles.display_flex + " " + styles.input_field}>
-            <Box className={styles.padding_right + " " + styles.width_100}>
+          <Box className={styles.display_flex + ' ' + styles.input_field}>
+            <Box className={styles.padding_right + ' ' + styles.width_100}>
               <TextField
                 type="text"
                 variant="outlined"
@@ -163,7 +155,7 @@ export default function Gst() {
                 onChange={onValueChange}
                 onBlur={handleBlur}
               />
-              {errors.name && touched.name ? (
+              {errors.name != null && (touched.name ?? false) ? (
                 <div className={styles.form_error}>{errors.name}</div>
               ) : null}
             </Box>
@@ -175,11 +167,11 @@ export default function Gst() {
                 label="Enter tax"
                 size="small"
                 fullWidth
-                value={editData.tax===0?"":editData.tax}
+                value={editData.tax === 0 ? '' : editData.tax}
                 onBlur={handleBlur}
                 onChange={onValueChange}
               />
-              {errors.tax && touched.tax ? (
+              {errors.tax != null && (touched.tax ?? false) ? (
                 <div className={styles.form_error}>{errors.tax}</div>
               ) : null}
             </Box>
@@ -196,7 +188,7 @@ export default function Gst() {
               onBlur={handleBlur}
               fullWidth
             />
-            {errors.description && touched.description ? (
+            {errors.description != null && (touched.description ?? false) ? (
               <div className={styles.form_error}>{errors.description}</div>
             ) : null}
           </Box>

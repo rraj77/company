@@ -1,11 +1,10 @@
-
-import { ILinks } from "../interfaces/RouteLink";
+import { ILinks } from '../interfaces/RouteLink';
 
 export const NavLinks: ILinks[] = [
-  { name: "Admin", to: "/" },
+  { name: 'Admin', to: '/' },
   {
-    name: "Company",
-    to: "/company",
+    name: 'Company',
+    to: '/company'
   },
   { name: "Users", to: "/users" },
   {name:"Product",to:"/product"},

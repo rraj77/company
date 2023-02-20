@@ -1,0 +1,8 @@
+dist/
+out/
+public/
+strings/
+tests/
+node_modules/
+package-lock.json
+.eslintrc.js

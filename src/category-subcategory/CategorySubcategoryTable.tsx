@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import Grid from "@mui/material/Unstable_Grid2";
-import { Box, Typography } from "@mui/material";
-import styles from "../styles/styles.module.scss";
-import { ICategory, TableDataProp } from "../interfaces/category";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import TreeView from "@mui/lab/TreeView";
-import TreeItem, { TreeItemProps } from "@mui/lab/TreeItem";
-import EditIcon from "@mui/icons-material/Edit";
-import AddCategorySubCategory from "./category-sub-category-form/AddCategorySubCategory";
-import DeleteIcon from "@mui/icons-material/Delete";
+import React, { useState } from 'react';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Box, Typography } from '@mui/material';
+import styles from '../styles/styles.module.scss';
+import { ICategory, TableDataProp } from '../interfaces/category';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import TreeView from '@mui/lab/TreeView';
+import TreeItem, { TreeItemProps } from '@mui/lab/TreeItem';
+import EditIcon from '@mui/icons-material/Edit';
+import AddCategorySubCategory from './category-sub-category-form/AddCategorySubCategory';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function CategorySubcategoryTable() {
   const [tableData, setTableData] = useState<TableDataProp[]>([]);
   const [edit, setEdit] = useState<TableDataProp>({
     id: 0,
-    category: "",
-    subCategory: [{ id: 0, name: "", children: [] }],
+    category: '',
+    subCategory: [{ id: 0, name: '', children: [] }]
   });
 
   const onAdd = (editData: TableDataProp) => {
     let subCategories: ICategory[] = [];
     let subSubCategory: ICategory[] = [];
     editData.subCategory.map((data, index) => {
-      if (data.name !== "") {
+      if (data.name !== '') {
         data.id = Math.random();
         subCategories.push(data);
-        data.children.map((d, i) => {
-          if (d.name !== "") {
+        data.children.map((d) => {
+          if (d.name !== '') {
             d.id = Math.random();
             subSubCategory.push(d);
           }
@@ -41,36 +41,32 @@ export default function CategorySubcategoryTable() {
     subCategories = [];
   };
   const [editSubCategory, setEditSubCategory] = useState<boolean>(true);
-  const onEditCategory = (
-    e: React.MouseEvent,
-    name: string,
-    data: TableDataProp | ICategory
-  ) => {
+  const onEditCategory = (e: React.MouseEvent, name: string, data: TableDataProp | ICategory) => {
     e.stopPropagation();
     setEditSubCategory(true);
     let copiedData = JSON.parse(JSON.stringify(data));
-    if (name === "subCategory") {
+    if (name === 'subCategory') {
       const da = tableData.find((data) => {
         return data.subCategory.find((d) => d.id === copiedData.id);
       });
-      let copied = JSON.parse(JSON.stringify(da));
+      const copied = JSON.parse(JSON.stringify(da));
 
       copied.subCategory = [copiedData];
       copiedData = copied;
     }
     if (copiedData.subCategory[0] === undefined) {
       copiedData.subCategory.push({
-        name: "",
-        id: "",
-        children: [],
+        name: '',
+        id: '',
+        children: []
       });
       setEdit(copiedData);
     } else {
-      if (name === "subCategory") {
+      if (name === 'subCategory') {
         setEditSubCategory(false);
-        copiedData.subCategory.map((data: ICategory, index: number) => {
+        copiedData.subCategory.map((_data: ICategory, index: number) => {
           if (copiedData.subCategory[index].children[0] === undefined) {
-            copiedData.subCategory[index].children.push({ name: "" });
+            copiedData.subCategory[index].children.push({ name: '' });
           }
         });
       }
@@ -97,18 +93,15 @@ export default function CategorySubcategoryTable() {
           <Box className={styles.display_flex}>
             <Typography className={styles.tree_item}>{labelText}</Typography>
             <Typography variant="caption" color="inherit">
-              {name === "category" ? (
+              {name === 'category' ? (
                 <DeleteIcon
                   onClick={() => onDeleteCategory(labelInfo.id)}
                   color="error"
                   className={styles.padding_right}
                 />
               ) : null}
-              {name !== "children" ? (
-                <EditIcon
-                  color="primary"
-                  onClick={(e) => onEditCategory(e, name, labelInfo)}
-                />
+              {name !== 'children' ? (
+                <EditIcon color="primary" onClick={(e) => onEditCategory(e, name, labelInfo)} />
               ) : null}
             </Typography>
           </Box>
@@ -130,7 +123,7 @@ export default function CategorySubcategoryTable() {
             aria-label="file system navigator"
             defaultCollapseIcon={<ArrowDropDownIcon />}
             defaultExpandIcon={<ArrowRightIcon />}
-            sx={{ paddingRight: "1rem" }}
+            sx={{ paddingRight: '1rem' }}
           >
             <StyledTreeItem
               key={index}

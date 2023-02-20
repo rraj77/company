@@ -1,4 +1,3 @@
-
 import { Routes, Route, NavLink } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import { Box } from "@mui/system";
@@ -13,12 +12,13 @@ import styles from "./../styles/styles.module.scss";
 
 import CategorySubcategoryTable from "../category-subcategory/CategorySubcategoryTable";
 
-import Customertable from "../customer/CustomerTable";
-import Gst from "../admin/gst/Gst";
-import ProductTable from "../products/ProductTable";
+
+
 import Invoice from "../invoice/Invoice";
 
-
+import Customertable from '../customer/CustomerTable';
+import Gst from '../admin/gst/Gst';
+import ProductTable from '../products/ProductTable';
 
 export default function   NavBarList() {
   return (
@@ -30,27 +30,24 @@ export default function   NavBarList() {
               key={index}
               to={links.to}
               style={({ isActive }) => ({
-                color: isActive ? "white" : "black",
-                textDecorationLine: isActive ? "underline" : "none",
+                color: isActive ? 'white' : 'black',
+                textDecorationLine: isActive ? 'underline' : 'none'
               })}
             >
-              <MenuItem sx={{ whiteSpace: "pre-line" }}>{links.name}</MenuItem>
+              <MenuItem sx={{ whiteSpace: 'pre-line' }}>{links.name}</MenuItem>
             </NavLink>
           ))}
         </Box>
-      </Grid>
+      </Grid>import Gst from "../admin/gst/Gst";
       <Grid lg={10} md={10} xs={12} className={styles.company}>
         <Routes>
           <Route path="/" element={<Admin />} />
           <Route path="/company" element={<CompanyList />} />
           <Route path="/users" element={<Users />} />
           <Route path="/product" element={<ProductTable />} />
-          <Route path="/customer" element={<Customertable/>}/>
+          <Route path="/customer" element={<Customertable />} />
           <Route path="/gst" element={<Gst />} />
-          <Route
-            path="/category-subcategory"
-            element={<CategorySubcategoryTable />}
-          />
+          <Route path="/category-subcategory" element={<CategorySubcategoryTable />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/invoice" element={<Invoice/>} />

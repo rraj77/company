@@ -1,6 +1,4 @@
-
-
-import { IProduct } from "../interfaces/product";
+import { IProduct } from '../interfaces/product';
 
 
  export const ProductList:IProduct[] = [
