@@ -1,28 +1,28 @@
-import React from "react";
-import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { Button, IconButton, TableBody } from "@mui/material";
-import { TableCell, Typography } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { ICompanyType } from "../interfaces/company";
-import { Box } from "@mui/system";
-import { useState, useEffect, useRef } from "react";
-import { companyDetails } from "../api-calls/Api";
-import styles from "./../styles/styles.module.scss";
-import AddCompanyForm from "./add-company-form/AddCompanyForm";
+import React from 'react';
+import Table from '@mui/material/Table';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { Button, IconButton, TableBody } from '@mui/material';
+import { TableCell, Typography } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { ICompanyType } from '../interfaces/company';
+import { Box } from '@mui/system';
+import { useState, useEffect, useRef } from 'react';
+import { companyDetails } from '../api-calls/Api';
+import styles from './../styles/styles.module.scss';
+import AddCompanyForm from './add-company-form/AddCompanyForm';
 export default function CompanyList() {
   const [companyList, setCompanyList] = useState<ICompanyType[]>([]);
   const [editCompany, setEditCompany] = useState<ICompanyType>({
     id: 0,
-    name: "",
-    email: "",
+    name: '',
+    email: '',
     phone: 0,
-    pan: "",
-    gst: "",
-    cin: "",
+    pan: '',
+    gst: '',
+    cin: ''
   });
   useEffect(() => {
     return () => {
@@ -32,10 +32,9 @@ export default function CompanyList() {
   const newFormRef: any = useRef();
 
   const onSubmitCompanyForm = (dataCompany: ICompanyType): void => {
-    if (dataCompany.id ) {
+    if (dataCompany.id !== 0) {
       dataCompany.id = Math.random();
-      setCompanyList([...companyList,dataCompany]);
-
+      setCompanyList([...companyList, dataCompany]);
     } else {
       companyList.map((data) => {
         if (data.id === dataCompany.id) {
@@ -81,24 +80,12 @@ export default function CompanyList() {
             <TableBody>
               {companyList?.map((companies) => (
                 <TableRow key={companies.id}>
-                  <TableCell className={styles.tableCellBody}>
-                    {companies.name}
-                  </TableCell>
-                  <TableCell className={styles.tableCellBody}>
-                    {companies.email}
-                  </TableCell>
-                  <TableCell className={styles.tableCellBody}>
-                    {companies.phone}
-                  </TableCell>
-                  <TableCell className={styles.tableCellBody}>
-                    {companies.pan}
-                  </TableCell>
-                  <TableCell className={styles.tableCellBody}>
-                    {companies.gst}
-                  </TableCell>
-                  <TableCell className={styles.tableCellBody}>
-                    {companies.cin}
-                  </TableCell>
+                  <TableCell className={styles.tableCellBody}>{companies.name}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{companies.email}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{companies.phone}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{companies.pan}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{companies.gst}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{companies.cin}</TableCell>
                   <TableCell className={styles.tableCellBody}>
                     <Box className={styles.action}>
                       <IconButton
