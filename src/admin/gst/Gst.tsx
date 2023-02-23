@@ -98,7 +98,8 @@ export default function Gst() {
         <Modal
           open={open}
           aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description">
+          aria-describedby="modal-modal-description"
+        >
           <Box className={styles.popup_style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
               delete confirmation
@@ -118,7 +119,8 @@ export default function Gst() {
             variant="contained"
             size="small"
             className={styles.margin_left + ' ' + styles.margin_left}
-            onClick={onNewForm}>
+            onClick={onNewForm}
+          >
             new
           </Button>
         </Box>
@@ -146,7 +148,8 @@ export default function Gst() {
                       onClick={() => {
                         setEditdata(d);
                         formik.resetForm();
-                      }}>
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
 
@@ -154,7 +157,8 @@ export default function Gst() {
                       color="error"
                       onClick={() => {
                         handleOpen(d.id);
-                      }}>
+                      }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Box>

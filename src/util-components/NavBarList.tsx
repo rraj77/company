@@ -1,23 +1,20 @@
-import React from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
-import MenuItem from "@mui/material/MenuItem";
-import { Box } from "@mui/system";
-import Users from "../main/Users";
-import CompanyList from "../admin/CompanyList";
-import Admin from "../admin/Admin";
-import { NavLinks } from "../routes/Routers";
-import Grid from "@mui/material/Unstable_Grid2";
-import SignIn from "../auth/sign-in/SignIn";
-import SignUp from "../auth/sign-up/SignUp";
-import styles from "./../styles/styles.module.scss";
-
-import CategorySubcategoryTable from "../category-subcategory/CategorySubcategoryTable";
-import Drive from "../drive/Drive";
-
-import Customertable from "../customer/CustomerTable";
-import Gst from "../admin/gst/Gst";
-import ProductTable from "../products/ProductTable";
-
+import React from 'react';
+import { Routes, Route, NavLink } from 'react-router-dom';
+import MenuItem from '@mui/material/MenuItem';
+import { Box } from '@mui/system';
+import Users from '../main/Users';
+import CompanyList from '../admin/CompanyList';
+import Admin from '../admin/Admin';
+import { NavLinks } from '../routes/Routers';
+import Grid from '@mui/material/Unstable_Grid2';
+import SignIn from '../auth/sign-in/SignIn';
+import SignUp from '../auth/sign-up/SignUp';
+import styles from './../styles/styles.module.scss';
+import CategorySubcategoryTable from '../category-subcategory/CategorySubcategoryTable';
+import Drive from '../drive/Drive';
+import Customertable from '../customer/CustomerTable';
+import Gst from '../admin/gst/Gst';
+import ProductTable from '../products/ProductTable';
 
 export default function NavBarList() {
   return (
@@ -29,11 +26,11 @@ export default function NavBarList() {
               key={index}
               to={links.to}
               style={({ isActive }) => ({
-                color: isActive ? "white" : "black",
-                textDecorationLine: isActive ? "underline" : "none",
+                color: isActive ? 'white' : 'black',
+                textDecorationLine: isActive ? 'underline' : 'none'
               })}
             >
-              <MenuItem sx={{ whiteSpace: "pre-line" }}>{links.name}</MenuItem>
+              <MenuItem sx={{ whiteSpace: 'pre-line' }}>{links.name}</MenuItem>
             </NavLink>
           ))}
         </Box>
@@ -44,12 +41,9 @@ export default function NavBarList() {
           <Route path="/company" element={<CompanyList />} />
           <Route path="/users" element={<Users />} />
           <Route path="/product" element={<ProductTable />} />
-          <Route path="/customer" element={<Customertable/>}/>
+          <Route path="/customer" element={<Customertable />} />
           <Route path="/gst" element={<Gst />} />
-          <Route
-            path="/category-subcategory"
-            element={<CategorySubcategoryTable />}
-          />
+          <Route path="/category-subcategory" element={<CategorySubcategoryTable />} />
           <Route path="/drive" element={<Drive />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
