@@ -43,20 +43,13 @@ const DriveCard = ({ cardDetails }: DriveCardProps) => {
     <>
       <Card
         className={style.card}
-        sx={{ position: 'relative' }}
         aria-owns={anchorEl ? 'simple-menu' : undefined}
         aria-haspopup="true"
         onMouseEnter={mouseInHandler}
         onMouseLeave={mouseOutHandler}>
         <CardMedia sx={{ height: 110 }} image={cardDetails.image} title={cardDetails.title} />
 
-        <CardContent
-          sx={{
-            height: '10px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
+        <CardContent className={style.card_content}>
           <Typography gutterBottom variant="body2" component="div">
             {cardDetails.title}
           </Typography>

@@ -4,32 +4,8 @@ import Box from '@mui/material/Box';
 import { Modal, Typography, TextField } from '@mui/material';
 import style from '../styles/drive.module.scss';
 import DisplayCard from './DisplayCard';
-import audio from '../image/audio.png';
-import video from '../image/video.png';
-import image from '../image/image.png';
-import natureimage from '../image/nature.webp';
-import zipimage from '../image/zip.png';
-import wallpaper from '../image/wallpaper.jpg';
 import filefolder from '../image/filefolder.png';
-
-const driveCardDetails = [
-  { title: 'audio.mp3', image: audio },
-  { title: 'video.mp4', image: video },
-  { title: 'image.png', image: image },
-  { title: 'nature.webp', image: natureimage },
-  { title: 'video.mp4', image: video },
-  { title: 'zip.png', image: zipimage },
-  { title: 'wallpaper', image: wallpaper },
-  { title: 'audio.mp3', image: audio },
-  { title: 'image.png', image: image },
-  { title: 'audio.mp3', image: audio },
-  { title: 'video.mp4', image: video },
-  { title: 'image.png', image: image },
-  { title: 'nature.webp', image: natureimage },
-  { title: 'video.mp4', image: video },
-  { title: 'zip.png', image: zipimage },
-  { title: 'audio.mp3', image: audio }
-];
+import driveCardDetails from './Constant';
 
 function Drive() {
   const [open, setOpen] = useState(false);
@@ -37,7 +13,7 @@ function Drive() {
 
   const ModelClose = () => {
     setOpen(false);
-    setName('')
+    setName('');
   };
 
   const getName = (name: string) => {

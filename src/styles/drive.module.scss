@@ -1,9 +1,23 @@
 .card{
-    min-width: 180px;
-    min-height:100px;
+    min-width: 190px;
+    min-height:110px;
     font-weight: 2;
     padding: 1rem;
     margin: 30;
+    position: relative;
+}
+
+.display{
+    display:grid;
+    grid-template-columns: auto auto auto auto;
+    gap:2rem;
+}
+
+.card_content{
+    height: 10px;
+    display: flex;
+    justify-Content: space-between;
+    align-Items: center;
 }
 
 .modal{
@@ -13,7 +27,7 @@
    
 }
 
-.popup_style {
+.popup_style { 
     background-color: white;
     border: 1px solid black;
     padding: 2rem;
