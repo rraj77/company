@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button, IconButton, Table } from '@mui/material';
 import { TableBody, TableCell, Typography } from '@mui/material';
 import { TableHead, TableRow, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { useFormik } from 'formik';
-import { vatTableSchema } from './vatTableSchema';
-import styles from '../../styles/styles.module.scss';
+import { gstTableSchema } from './gstTableSchema';
+import styles from '../styles/styles.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { IGst } from '../../interfaces/gst';
+import { IGst } from '../interfaces/gst';
+import { addGst, deleteGst, getGstAll, updateGst } from '../api-calls/gstApi';
 
 export default function Gst() {
   const [data, setData] = useState<IGst[]>([]);
@@ -29,19 +30,20 @@ export default function Gst() {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: vatTableSchema,
-    onSubmit: (values, action) => {
-      if (!Number.isNaN(values.id)) {
-        const list = data;
-        values.id = Math.random();
-        list.push(values);
-        setData(list);
+    validationSchema: gstTableSchema,
+    onSubmit: async (values, action) => {
+      if (values.id === 0) {
+        const gst = await addGst(values);
+        if (gst.status === 200) {
+          setData([...data, gst.data]);
+        }
       } else {
+        const gst = await updateGst(values.id, values);
         data.map((datas) => {
-          if (datas.id === values.id) {
-            datas.name = values.name;
-            datas.tax = values.tax;
-            datas.description = values.description;
+          if (datas.id === values.id && gst.status === 200) {
+            (datas.name = values.name),
+              (datas.description = values.description),
+              (datas.tax = values.tax);
           }
         });
       }
@@ -76,6 +78,23 @@ export default function Gst() {
     formik.resetForm();
   };
 
+  const getAllGst = async () => {
+    const data = await getGstAll();
+    setData(data);
+  };
+
+  const onDeleteGst = async (id: number) => {
+    const gst = await deleteGst(id);
+    if (gst.status === 200) {
+      const deleteData = data.filter((datas) => datas.id !== id);
+      setData(deleteData);
+    }
+  };
+
+  useEffect(() => {
+    getAllGst();
+  }, []);
+
   return (
     <Grid container spacing={2}>
       <Grid xs={12} lg={6} md={6}>
@@ -85,8 +104,7 @@ export default function Gst() {
             variant="contained"
             size="small"
             className={styles.margin_left + ' ' + styles.margin_left}
-            onClick={onNewForm}
-          >
+            onClick={onNewForm}>
             new
           </Button>
         </Box>
@@ -102,7 +120,7 @@ export default function Gst() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.map((d, index: number) => (
+            {data?.map((d, index) => (
               <TableRow key={index}>
                 <TableCell className={styles.tableCellBody}>{d.name}</TableCell>
                 <TableCell className={styles.tableCellBody}>{d.description}</TableCell>
@@ -114,18 +132,11 @@ export default function Gst() {
                       onClick={() => {
                         setEditdata(d);
                         formik.resetForm();
-                      }}
-                    >
+                      }}>
                       <EditIcon />
                     </IconButton>
 
-                    <IconButton
-                      color="error"
-                      onClick={() => {
-                        const deleteData = data.filter((datas) => datas.id !== d.id);
-                        setData(deleteData);
-                      }}
-                    >
+                    <IconButton color="error" onClick={() => onDeleteGst(d.id)}>
                       <DeleteIcon />
                     </IconButton>
                   </Box>
@@ -138,7 +149,7 @@ export default function Gst() {
       <Grid xs={6} lg={6} md={6}>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {!Number.isNaN(editData.id) ? 'Edit' + ' ' + editData.name : 'Add Gst'}
+            {editData.id !== 0 ? 'Edit' + ' ' + editData.name : 'Add Gst'}
           </Typography>
         </Box>
         <Box component="form" onSubmit={onFormSubmit}>

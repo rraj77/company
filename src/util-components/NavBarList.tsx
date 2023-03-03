@@ -14,7 +14,7 @@ import styles from './../styles/styles.module.scss';
 import CategorySubcategoryTable from '../category-subcategory/CategorySubcategoryTable';
 
 import Customertable from '../customer/CustomerTable';
-import Gst from '../admin/gst/Gst';
+import Gst from '../gst/Gst';
 import ProductTable from '../products/ProductTable';
 
 export default function NavBarList() {
