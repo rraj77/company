@@ -20,14 +20,14 @@ export default function ProductTable() {
   const [productData, setProductData] = useState<IProduct[]>([]);
 
   const [userProducts, setuserProducts] = useState<IProduct>({
-    id: 0,
+    id: '',
     name: '',
     category: '',
     subCategory: '',
     description: '',
     tax: 0,
     discount: 0,
-    price:0,
+    price: 0
   });
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function ProductTable() {
 
   function onSubmitProductForm(inputs: IProduct) {
     if (!Number.isNaN(inputs.id)) {
-      inputs.id = Math.random();
+      inputs.id = Math.random().toString();
       const list = productData;
       list.push(inputs);
       setProductData(list);
@@ -62,14 +62,14 @@ export default function ProductTable() {
 
   const handleReset = () => {
     setuserProducts({
-      name: "",
-      category: "",
-      subCategory: "",
-      description: "",
-      tax:0,
-      discount:0,
-      id: 0,
-      price:0,
+      name: '',
+      category: '',
+      subCategory: '',
+      description: '',
+      tax: 0,
+      discount: 0,
+      id: '',
+      price: 0
     });
   };
 
@@ -77,28 +77,6 @@ export default function ProductTable() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12} md={8}>
-          <Box className={style.title}>
-            <Typography variant="h5">products</Typography>
-            <Button variant="contained" className={style.margin_left} onClick={handleReset}>
-              New
-            </Button>
-          </Box>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell className={style.tableCellHead}>product_name</TableCell>
-                <TableCell className={style.tableCellHead}>category</TableCell>
-                <TableCell className={style.tableCellHead}>sub_category</TableCell>
-                <TableCell className={style.tableCellHead}>description</TableCell>
-                <TableCell className={style.tableCellHead}>company_id</TableCell>
-                <TableCell className={style.tableCellHead} align="center">
-                  Action
-                </TableCell>
-              </TableRow>
-            </TableHead>
-          </Table>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={12} md={8}>
               <Box className={style.title}>
                 <Typography variant="h5">products</Typography>
                 <Button variant="contained" className={style.margin_left} onClick={handleReset}>
@@ -139,7 +117,9 @@ export default function ProductTable() {
                           <IconButton
                             color="primary"
                             onClick={() => {
+                             if(products.id!==undefined){
                               editProduct(products.id);
+                             }
                             }}
                           >
                             <EditIcon />
@@ -163,17 +143,18 @@ export default function ProductTable() {
                   })}
                 </TableBody>
               </Table>
-            </Grid>
-            <Grid item xs={12} sm={12} md={4}>
+            
+          </Grid>
+          <Grid item xs={12} sm={12} md={4}>
+
               <AddProductForm
                 onSubmitProductForm={onSubmitProductForm}
                 userProducts={userProducts}
                 setuserProducts={setuserProducts}
               />
+              
             </Grid>
-          </Grid>
         </Grid>
-      </Grid>
     </Box>
   );
 }

@@ -23,7 +23,7 @@ export default function AddProductForm({
     description: userProducts.description,
     tax: userProducts.tax,
     discount: userProducts.discount,
-    price:userProducts.price
+    price: userProducts.price
   };
 
   const { values, touched, errors, handleChange, handleSubmit, resetForm, setErrors } = useFormik({
@@ -51,14 +51,14 @@ export default function AddProductForm({
   const onFormSubmit = (values: IProduct) => {
     onSubmitProductForm(values);
     setuserProducts({
-      id: 0,
+      id: '',
       name: '',
       category: '',
       subCategory: '',
       description: '',
       tax: 0,
       discount: 0,
-      price:0,
+      price: 0
     });
   };
 
@@ -83,14 +83,14 @@ export default function AddProductForm({
   const handleReset = () => {
     resetForm();
     setuserProducts({
-      id: 0,
+      id: '',
       name: '',
       category: '',
       subCategory: '',
       description: '',
       tax: 0,
       discount: 0,
-      price:0,
+      price: 0
     });
   };
   return (
