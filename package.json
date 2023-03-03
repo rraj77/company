@@ -21,20 +21,22 @@
     "react-hook-form": "^7.41.5",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
+    "source-map-explorer": "^2.5.3",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_ENV=production && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "prepare": "husky install",
-    "postinstall": "husky install",
-    "verify-push": "npm run format && npm run lint:fix && npm run lint"
+    "prepare": "npx husky install",
+    "husky-init": "npx husky-init",
+    "verify-commit": "npm run format && npm run lint:fix && npm run lint",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": [
