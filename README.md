@@ -1,7 +1,5 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -56,3 +54,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 # -company_portal
 
 # -company_portal
+
+npx husky add .husky/pre-commit "npm test"
+https://create-react-app.dev/docs/adding-a-css-modules-stylesheet
