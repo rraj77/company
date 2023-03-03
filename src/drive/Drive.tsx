@@ -5,7 +5,7 @@ import { Modal, Typography, TextField } from '@mui/material';
 import style from '../styles/drive.module.scss';
 import DisplayCard from './DisplayCard';
 import filefolder from '../image/filefolder.png';
-import driveCardDetails from './Constant';
+import driveCard from './Constant';
 
 function Drive() {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ function Drive() {
       title: name,
       image: filefolder
     };
-    driveCardDetails.unshift(folder);
+    driveCard.unshift(folder);
     ModelClose();
     setName('');
   };
@@ -73,7 +73,7 @@ function Drive() {
           Upload
         </Button>
       </Box>
-      <DisplayCard driveCardDetails={driveCardDetails} />
+      <DisplayCard driveCardDetails={driveCard} />
     </>
   );
 }
