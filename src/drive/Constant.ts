@@ -1,4 +1,3 @@
-import React from 'react';
 import audio from '../image/audio.png';
 import video from '../image/video.png';
 import image from '../image/image.png';
