@@ -6,7 +6,7 @@ import natureimage from '../image/nature.webp';
 import zipimage from '../image/zip.png';
 import wallpaper from '../image/wallpaper.jpg';
 
-const driveCard= [
+const driveCard = [
   { title: 'audio.mp3', image: audio },
   { title: 'video.mp4', image: video },
   { title: 'image.png', image: image },
