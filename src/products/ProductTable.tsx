@@ -84,12 +84,14 @@ export default function ProductTable() {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell className={styles.tableCellHead}>product_name</TableCell>
+              <TableCell className={styles.tableCellHead}>product name</TableCell>
               <TableCell className={styles.tableCellHead}>category</TableCell>
-              <TableCell className={styles.tableCellHead}>sub_category</TableCell>
+              <TableCell className={styles.tableCellHead}>sub category</TableCell>
               <TableCell className={styles.tableCellHead}>description</TableCell>
               <TableCell className={styles.tableCellHead}>tax</TableCell>
               <TableCell className={styles.tableCellHead}>discount</TableCell>
+              <TableCell className={styles.tableCellHead}>price</TableCell>
+
               <TableCell className={styles.tableCellHead} align="center">
                 Action
               </TableCell>
@@ -107,6 +109,8 @@ export default function ProductTable() {
                   <TableCell className={styles.tableCellBody}>{products.description}</TableCell>
                   <TableCell className={styles.tableCellBody}>{products.tax}</TableCell>
                   <TableCell className={styles.tableCellBody}>{products.discount}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{products.price}</TableCell>
+
                   <TableCell sx={{ display: 'flex' }}>
                     <IconButton
                       color="primary"
