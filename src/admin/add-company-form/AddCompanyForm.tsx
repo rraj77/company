@@ -80,7 +80,7 @@ const forwardRefComponent = (
     <Box>
       <Box className={styles.title}>
         <Typography variant="h5">
-          {!Number.isNaN(editCompany.id) ? 'Edit' + ' ' + editCompany.name : 'Add company'}
+          {editCompany.id !== 0 ? 'Edit' + ' ' + editCompany.name : 'Add company'}
         </Typography>
       </Box>
       <Box component="form" onSubmit={handleFormData} noValidate>
@@ -93,7 +93,6 @@ const forwardRefComponent = (
             value={editCompany.name}
             onChange={onChangeValue}
             onBlur={handleBlur}
-            id="name"
             fullWidth
           />
           {(errors.name ?? '').length > 0 && (touched.name ?? false) ? (
