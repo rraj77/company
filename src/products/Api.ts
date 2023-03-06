@@ -2,7 +2,7 @@ import { IProduct } from '../interfaces/product';
 
 export const ProductList: IProduct[] = [
   {
-    id: '1',
+    id:1,
     name: 'frogen',
     category: 'sdf',
     subCategory: 'desad',
@@ -12,7 +12,7 @@ export const ProductList: IProduct[] = [
     price: 23
   },
   {
-    id: '2',
+    id: 2,
     name: 'Ice ',
     category: 'dfg',
     subCategory: 'cdvf',
@@ -22,7 +22,7 @@ export const ProductList: IProduct[] = [
     price: 21
   },
   {
-    id: '3',
+    id: 3,
     name: 'Eclair',
     category: 'fgf',
     subCategory: 'fdvfdv',
@@ -32,7 +32,7 @@ export const ProductList: IProduct[] = [
     price: 27
   },
   {
-    id: '4',
+    id: 4,
     name: 'Cupcake',
     category: 'fh',
     subCategory: 'fvdgf',
@@ -42,7 +42,7 @@ export const ProductList: IProduct[] = [
     price: 22
   },
   {
-    id: '5',
+    id: 5,
     name: 'Gingerbread',
     category: 'rt',
     subCategory: 'fgfdh',

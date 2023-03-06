@@ -1,3 +1,4 @@
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -35,7 +35,7 @@ export default function Invoice() {
   const [newDiscount, setNewDiscount] = useState<number>(0);
   const [newTotal, setNewTotal] = useState<number>(0);
   const [product, setProduct] = useState<IProduct>({
-    id: '',
+    id: 0,
     name: '',
     category: '',
     subCategory: '',
@@ -151,7 +151,7 @@ export default function Invoice() {
     };
 
     setProduct({
-      id: '',
+      id: 0,
       name: '',
       category: '',
       subCategory: '',

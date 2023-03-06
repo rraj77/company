@@ -1,5 +1,5 @@
 export interface IProduct {
-  id?: string;
+  id: number;
   name: string;
   category: string;
   subCategory: string;
@@ -18,8 +18,8 @@ export interface AddProductFormPro {
   setuserProducts: React.Dispatch<React.SetStateAction<IProduct>>;
 }
 
-export interface  IQuantity  {
-  id?:string,
+export interface IQuantity {
+  id?: string;
   product: IProduct;
   quantity: number;
   totalData: number | undefined;
