@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IInvoiceProduct, IInvoiceProductForm } from '../interfaces/invoice';
-import { invoiceProductsList } from '../api-calls/invoiceApi';
+import { invoiceProductsList } from '../api-calls/invoiceProductsApi';
 
 export default function InvoiceProductForm({
   invoiceProduct,
@@ -81,6 +81,7 @@ export default function InvoiceProductForm({
           invoiceProduct.name
         )}
       </TableCell>
+      <TableCell className={styles.tableCellBody}>{invoiceProduct.description}</TableCell>
       <TableCell className={styles.tableCellBody}>{invoiceProduct.price}</TableCell>
       <TableCell className={styles.tableCellBody}>
         <TextField

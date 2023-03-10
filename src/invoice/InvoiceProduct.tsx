@@ -13,6 +13,7 @@ export default function invoiceProductTable({
   return (
     <TableRow>
       <TableCell className={styles.tableCellBody}>{invoiceProduct.name}</TableCell>
+      <TableCell className={styles.tableCellBody}>{invoiceProduct.description}</TableCell>
       <TableCell className={styles.tableCellBody}>{invoiceProduct.price}</TableCell>
       <TableCell className={styles.tableCellBody}>{invoiceProduct.quantity}</TableCell>
       <TableCell className={styles.tableCellBody}>{invoiceProduct.gst}</TableCell>

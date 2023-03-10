@@ -9,11 +9,15 @@ import InvoiceProductForm from './InvoiceProductForm';
 import InvoiceProduct from './InvoiceProduct';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
+import { addDocument, getAllDocument } from '../api-calls/invoiceProductsApi';
+import { useNavigate } from 'react-router-dom';
 
 function InvoiceData() {
+  const navigate = useNavigate();
   const newInvoiceProduct: IInvoiceProduct = {
     id: 0,
     name: '',
+    description: '',
     price: 0,
     quantity: 1,
     discount: 0,
@@ -48,7 +52,12 @@ function InvoiceData() {
   const [discount, setDiscount] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
 
+  const getAllInvoiceProducts = async () => {
+    const data = await getAllDocument();
+  };
+
   useEffect(() => {
+    getAllInvoiceProducts();
     onTotalAmount(invoice);
   }, [invoiceProducts, discount]);
 
@@ -60,7 +69,7 @@ function InvoiceData() {
     setTotal(Total);
     if (discount > 0) {
       const discountAmount = Total * (discount / 100);
-      invoice.discount = discountAmount;
+      invoice.discount = discount;
       invoice.total = Total - discountAmount;
     } else {
       invoice.discount = 0;
@@ -75,9 +84,13 @@ function InvoiceData() {
       setDiscount(value);
     }
   };
-  const onSaveInvoice = () => {
-    //eslint-disable-next-line no-console
-    console.log('onSaveInvoice');
+  const onSaveInvoice = async () => {
+    const data = await addDocument(invoice);
+    if (data.status === 200) {
+      setTimeout(() => {
+        navigate('/invoice-create');
+      }, 100);
+    }
   };
 
   return (
@@ -86,6 +99,7 @@ function InvoiceData() {
         <TableHead>
           <TableRow>
             <TableCell className={styles.tableCellHead}>Product name</TableCell>
+            <TableCell className={styles.tableCellHead}>Description</TableCell>
             <TableCell className={styles.tableCellHead}>Price</TableCell>
             <TableCell className={styles.tableCellHead}>Quantity</TableCell>
             <TableCell className={styles.tableCellHead}>Gst</TableCell>
@@ -114,7 +128,7 @@ function InvoiceData() {
                   />
                 ) : (
                   <InvoiceProduct
-                    key={invoiceProduct.id}
+                    key={index}
                     onDeleteInvoiceProduct={onDeleteInvoiceProduct}
                     invoiceProduct={invoiceProduct}
                     onEditInvoiceProduct={onEditInvoiceProduct}
@@ -160,13 +174,19 @@ function InvoiceData() {
           <Typography>Net Amount :</Typography>
           <Typography className={styles.margin_left}>{invoice.total.toFixed(2)}</Typography>
         </Box>
-        <Button
-          size="small"
-          variant="contained"
-          className={styles.save_button}
-          onClick={onSaveInvoice}>
-          Save
-        </Button>
+        {invoice.total !== 0 ? (
+          <Button
+            size="small"
+            variant="contained"
+            className={styles.save_button}
+            onClick={onSaveInvoice}>
+            Save
+          </Button>
+        ) : (
+          <Button size="small" variant="contained" disabled className={styles.save_button}>
+            Save
+          </Button>
+        )}
       </Box>
     </>
   );

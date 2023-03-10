@@ -1,6 +1,7 @@
 export interface IInvoiceProduct {
   id: number;
   name: string;
+  description: string;
   price: number;
   quantity: number;
   discount: number;
@@ -29,4 +30,13 @@ export interface IInvoice {
   invoiceProducts: IInvoiceProduct[];
   discount: number;
   total: number;
+}
+
+export interface IInvoices {
+  id: number;
+  status: 'active' | 'paid' | 'completed' | 'cancel';
+  number: number;
+  documentDate: number;
+  discount: GLfloat;
+  total: GLfloat;
 }

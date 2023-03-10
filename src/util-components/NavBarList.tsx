@@ -17,6 +17,7 @@ import Invoice from '../invoice/Invoice';
 import Customertable from '../customer/CustomerTable';
 import Gst from '../admin/gst/Gst';
 import ProductTable from '../products/ProductTable';
+import InvoiceList from '../invoice/InvoiceList';
 
 export default function NavBarList() {
   return (
@@ -30,8 +31,7 @@ export default function NavBarList() {
               style={({ isActive }) => ({
                 color: isActive ? 'white' : 'black',
                 textDecorationLine: isActive ? 'underline' : 'none'
-              })}
-            >
+              })}>
               <MenuItem sx={{ whiteSpace: 'pre-line' }}>{links.name}</MenuItem>
             </NavLink>
           ))}
@@ -49,6 +49,7 @@ export default function NavBarList() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/invoice" element={<Invoice />} />
+          <Route path="/invoice-create" element={<InvoiceList />} />
         </Routes>
       </Grid>
     </Grid>
