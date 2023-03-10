@@ -1,18 +1,15 @@
-import { Box } from '@mui/material';
 import React from 'react';
+import { Box } from '@mui/material';
 import DriveCard from './DriveCard';
 import style from '../styles/drive.module.scss';
-import { DisplayCardProps } from '../interfaces/drive';
-import { cardDetailsprops } from '../interfaces/card';
+import driveCard from './Constant';
 
-export default function DisplayCard({ driveCardDetails }: DisplayCardProps) {
+export default function DisplayCard() {
   return (
-    <>
-      <Box className={style.display}>
-        {driveCardDetails.map((cardDetails: cardDetailsprops) => {
-          return <DriveCard cardDetails={cardDetails} key={Math.random()} />;
-        })}
-      </Box>
-    </>
+    <Box className={style.display}>
+      {driveCard.map((cardDetails) => {
+        return <DriveCard cardDetails={cardDetails} key={Math.random()} />;
+      })}
+    </Box>
   );
 }

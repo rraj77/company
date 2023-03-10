@@ -6,6 +6,7 @@ import style from '../styles/drive.module.scss';
 import DisplayCard from './DisplayCard';
 import filefolder from '../image/filefolder.png';
 import driveCard from './Constant';
+import { DisplayCardProps } from '../interfaces/drive';
 
 function Drive() {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,7 @@ function Drive() {
   };
 
   const getName = (name: string) => {
-    const folder: { title: string; image: string } = {
+    const folder: DisplayCardProps = {
       title: name,
       image: filefolder
     };
@@ -33,8 +34,7 @@ function Drive() {
         onClose={ModelClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className={style.modal}
-      >
+        className={style.modal}>
         <Box className={style.popup_style}>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Folder Name
@@ -53,8 +53,7 @@ function Drive() {
               variant="contained"
               onClick={ModelClose}
               color="error"
-              sx={{ marginRight: '7px' }}
-            >
+              sx={{ marginRight: '7px' }}>
               Cancel
             </Button>
             <Button variant="contained" onClick={() => getName(name)} color="success">
@@ -68,15 +67,14 @@ function Drive() {
           variant="contained"
           onClick={() => setOpen(true)}
           size="small"
-          className={style.create_button}
-        >
+          className={style.create_button}>
           Create Folder
         </Button>
         <Button variant="contained" size="small" className={style.upload_button}>
           Upload
         </Button>
       </Box>
-      <DisplayCard driveCardDetails={driveCard} />
+      <DisplayCard />
     </>
   );
 }

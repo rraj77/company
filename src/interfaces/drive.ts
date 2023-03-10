@@ -1,3 +1,11 @@
 export interface DisplayCardProps {
-  driveCardDetails: Array<{ title: string; image: string }>;
+  title: string;
+  image: string;
+}
+
+export interface DriveCardProps {
+  cardDetails: {
+    title: string;
+    image: string;
+  };
 }
