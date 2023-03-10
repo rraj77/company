@@ -29,7 +29,7 @@ export default function CompanyList() {
       setCompanyList(companyDetails);
     };
   }, []);
-  const newFormRef: any = useRef();
+  const newFormRef = useRef<any>();
 
   const onSubmitCompanyForm = (dataCompany: ICompanyType): void => {
     if (dataCompany.id !== 0) {
@@ -58,8 +58,7 @@ export default function CompanyList() {
               variant="contained"
               size="small"
               className={styles.margin_left}
-              onClick={() => newFormRef.current.onNewForm()}
-            >
+              onClick={() => newFormRef.current?.onNewForm()}>
               New
             </Button>
           </Box>
@@ -92,8 +91,7 @@ export default function CompanyList() {
                         color="primary"
                         onClick={() => {
                           setEditCompany(companies);
-                        }}
-                      >
+                        }}>
                         <EditIcon />
                       </IconButton>
 
@@ -104,8 +102,7 @@ export default function CompanyList() {
                             (company) => company.id !== companies.id
                           );
                           setCompanyList(deleteCompany);
-                        }}
-                      >
+                        }}>
                         <DeleteIcon />
                       </IconButton>
                     </Box>

@@ -29,8 +29,6 @@ export default function CategorySubcategoryTable() {
   const api = async () => {
     const data = await getCategory();
     setCategory(data);
-    //eslint-disable-next-line no-console
-    console.log(category, 'in category');
   };
 
   const onAdd = (editData: TableDataProp) => {
@@ -101,7 +99,6 @@ export default function CategorySubcategoryTable() {
   const onDeleteCategory = async (id: number) => {
     const tableCategory = tableData.filter((data) => data.id !== id);
     setTableData(tableCategory);
-    const data = await DeleteCategory(id);
   };
 
   function StyledTreeItem(props: StyledTreeItemProps) {
@@ -142,23 +139,20 @@ export default function CategorySubcategoryTable() {
             aria-label="file system navigator"
             defaultCollapseIcon={<ArrowDropDownIcon />}
             defaultExpandIcon={<ArrowRightIcon />}
-            sx={{ paddingRight: '1rem' }}
-          >
+            sx={{ paddingRight: '1rem' }}>
             <StyledTreeItem
               key={index}
               nodeId={category.category}
               name="category"
               labelInfo={category}
-              labelText={category.category}
-            >
+              labelText={category.category}>
               {category.subCategory.map((subcategory, idx) => (
                 <StyledTreeItem
                   key={idx}
                   name="subCategory"
                   nodeId={subcategory.name}
                   labelText={subcategory.name}
-                  labelInfo={subcategory}
-                >
+                  labelInfo={subcategory}>
                   {subcategory.children.map((children, i) => (
                     <StyledTreeItem
                       key={i}
