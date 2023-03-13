@@ -190,13 +190,15 @@ export default function AddCategorySubCategory({
                   type="button"
                   className={styles.padding_right}
                   onClick={() => removeFormFields('subCategory', index, index)}
-                  color="error">
+                  color="error"
+                >
                   <DeleteIcon />
                 </Button>
                 <Button
                   onClick={() => addFormFields('subCategory', index)}
                   type="button"
-                  color="primary">
+                  color="primary"
+                >
                   <AddIcon />
                 </Button>
               </Box>
@@ -218,13 +220,15 @@ export default function AddCategorySubCategory({
                     type="button"
                     className={styles.padding_right}
                     color="error"
-                    onClick={() => removeFormFields('sCategory', index, i)}>
+                    onClick={() => removeFormFields('sCategory', index, i)}
+                  >
                     <DeleteIcon />
                   </Button>
                   <Button
                     type="button"
                     onClick={() => addFormFields('sCategory', index)}
-                    color="primary">
+                    color="primary"
+                  >
                     <AddIcon />
                   </Button>
                 </Box>

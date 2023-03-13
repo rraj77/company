@@ -171,7 +171,7 @@ export default function Gst() {
       <Grid xs={6} lg={6} md={6}>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {editData.id!==0 ? 'Edit' + ' ' + editData.name : 'Add Gst'}
+            {editData.id !== 0 ? 'Edit' + ' ' + editData.name : 'Add Gst'}
           </Typography>
         </Box>
         <Box component="form" onSubmit={onFormSubmit}>

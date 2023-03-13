@@ -2,7 +2,7 @@ import { IProduct } from '../interfaces/product';
 
 export const ProductList: IProduct[] = [
   {
-    id:1,
+    id: 1,
     name: 'frogen',
     category: 'sdf',
     subCategory: 'desad',

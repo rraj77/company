@@ -178,7 +178,8 @@ function Invoice() {
             size="small"
             variant="contained"
             className={styles.save_button}
-            onClick={onSaveInvoice}>
+            onClick={onSaveInvoice}
+          >
             Save
           </Button>
         ) : (

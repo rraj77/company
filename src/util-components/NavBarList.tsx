@@ -30,7 +30,8 @@ export default function NavBarList() {
               style={({ isActive }) => ({
                 color: isActive ? 'white' : 'black',
                 textDecorationLine: isActive ? 'underline' : 'none'
-              })}>
+              })}
+            >
               <MenuItem sx={{ whiteSpace: 'pre-line' }}>{links.name}</MenuItem>
             </NavLink>
           ))}

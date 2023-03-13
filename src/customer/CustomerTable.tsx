@@ -79,7 +79,8 @@ export default function Customertable() {
             variant="contained"
             className={style.margin_left}
             size="small"
-            onClick={handleReset}>
+            onClick={handleReset}
+          >
             New
           </Button>
         </Box>
@@ -122,7 +123,8 @@ export default function Customertable() {
                       color="primary"
                       onClick={() => {
                         editCustomer(customers.id);
-                      }}>
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
 
@@ -134,7 +136,8 @@ export default function Customertable() {
                         );
 
                         setData(customerCompany);
-                      }}>
+                      }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>

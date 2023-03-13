@@ -81,7 +81,8 @@ export default function ProductTable() {
             variant="contained"
             className={styles.margin_left}
             size="small"
-            onClick={handleReset}>
+            onClick={handleReset}
+          >
             New
           </Button>
         </Box>
@@ -122,7 +123,8 @@ export default function ProductTable() {
                         if (products.id !== undefined) {
                           editProduct(products.id);
                         }
-                      }}>
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
 
@@ -134,7 +136,8 @@ export default function ProductTable() {
                         );
 
                         setProductData(productCompany);
-                      }}>
+                      }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>

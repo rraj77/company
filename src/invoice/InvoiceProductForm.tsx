@@ -108,7 +108,8 @@ export default function InvoiceProductForm({
               color="primary"
               onClick={() => {
                 invoiceProduct.id !== 0 ? onAddInvoiceProduct() : null;
-              }}>
+              }}
+            >
               <AddIcon />
             </IconButton>
           ) : (

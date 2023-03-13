@@ -139,20 +139,23 @@ export default function CategorySubcategoryTable() {
             aria-label="file system navigator"
             defaultCollapseIcon={<ArrowDropDownIcon />}
             defaultExpandIcon={<ArrowRightIcon />}
-            sx={{ paddingRight: '1rem' }}>
+            sx={{ paddingRight: '1rem' }}
+          >
             <StyledTreeItem
               key={index}
               nodeId={category.category}
               name="category"
               labelInfo={category}
-              labelText={category.category}>
+              labelText={category.category}
+            >
               {category.subCategory.map((subcategory, idx) => (
                 <StyledTreeItem
                   key={idx}
                   name="subCategory"
                   nodeId={subcategory.name}
                   labelText={subcategory.name}
-                  labelInfo={subcategory}>
+                  labelInfo={subcategory}
+                >
                   {subcategory.children.map((children, i) => (
                     <StyledTreeItem
                       key={i}
