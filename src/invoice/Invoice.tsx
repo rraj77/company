@@ -12,7 +12,7 @@ import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
 import { addDocument } from '../api-calls/invoiceProductsApi';
 import { useNavigate } from 'react-router-dom';
 
-function InvoiceData() {
+function Invoice() {
   const navigate = useNavigate();
   const newInvoiceProduct: IInvoiceProduct = {
     id: 0,
@@ -49,6 +49,7 @@ function InvoiceData() {
     discount: 0,
     total: 0
   });
+
   const [discount, setDiscount] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [discountAmount, setDiscountAmount] = useState<number>(0);
@@ -189,4 +190,4 @@ function InvoiceData() {
     </>
   );
 }
-export default InvoiceData;
+export default Invoice;
