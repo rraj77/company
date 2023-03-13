@@ -9,7 +9,7 @@ import InvoiceProductForm from './InvoiceProductForm';
 import InvoiceProduct from './InvoiceProduct';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
-import { addDocument, getAllDocument } from '../api-calls/invoiceProductsApi';
+import { addDocument } from '../api-calls/invoiceProductsApi';
 import { useNavigate } from 'react-router-dom';
 
 function InvoiceData() {
@@ -53,12 +53,7 @@ function InvoiceData() {
   const [total, setTotal] = useState<number>(0);
   const [discountAmount, setDiscountAmount] = useState<number>(0);
 
-  const getAllInvoiceProducts = async () => {
-    const data = await getAllDocument();
-  };
-
   useEffect(() => {
-    getAllInvoiceProducts();
     onTotalAmount(invoice);
   }, [invoiceProducts, discount]);
 

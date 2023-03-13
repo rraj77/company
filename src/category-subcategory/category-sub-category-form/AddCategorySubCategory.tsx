@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import styles from '../../styles/styles.module.scss';
 import { ICategory, CategoryProp } from '../../interfaces/category';
+import { UpdateCategory } from '../../api-calls/CategoryApi';
 
 export default function AddCategorySubCategory({
   tableData,
@@ -115,7 +116,7 @@ export default function AddCategorySubCategory({
             if (d.id === data.id && d.name !== '') {
               list[index].subCategory[idx] = d;
             } else {
-              if (!Number.isNaN(d.id)) {
+              if (d.id === 0) {
                 d.id = Math.random();
                 list[index].subCategory.push(d);
               }
@@ -126,7 +127,7 @@ export default function AddCategorySubCategory({
       } else {
         edit.subCategory = subCategories;
         edit.subCategory.map((data) => {
-          if (!Number.isNaN(data.id)) {
+          if (data.id === 0) {
             data.id = Math.random();
           }
         });
@@ -140,6 +141,7 @@ export default function AddCategorySubCategory({
       subCategory: [{ id: 0, name: '', children: [] }]
     });
     setEditSubCategory(true);
+    UpdateCategory();
   };
 
   return (
@@ -149,7 +151,7 @@ export default function AddCategorySubCategory({
           <>
             <Box className={styles.title}>
               <Typography variant="h5">
-                {!Number.isNaN(edit.id) ? 'Edit ' + edit.category : 'Add category'}
+                {edit.id !== 0 ? 'Edit ' + edit.category : 'Add category'}
               </Typography>
             </Box>
             <Box className={styles.input_field}>
@@ -188,15 +190,13 @@ export default function AddCategorySubCategory({
                   type="button"
                   className={styles.padding_right}
                   onClick={() => removeFormFields('subCategory', index, index)}
-                  color="error"
-                >
+                  color="error">
                   <DeleteIcon />
                 </Button>
                 <Button
                   onClick={() => addFormFields('subCategory', index)}
                   type="button"
-                  color="primary"
-                >
+                  color="primary">
                   <AddIcon />
                 </Button>
               </Box>
@@ -218,15 +218,13 @@ export default function AddCategorySubCategory({
                     type="button"
                     className={styles.padding_right}
                     color="error"
-                    onClick={() => removeFormFields('sCategory', index, i)}
-                  >
+                    onClick={() => removeFormFields('sCategory', index, i)}>
                     <DeleteIcon />
                   </Button>
                   <Button
                     type="button"
                     onClick={() => addFormFields('sCategory', index)}
-                    color="primary"
-                  >
+                    color="primary">
                     <AddIcon />
                   </Button>
                 </Box>

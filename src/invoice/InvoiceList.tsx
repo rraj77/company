@@ -23,6 +23,7 @@ export default function InvoiceList() {
       <Table>
         <TableHead>
           <TableRow>
+            <TableCell className={styles.tableCellHead}>Id</TableCell>
             <TableCell className={styles.tableCellHead}>Number</TableCell>
             <TableCell className={styles.tableCellHead}>Invoice Date</TableCell>
             <TableCell className={styles.tableCellHead}>Discount</TableCell>
@@ -34,6 +35,7 @@ export default function InvoiceList() {
           {invoices.map((invoice) => (
             <TableRow key={invoice.id}>
               <TableCell className={styles.tableCellBody}>invoice - {invoice.id}</TableCell>
+              <TableCell className={styles.tableCellBody}>{invoice.number}</TableCell>
               <TableCell className={styles.tableCellBody}>{invoice.documentDate}</TableCell>
               <TableCell className={styles.tableCellBody}>{invoice.discount}</TableCell>
               <TableCell className={styles.tableCellBody}>{invoice.total.toFixed(2)}</TableCell>

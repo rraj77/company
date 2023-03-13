@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
-import { Button, IconButton, Table } from '@mui/material';
+import { Button, IconButton, Modal, Table } from '@mui/material';
 import { TableBody, TableCell, Typography } from '@mui/material';
 import { TableHead, TableRow, TextField } from '@mui/material';
 import { Box } from '@mui/system';
@@ -31,7 +31,7 @@ export default function Gst() {
     initialValues,
     validationSchema: vatTableSchema,
     onSubmit: (values, action) => {
-      if (values.id===0) {
+      if (values.id === 0) {
         const list = data;
         values.id = Math.random();
         list.push(values);
@@ -76,9 +76,43 @@ export default function Gst() {
     formik.resetForm();
   };
 
+  const [open, setOpen] = React.useState(false);
+  const [onDelete, setOnDelete] = useState<number>();
+  const handleOpen = (id: number) => {
+    setOpen(true);
+    setOnDelete(id);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const onDeleteVat = () => {
+    const deleteData = data.filter((datas) => datas.id !== onDelete);
+    setData(deleteData);
+    setOpen(false);
+  };
   return (
     <Grid container spacing={2}>
       <Grid xs={12} lg={6} md={6}>
+        <Modal
+          open={open}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className={styles.popup_style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              delete confirmation
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Are u sure you want to delete data?
+            </Typography>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button size="small" onClick={onDeleteVat}>
+              Delete
+            </Button>
+          </Box>
+        </Modal>
         <Box className={styles.title}>
           <Typography variant="h5">Gst</Typography>
           <Button
@@ -122,8 +156,7 @@ export default function Gst() {
                     <IconButton
                       color="error"
                       onClick={() => {
-                        const deleteData = data.filter((item) => item.id !== d.id);
-                        setData(deleteData);
+                        handleOpen(d.id);
                       }}
                     >
                       <DeleteIcon />

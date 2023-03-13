@@ -1,14 +1,9 @@
 import axios from 'axios';
 import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
 
-export async function getAllDocument() {
-  return await axios.get('http://localhost:4000/document/28').then((data) => data.data);
-}
-
 export async function addDocument(invoice: IInvoice) {
   const invoiceData = {
     status: 'completed',
-    number: Math.floor(Math.random() * 10000000000000),
     discount: invoice.discount,
     total: invoice.total,
     documentProducts: invoice.invoiceProducts
@@ -21,9 +16,12 @@ export async function addDocument(invoice: IInvoice) {
       documentTypeId: 1
     }
   };
-  return await axios.post('http://localhost:4000/document', invoiceData, setHeaders);
+  return await axios.post(
+    `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_DOCUMENT_API_BASE_PATH}`,
+    invoiceData,
+    setHeaders
+  );
 }
-
 
 export const invoiceProductList: IInvoiceProduct[] = [
   {
@@ -77,39 +75,3 @@ export const invoiceProductList: IInvoiceProduct[] = [
     total: 0
   }
 ];
-
-// export async function addCompany(company: ICompanyType) {
-//   const companyData = {
-//     name: company.name,
-//     email: company.email,
-//     phone: company.phone,
-//     pan: company.pan,
-//     gst: company.gst,
-//     cin: company.cin
-//   };
-//   return await axios.post('http://localhost:4000/company', companyData, {
-//     headers: {
-//       userId: 1
-//     }
-//   });
-// }
-
-// export async function updateCompany(id: number, company: ICompanyType) {
-//   const companyData = {
-//     name: company.name,
-//     email: company.email,
-//     phone: company.phone,
-//     pan: company.pan,
-//     gst: company.gst,
-//     cin: company.cin
-//   };
-//   return await axios.put(`http://localhost:4000/company/${id}`, companyData, {
-//     headers: {
-//       userId: 1
-//     }
-//   });
-// }
-
-// export async function deleteCompany(id: number) {
-//   return await axios.delete(`http://localhost:4000/company/${id}`);
-// }
