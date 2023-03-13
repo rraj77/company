@@ -76,8 +76,12 @@ export default function ProductTable() {
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={8}>
         <Box className={styles.title}>
-          <Typography variant="h5">products</Typography>
-          <Button variant="contained" className={styles.margin_left} onClick={handleReset}>
+          <Typography variant="h5">Products</Typography>
+          <Button
+            variant="contained"
+            className={styles.margin_left}
+            size="small"
+            onClick={handleReset}>
             New
           </Button>
         </Box>

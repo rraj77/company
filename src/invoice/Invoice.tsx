@@ -38,8 +38,8 @@ function InvoiceData() {
   };
 
   const onDeleteInvoiceProduct = (id: number) => {
-    const invoiceProductsList = invoiceProducts.filter((item) => item.id !== id);
-    setInvoiceProducts(invoiceProductsList);
+    const invoiceProductList = invoiceProducts.filter((item) => item.id !== id);
+    setInvoiceProducts(invoiceProductList);
     onSaveInvoiceProduct();
   };
 

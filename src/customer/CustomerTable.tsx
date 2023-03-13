@@ -74,8 +74,12 @@ export default function Customertable() {
     <Grid container spacing={2}>
       <Grid item xs={12} sm={12} md={8}>
         <Box className={style.title}>
-          <Typography variant="h5">customers</Typography>
-          <Button variant="contained" className={style.margin_left} onClick={handleReset}>
+          <Typography variant="h5">Customers</Typography>
+          <Button
+            variant="contained"
+            className={style.margin_left}
+            size="small"
+            onClick={handleReset}>
             New
           </Button>
         </Box>
@@ -118,8 +122,7 @@ export default function Customertable() {
                       color="primary"
                       onClick={() => {
                         editCustomer(customers.id);
-                      }}
-                    >
+                      }}>
                       <EditIcon />
                     </IconButton>
 
@@ -131,8 +134,7 @@ export default function Customertable() {
                         );
 
                         setData(customerCompany);
-                      }}
-                    >
+                      }}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>

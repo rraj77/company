@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IInvoiceProduct, IInvoiceProductForm } from '../interfaces/invoice';
-import { invoiceProductsList } from '../api-calls/invoiceProductsApi';
+import { invoiceProductList } from '../api-calls/invoiceProductsApi';
 
 export default function InvoiceProductForm({
   invoiceProduct,
@@ -18,7 +18,7 @@ export default function InvoiceProductForm({
   setInvoiceProducts
 }: IInvoiceProductForm) {
   const onSelectProduct = (event: { target: { value: string } }) => {
-    const invoiceProduct = invoiceProductsList.find(
+    const invoiceProduct = invoiceProductList.find(
       (invoiceProduct) => invoiceProduct.name === event.target.value
     );
     if (invoiceProduct !== undefined) {
@@ -70,7 +70,7 @@ export default function InvoiceProductForm({
           <FormControl fullWidth>
             <InputLabel>Product</InputLabel>
             <Select label="Product" value={invoiceProduct.name} onChange={onSelectProduct}>
-              {invoiceProductsList.map((row) => (
+              {invoiceProductList.map((row) => (
                 <MenuItem key={row.id} value={row.name}>
                   {row.name}
                 </MenuItem>

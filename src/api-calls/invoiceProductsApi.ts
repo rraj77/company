@@ -25,7 +25,7 @@ export async function addDocument(invoice: IInvoice) {
 }
 
 
-export const invoiceProductsList: IInvoiceProduct[] = [
+export const invoiceProductList: IInvoiceProduct[] = [
   {
     id: 1,
     name: 'frogen',
