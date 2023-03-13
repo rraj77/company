@@ -51,6 +51,7 @@ function InvoiceData() {
   });
   const [discount, setDiscount] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
+  const [discountAmount, setDiscountAmount] = useState<number>(0);
 
   const getAllInvoiceProducts = async () => {
     const data = await getAllDocument();
@@ -69,9 +70,11 @@ function InvoiceData() {
     setTotal(Total);
     if (discount > 0) {
       const discountAmount = Total * (discount / 100);
+      setDiscountAmount(discountAmount);
       invoice.discount = discount;
       invoice.total = Total - discountAmount;
     } else {
+      setDiscountAmount(0);
       invoice.discount = 0;
       invoice.total = Total;
     }
@@ -139,7 +142,7 @@ function InvoiceData() {
           })}
           {editInvoiceProductId === 0 ? (
             <InvoiceProductForm
-              key={Math.random()}
+              key={invoiceProduct.id}
               invoiceProducts={invoiceProducts}
               setInvoiceProducts={setInvoiceProducts}
               onSaveInvoiceProduct={onSaveInvoiceProduct}
@@ -168,13 +171,13 @@ function InvoiceData() {
         </Box>
         <Box className={styles.display_flex + ' ' + styles.padding_0_5}>
           <Typography>Discount amount :</Typography>
-          <Typography className={styles.margin_left}>- {invoice.discount.toFixed(2)}</Typography>
+          <Typography className={styles.margin_left}>- {discountAmount.toFixed(2)}</Typography>
         </Box>
         <Box className={styles.display_flex + ' ' + styles.padding_0_5}>
           <Typography>Net Amount :</Typography>
           <Typography className={styles.margin_left}>{invoice.total.toFixed(2)}</Typography>
         </Box>
-        {invoice.total !== 0 ? (
+        {invoice.invoiceProducts[0] !== undefined ? (
           <Button
             size="small"
             variant="contained"
