@@ -1,0 +1,46 @@
+.card{
+    min-width: 190px;
+    min-height:110px;
+    font-weight: 2;
+    padding: 1rem;
+    margin: 30;
+    position: relative;
+}
+
+.display{
+    display:grid;
+    grid-template-columns: auto auto auto auto;
+    gap:2rem;
+}
+
+.card_content{
+    height: 10px;
+    display: flex;
+    justify-Content: space-between;
+    align-Items: center;
+}
+
+.modal{
+    display: flex;
+    justify-Content: center;
+    align-Items: center;
+   
+}
+
+.popup_style { 
+    background-color: white;
+    border: 1px solid black;
+    padding: 2rem;
+  }
+.upload_button{
+   margin-bottom: 1rem  !important;
+}
+.create_button {
+    margin-bottom: 1rem  !important;
+    margin-left: 7px;
+}
+.image{
+     height: 30px; 
+     width: 30px;
+}
+

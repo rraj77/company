@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import styles from '../../styles/styles.module.scss';
 import { ICategory, CategoryProp } from '../../interfaces/category';
+import { UpdateCategory } from '../../api-calls/CategoryApi';
 
 export default function AddCategorySubCategory({
   tableData,
@@ -140,6 +141,7 @@ export default function AddCategorySubCategory({
       subCategory: [{ id: 0, name: '', children: [] }]
     });
     setEditSubCategory(true);
+    UpdateCategory();
   };
 
   return (

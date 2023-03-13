@@ -10,9 +10,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import SignIn from '../auth/sign-in/SignIn';
 import SignUp from '../auth/sign-up/SignUp';
 import styles from './../styles/styles.module.scss';
-
 import CategorySubcategoryTable from '../category-subcategory/CategorySubcategoryTable';
-
+import Drive from '../drive/Drive';
 import Customertable from '../customer/CustomerTable';
 import Gst from '../admin/gst/Gst';
 import ProductTable from '../products/ProductTable';
@@ -45,6 +44,7 @@ export default function NavBarList() {
           <Route path="/customer" element={<Customertable />} />
           <Route path="/gst" element={<Gst />} />
           <Route path="/category-subcategory" element={<CategorySubcategoryTable />} />
+          <Route path="/drive" element={<Drive />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
