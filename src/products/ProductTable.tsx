@@ -7,7 +7,7 @@ import { Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { Typography } from '@mui/material';
 import { Button } from '@mui/material';
-import style from '../styles/styles.module.scss';
+import styles from '../styles/styles.module.scss';
 import AddProductForm from './AddProductForm';
 import { ProductList } from './Api';
 import { useState, useEffect } from 'react';
@@ -26,7 +26,8 @@ export default function ProductTable() {
     subCategory: '',
     description: '',
     tax: 0,
-    discount: 0
+    discount: 0,
+    price: 0
   });
 
   useEffect(() => {
@@ -34,11 +35,10 @@ export default function ProductTable() {
   }, []);
 
   function onSubmitProductForm(inputs: IProduct) {
-    if (!Number.isNaN(inputs.id)) {
+    if (inputs.id === 0) {
       inputs.id = Math.random();
-      const list = productData;
-      list.push(inputs);
-      setProductData(list);
+
+      setProductData([...productData, inputs]);
     } else {
       productData.map((data) => {
         if (data.id === inputs.id) {
@@ -67,111 +67,93 @@ export default function ProductTable() {
       description: '',
       tax: 0,
       discount: 0,
-      id: 0
+      id: 0,
+      price: 0
     });
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={8}>
-          <Box className={style.title}>
-            <Typography variant="h5">products</Typography>
-            <Button variant="contained" className={style.margin_left} onClick={handleReset}>
-              New
-            </Button>
-          </Box>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell className={style.tableCellHead}>product_name</TableCell>
-                <TableCell className={style.tableCellHead}>category</TableCell>
-                <TableCell className={style.tableCellHead}>sub_category</TableCell>
-                <TableCell className={style.tableCellHead}>description</TableCell>
-                <TableCell className={style.tableCellHead}>company_id</TableCell>
-                <TableCell className={style.tableCellHead} align="center">
-                  Action
-                </TableCell>
-              </TableRow>
-            </TableHead>
-          </Table>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={12} md={8}>
-              <Box className={style.title}>
-                <Typography variant="h5">products</Typography>
-                <Button variant="contained" className={style.margin_left} onClick={handleReset}>
-                  New
-                </Button>
-              </Box>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell className={style.tableCellHead}>product_name</TableCell>
-                    <TableCell className={style.tableCellHead}>category</TableCell>
-                    <TableCell className={style.tableCellHead}>sub_category</TableCell>
-                    <TableCell className={style.tableCellHead}>description</TableCell>
-                    <TableCell className={style.tableCellHead}>tax</TableCell>
-                    <TableCell className={style.tableCellHead}>discount</TableCell>
-                    <TableCell className={style.tableCellHead} align="center">
-                      Action
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
+    <Grid container spacing={2}>
+      <Grid item xs={12} sm={12} md={8}>
+        <Box className={styles.title}>
+          <Typography variant="h5">Products</Typography>
+          <Button
+            variant="contained"
+            className={styles.margin_left}
+            size="small"
+            onClick={handleReset}
+          >
+            New
+          </Button>
+        </Box>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell className={styles.tableCellHead}>product name</TableCell>
+              <TableCell className={styles.tableCellHead}>category</TableCell>
+              <TableCell className={styles.tableCellHead}>sub category</TableCell>
+              <TableCell className={styles.tableCellHead}>description</TableCell>
+              <TableCell className={styles.tableCellHead}>tax</TableCell>
+              <TableCell className={styles.tableCellHead}>discount</TableCell>
+              <TableCell className={styles.tableCellHead}>price</TableCell>
 
-                <TableBody>
-                  {productData?.map((products: IProduct) => {
-                    return (
-                      <TableRow key={products.id}>
-                        <TableCell className={style.tableCellBody}>{products.name}</TableCell>
+              <TableCell className={styles.tableCellHead} align="center">
+                Action
+              </TableCell>
+            </TableRow>
+          </TableHead>
 
-                        <TableCell className={style.tableCellBody}>{products.category}</TableCell>
-                        <TableCell className={style.tableCellBody}>
-                          {products.subCategory}
-                        </TableCell>
-                        <TableCell className={style.tableCellBody}>
-                          {products.description}
-                        </TableCell>
-                        <TableCell className={style.tableCellBody}>{products.tax}</TableCell>
-                        <TableCell className={style.tableCellBody}>{products.discount}</TableCell>
-                        <TableCell sx={{ display: 'flex' }}>
-                          <IconButton
-                            color="primary"
-                            onClick={() => {
-                              editProduct(products.id);
-                            }}
-                          >
-                            <EditIcon />
-                          </IconButton>
+          <TableBody>
+            {productData?.map((products: IProduct) => {
+              return (
+                <TableRow key={products.id}>
+                  <TableCell className={styles.tableCellBody}>{products.name}</TableCell>
 
-                          <IconButton
-                            color="error"
-                            onClick={() => {
-                              const productCompany = productData.filter(
-                                (Product) => Product.id !== products.id
-                              );
+                  <TableCell className={styles.tableCellBody}>{products.category}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{products.subCategory}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{products.description}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{products.tax}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{products.discount}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{products.price}</TableCell>
 
-                              setProductData(productCompany);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </Grid>
-            <Grid item xs={12} sm={12} md={4}>
-              <AddProductForm
-                onSubmitProductForm={onSubmitProductForm}
-                userProducts={userProducts}
-                setuserProducts={setuserProducts}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
+                  <TableCell sx={{ display: 'flex' }}>
+                    <IconButton
+                      color="primary"
+                      onClick={() => {
+                        if (products.id !== undefined) {
+                          editProduct(products.id);
+                        }
+                      }}
+                    >
+                      <EditIcon />
+                    </IconButton>
+
+                    <IconButton
+                      color="error"
+                      onClick={() => {
+                        const productCompany = productData.filter(
+                          (Product) => Product.id !== products.id
+                        );
+
+                        setProductData(productCompany);
+                      }}
+                    >
+                      <DeleteIcon />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       </Grid>
-    </Box>
+      <Grid item xs={12} sm={12} md={4}>
+        <AddProductForm
+          onSubmitProductForm={onSubmitProductForm}
+          userProducts={userProducts}
+          setuserProducts={setuserProducts}
+        />
+      </Grid>
+    </Grid>
   );
 }

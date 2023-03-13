@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { useFormik } from 'formik';
 import { formSchema } from '../schemas/schemas';
-import style from '../styles/styles.module.scss';
+import styles from '../styles/styles.module.scss';
 
 import { useEffect } from 'react';
 import { AddProductFormPro, IProduct } from '../interfaces/product';
@@ -22,7 +22,8 @@ export default function AddProductForm({
     subCategory: userProducts.subCategory,
     description: userProducts.description,
     tax: userProducts.tax,
-    discount: userProducts.discount
+    discount: userProducts.discount,
+    price: userProducts.price
   };
 
   const { values, touched, errors, handleChange, handleSubmit, resetForm, setErrors } = useFormik({
@@ -56,7 +57,8 @@ export default function AddProductForm({
       subCategory: '',
       description: '',
       tax: 0,
-      discount: 0
+      discount: 0,
+      price: 0
     });
   };
 
@@ -87,41 +89,36 @@ export default function AddProductForm({
       subCategory: '',
       description: '',
       tax: 0,
-      discount: 0
+      discount: 0,
+      price: 0
     });
   };
   return (
-    <Box
-      sx={{ paddingLeft: '1rem' }}
-      component="form"
-      onSubmit={ProductSubmit}
-      noValidate
-      autoComplete="off"
-    >
-      <Box className={style.title}>
+    <Box component="form" onSubmit={ProductSubmit} noValidate autoComplete="off">
+      <Box className={styles.title}>
         <Typography variant="h5">
-          {!Number.isNaN(userProducts.id) ? 'Edit' + ' ' + userProducts.name : 'Add product'}
+          {userProducts.id !== 0 ? 'Edit' + ' ' + userProducts.name : 'Add product'}
         </Typography>
       </Box>
-      <Box sx={{ display: 'flex' }}>
-        <Box className={style.input_field} sx={{ paddingRight: '1rem' }}>
+      <Box sx={{ display: 'flex' }} className={styles.input_field}>
+        <Box className={styles.width_100 + ' ' + styles.padding_right}>
           <TextField
             size="small"
-            label="product_name"
+            label="Enter product name"
             type="text"
-            name="product_name"
+            name="name"
             fullWidth
             value={userProducts.name}
             onChange={handleValue}
           />
           {errors.name != null && (touched.name ?? false) ? (
-            <p className={style.form_error}>{errors.name}</p>
+            <p className={styles.form_error}>{errors.name}</p>
           ) : null}
         </Box>
-        <Box className={style.input_field}>
+        <Box className={styles.width_100}>
           <TextField
             size="small"
-            label="category"
+            label="Enter category"
             type="text"
             fullWidth
             name="category"
@@ -129,33 +126,32 @@ export default function AddProductForm({
             onChange={handleValue}
           />
           {errors.category != null && (touched.category ?? false) ? (
-            <p className={style.form_error}>{errors.category}</p>
+            <p className={styles.form_error}>{errors.category}</p>
           ) : null}
         </Box>
       </Box>
 
-      <Box className={style.input_field}>
+      <Box className={styles.input_field}>
         <TextField
           size="small"
           id="outlined-required"
-          label="sub_category"
+          label="Enter sub category"
           fullWidth
           type="text"
-          name="sub_category"
+          name="subCategory"
           value={userProducts.subCategory}
           onChange={handleValue}
         />
 
         {errors.subCategory != null && (touched.subCategory ?? false) ? (
-          <p className={style.form_error}>{errors.subCategory}</p>
+          <p className={styles.form_error}>{errors.subCategory}</p>
         ) : null}
       </Box>
 
-      <Box className={style.input_field}>
+      <Box className={styles.input_field}>
         <TextField
           size="small"
-          id="outlined-required"
-          label="description"
+          label=" Enter description"
           fullWidth
           type="text"
           name="description"
@@ -164,16 +160,15 @@ export default function AddProductForm({
         />
 
         {errors.description != null && (touched.description ?? false) ? (
-          <p className={style.form_error}>{errors.description}</p>
+          <p className={styles.form_error}>{errors.description}</p>
         ) : null}
       </Box>
 
-      <Box className={style.input_field}>
+      <Box className={styles.input_field}>
         <TextField
           size="small"
-          id="outlined-required"
           type="number"
-          label="tax"
+          label="Enter tax"
           fullWidth
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           name="tax"
@@ -182,14 +177,13 @@ export default function AddProductForm({
         />
 
         {errors.tax != null && (touched.tax ?? false) ? (
-          <p className={style.form_error}>{errors.tax}</p>
+          <p className={styles.form_error}>{errors.tax}</p>
         ) : null}
       </Box>
-      <Box className={style.input_field}>
+      <Box className={styles.input_field}>
         <TextField
           size="small"
-          id="outlined-required"
-          label="discount"
+          label="Enter discount"
           type="number"
           InputProps={{ inputProps: { min: 0, max: 100 } }}
           fullWidth
@@ -199,10 +193,10 @@ export default function AddProductForm({
         />
 
         {errors.discount != null && (touched.discount ?? false) ? (
-          <p className={style.form_error}>{errors.discount}</p>
+          <p className={styles.form_error}>{errors.discount}</p>
         ) : null}
       </Box>
-      <Box className={style.input_field} sx={{ display: 'flex' }}>
+      <Box className={styles.input_field} sx={{ display: 'flex' }}>
         <Box sx={{ paddingRight: '1rem' }}>
           <Button type="button" variant="contained" onClick={handleReset} size="small">
             RESET

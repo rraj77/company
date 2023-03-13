@@ -29,7 +29,7 @@ export default function CompanyList() {
       setCompanyList(companyDetails);
     };
   }, []);
-  const newFormRef: any = useRef();
+  const newFormRef = useRef<any>();
 
   const onSubmitCompanyForm = (dataCompany: ICompanyType): void => {
     if (dataCompany.id !== 0) {
@@ -58,7 +58,7 @@ export default function CompanyList() {
               variant="contained"
               size="small"
               className={styles.margin_left}
-              onClick={() => newFormRef.current.onNewForm()}
+              onClick={() => newFormRef.current?.onNewForm()}
             >
               New
             </Button>

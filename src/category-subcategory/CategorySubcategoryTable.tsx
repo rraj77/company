@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Box, Typography } from '@mui/material';
 import styles from '../styles/styles.module.scss';
@@ -10,6 +10,9 @@ import TreeItem, { TreeItemProps } from '@mui/lab/TreeItem';
 import EditIcon from '@mui/icons-material/Edit';
 import AddCategorySubCategory from './category-sub-category-form/AddCategorySubCategory';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { getCategory } from './../api-calls/CategoryApi';
+import { AddCategory } from './../api-calls/CategoryApi';
+import { DeleteCategory } from './../api-calls/CategoryApi';
 
 export default function CategorySubcategoryTable() {
   const [tableData, setTableData] = useState<TableDataProp[]>([]);
@@ -18,6 +21,15 @@ export default function CategorySubcategoryTable() {
     category: '',
     subCategory: [{ id: 0, name: '', children: [] }]
   });
+  const [category, setCategory] = useState([]);
+  useEffect(() => {
+    api();
+  }, []);
+
+  const api = async () => {
+    const data = await getCategory();
+    setCategory(data);
+  };
 
   const onAdd = (editData: TableDataProp) => {
     let subCategories: ICategory[] = [];
@@ -36,10 +48,14 @@ export default function CategorySubcategoryTable() {
         subSubCategory = [];
       }
     });
+
+    AddCategory();
+
     editData.subCategory = subCategories;
     setTableData([...tableData, editData]);
     subCategories = [];
   };
+
   const [editSubCategory, setEditSubCategory] = useState<boolean>(true);
   const onEditCategory = (e: React.MouseEvent, name: string, data: TableDataProp | ICategory) => {
     e.stopPropagation();
@@ -80,7 +96,7 @@ export default function CategorySubcategoryTable() {
     labelInfo: TableDataProp | ICategory;
   };
 
-  const onDeleteCategory = (id: number | string) => {
+  const onDeleteCategory = async (id: number) => {
     const tableCategory = tableData.filter((data) => data.id !== id);
     setTableData(tableCategory);
   };

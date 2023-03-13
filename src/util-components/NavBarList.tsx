@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import { Box } from '@mui/system';
@@ -10,12 +9,14 @@ import Grid from '@mui/material/Unstable_Grid2';
 import SignIn from '../auth/sign-in/SignIn';
 import SignUp from '../auth/sign-up/SignUp';
 import styles from './../styles/styles.module.scss';
-
 import CategorySubcategoryTable from '../category-subcategory/CategorySubcategoryTable';
+import Drive from '../drive/Drive';
+import Invoice from '../invoice/Invoice';
 
 import Customertable from '../customer/CustomerTable';
 import Gst from '../admin/gst/Gst';
 import ProductTable from '../products/ProductTable';
+import InvoiceList from '../invoice/InvoiceList';
 
 export default function NavBarList() {
   return (
@@ -45,8 +46,11 @@ export default function NavBarList() {
           <Route path="/customer" element={<Customertable />} />
           <Route path="/gst" element={<Gst />} />
           <Route path="/category-subcategory" element={<CategorySubcategoryTable />} />
+          <Route path="/drive" element={<Drive />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/invoice" element={<Invoice />} />
+          <Route path="/invoice-create" element={<InvoiceList />} />
         </Routes>
       </Grid>
     </Grid>

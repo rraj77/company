@@ -1,0 +1,77 @@
+import axios from 'axios';
+import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
+
+export async function addDocument(invoice: IInvoice) {
+  const invoiceData = {
+    status: 'completed',
+    discount: invoice.discount,
+    total: invoice.total,
+    documentProducts: invoice.invoiceProducts
+  };
+
+  const setHeaders = {
+    headers: {
+      createdBy: 1,
+      companyId: 1,
+      documentTypeId: 1
+    }
+  };
+  return await axios.post(
+    `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_DOCUMENT_API_BASE_PATH}`,
+    invoiceData,
+    setHeaders
+  );
+}
+
+export const invoiceProductList: IInvoiceProduct[] = [
+  {
+    id: 1,
+    name: 'frogen',
+    description: 'dfg',
+    price: 23,
+    quantity: 1,
+    discount: 5,
+    gst: 4,
+    total: 0
+  },
+  {
+    id: 2,
+    name: 'Ice ',
+    description: 'dfg',
+    price: 21,
+    quantity: 1,
+    discount: 3,
+    gst: 3,
+    total: 0
+  },
+  {
+    id: 3,
+    name: 'Eclair',
+    description: 'dfg',
+    price: 27,
+    quantity: 1,
+    discount: 6,
+    gst: 3,
+    total: 0
+  },
+  {
+    id: 4,
+    name: 'abc',
+    description: 'dfg',
+    price: 22,
+    quantity: 1,
+    discount: 4,
+    gst: 5,
+    total: 0
+  },
+  {
+    id: 5,
+    name: 'Gingerbread',
+    description: 'dfg',
+    price: 25,
+    quantity: 1,
+    discount: 4,
+    gst: 5,
+    total: 0
+  }
+];
