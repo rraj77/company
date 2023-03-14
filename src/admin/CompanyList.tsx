@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -9,10 +9,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { ICompanyType } from '../interfaces/company';
 import { Box } from '@mui/system';
-import { useState, useEffect, useRef } from 'react';
-import { companyDetails } from '../api-calls/Api';
+import { useState, useRef } from 'react';
 import styles from './../styles/styles.module.scss';
 import AddCompanyForm from './add-company-form/AddCompanyForm';
+import { addCompany, deleteCompany, getAllCompany, updateCompany } from '../api/companyApi';
+
 export default function CompanyList() {
   const [companyList, setCompanyList] = useState<ICompanyType[]>([]);
   const [editCompany, setEditCompany] = useState<ICompanyType>({
@@ -24,30 +25,51 @@ export default function CompanyList() {
     gst: '',
     cin: ''
   });
+
+  const getCompanies = async () => {
+    const data: ICompanyType[] = await getAllCompany();
+    setCompanyList(data);
+  };
   useEffect(() => {
-    return () => {
-      setCompanyList(companyDetails);
-    };
+    getCompanies();
   }, []);
+
   const newFormRef = useRef<any>();
 
-  const onSubmitCompanyForm = (dataCompany: ICompanyType): void => {
-    if (dataCompany.id !== 0) {
-      dataCompany.id = Math.random();
-      setCompanyList([...companyList, dataCompany]);
+  const onSubmitCompanyForm = async (dataCompany: ICompanyType) => {
+    const list = [...companyList];
+
+    if (dataCompany.id === 0) {
+      const company = await addCompany(dataCompany);
+      if (company.status === 200) {
+        setCompanyList([...companyList, dataCompany]);
+      }
     } else {
-      companyList.map((data) => {
-        if (data.id === dataCompany.id) {
-          data.name = dataCompany.name;
-          data.email = dataCompany.email;
-          data.phone = dataCompany.phone;
-          data.pan = dataCompany.pan;
-          data.gst = dataCompany.gst;
-          data.cin = dataCompany.cin;
-        }
-      });
+      const company = await updateCompany(dataCompany.id, dataCompany);
+      if (company.status === 200) {
+        list.map((item) => {
+          if (item.id === dataCompany.id) {
+            item.name = dataCompany.name;
+            item.email = dataCompany.email;
+            item.phone = dataCompany.phone;
+            item.pan = dataCompany.pan;
+            item.gst = dataCompany.gst;
+            item.cin = dataCompany.cin;
+          }
+        });
+        setCompanyList(list);
+      }
     }
   };
+
+  const onDeleteCompany = async (id: number) => {
+    const company = await deleteCompany(id);
+    if (company.status === 200) {
+      const companies = companyList.filter((company) => company.id !== id);
+      setCompanyList(companies);
+    }
+  };
+
   return (
     <Box>
       <Grid container columnSpacing={2}>
@@ -58,8 +80,7 @@ export default function CompanyList() {
               variant="contained"
               size="small"
               className={styles.margin_left}
-              onClick={() => newFormRef.current?.onNewForm()}
-            >
+              onClick={() => newFormRef.current?.onNewForm()}>
               New
             </Button>
           </Box>
@@ -78,34 +99,25 @@ export default function CompanyList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {companyList?.map((companies) => (
-                <TableRow key={companies.id}>
-                  <TableCell className={styles.tableCellBody}>{companies.name}</TableCell>
-                  <TableCell className={styles.tableCellBody}>{companies.email}</TableCell>
-                  <TableCell className={styles.tableCellBody}>{companies.phone}</TableCell>
-                  <TableCell className={styles.tableCellBody}>{companies.pan}</TableCell>
-                  <TableCell className={styles.tableCellBody}>{companies.gst}</TableCell>
-                  <TableCell className={styles.tableCellBody}>{companies.cin}</TableCell>
+              {companyList?.map((company) => (
+                <TableRow key={company.id}>
+                  <TableCell className={styles.tableCellBody}>{company.name}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{company.email}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{company.phone}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{company.pan}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{company.gst}</TableCell>
+                  <TableCell className={styles.tableCellBody}>{company.cin}</TableCell>
                   <TableCell className={styles.tableCellBody}>
                     <Box className={styles.action}>
                       <IconButton
                         color="primary"
                         onClick={() => {
-                          setEditCompany(companies);
-                        }}
-                      >
+                          setEditCompany(company);
+                        }}>
                         <EditIcon />
                       </IconButton>
 
-                      <IconButton
-                        color="error"
-                        onClick={() => {
-                          const deleteCompany = companyList.filter(
-                            (company) => company.id !== companies.id
-                          );
-                          setCompanyList(deleteCompany);
-                        }}
-                      >
+                      <IconButton color="error" onClick={() => onDeleteCompany(company.id)}>
                         <DeleteIcon />
                       </IconButton>
                     </Box>
