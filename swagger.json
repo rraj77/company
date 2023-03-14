@@ -2,23 +2,26 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "title": "company api",
-    "description": ""
+    "description": "company api",
+    "title": "REST API"
   },
-  "host": "localhost:4000",
-  "basePath": "/",
-  "schemes": ["http"],
+  "servers": [
+    {
+      "url": "http://localhost:4000"
+    }
+  ],
   "paths": {
     "/company/user/{id}": {
       "get": {
-        "tags": ["Company/User"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -33,7 +36,6 @@
     },
     "/company/": {
       "get": {
-        "tags": ["Company"],
         "description": "",
         "parameters": [],
         "responses": {
@@ -46,39 +48,13 @@
         }
       },
       "post": {
-        "tags": ["Company"],
         "description": "",
         "parameters": [
           {
             "name": "userid",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "phone": {
-                  "example": "any"
-                },
-                "pan": {
-                  "example": "any"
-                },
-                "gst": {
-                  "example": "any"
-                },
-                "cin": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -89,19 +65,49 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "phone": {
+                    "example": "any"
+                  },
+                  "pan": {
+                    "example": "any"
+                  },
+                  "gst": {
+                    "example": "any"
+                  },
+                  "cin": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/company/{id}": {
       "get": {
-        "tags": ["Company"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -117,40 +123,14 @@
         }
       },
       "put": {
-        "tags": ["Company"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "phone": {
-                  "example": "any"
-                },
-                "pan": {
-                  "example": "any"
-                },
-                "gst": {
-                  "example": "any"
-                },
-                "cin": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -164,17 +144,47 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "phone": {
+                    "example": "any"
+                  },
+                  "pan": {
+                    "example": "any"
+                  },
+                  "gst": {
+                    "example": "any"
+                  },
+                  "cin": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["Company"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -192,7 +202,6 @@
     },
     "/gst/": {
       "get": {
-        "tags": ["Gst"],
         "description": "",
         "parameters": [],
         "responses": {
@@ -205,30 +214,13 @@
         }
       },
       "post": {
-        "tags": ["Gst"],
         "description": "",
         "parameters": [
           {
             "name": "companyid",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "tax": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -239,19 +231,40 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "tax": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/gst/{id}": {
       "get": {
-        "tags": ["Gst"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -267,36 +280,21 @@
         }
       },
       "put": {
-        "tags": ["Gst"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "companyid",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "tax": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -310,17 +308,38 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "tax": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["Gst"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -338,7 +357,6 @@
     },
     "/product/": {
       "get": {
-        "tags": ["Product"],
         "description": "",
         "parameters": [],
         "responses": {
@@ -351,43 +369,27 @@
         }
       },
       "post": {
-        "tags": ["Product"],
         "description": "",
         "parameters": [
           {
             "name": "categoryid",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "gstid",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "companyid",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                },
-                "quantity": {
-                  "example": "any"
-                },
-                "direction": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -398,19 +400,43 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  },
+                  "quantity": {
+                    "example": "any"
+                  },
+                  "direction": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/product/{id}": {
       "get": {
-        "tags": ["Product"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -426,43 +452,35 @@
         }
       },
       "put": {
-        "tags": ["Product"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "categoryid",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "gstid",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "companyid",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -476,17 +494,35 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  },
+                  "description": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["Product"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -504,7 +540,6 @@
     },
     "/user/": {
       "get": {
-        "tags": ["User"],
         "description": "",
         "parameters": [],
         "responses": {
@@ -517,31 +552,8 @@
         }
       },
       "post": {
-        "tags": ["User"],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "password": {
-                  "example": "any"
-                },
-                "email": {
-                  "example": "any"
-                },
-                "avatar": {
-                  "example": "any"
-                },
-                "name": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -552,33 +564,42 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "password": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "avatar": {
+                    "example": "any"
+                  },
+                  "name": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/user/{id}": {
       "put": {
-        "tags": ["User"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -586,17 +607,35 @@
           "200": {
             "description": "OK"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["User"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -608,9 +647,16 @@
     },
     "/category/": {
       "get": {
-        "tags": ["Category"],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -621,24 +667,20 @@
         }
       },
       "post": {
-        "tags": ["Category"],
         "description": "",
         "parameters": [
           {
-            "name": "companyid",
+            "name": "parentid",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "name": "body",
-            "in": "body",
+            "name": "companyid",
+            "in": "header",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -649,19 +691,34 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/category/{id}": {
       "get": {
-        "tags": ["Category"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -677,30 +734,21 @@
         }
       },
       "put": {
-        "tags": ["Category"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "companyid",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -714,17 +762,32 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["Category"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -742,7 +805,6 @@
     },
     "/role/": {
       "get": {
-        "tags": ["Role"],
         "description": "",
         "parameters": [],
         "responses": {
@@ -755,22 +817,8 @@
         }
       },
       "post": {
-        "tags": ["Role"],
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "role": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -778,19 +826,34 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/role/{id}": {
       "get": {
-        "tags": ["Role"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -806,25 +869,14 @@
         }
       },
       "put": {
-        "tags": ["Role"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "role": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -841,17 +893,32 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "role": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "delete": {
-        "tags": ["Role"],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -867,18 +934,10 @@
         }
       }
     },
-    "/document/{id}": {
+    "/document/": {
       "get": {
-        "tags": ["Document"],
         "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -887,44 +946,29 @@
             "description": "Not Found"
           }
         }
-      }
-    },
-    "/document/": {
+      },
       "post": {
-        "tags": ["Document"],
         "description": "",
         "parameters": [
           {
             "name": "createdby",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "companyid",
             "in": "header",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "documenttypeid",
             "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "documentProduct": {
-                  "example": "any"
-                },
-                "status": {
-                  "example": "any"
-                },
-                "number": {
-                  "example": "any"
-                }
-              }
+              "type": "string"
             }
           }
         ],
@@ -934,6 +978,49 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "documentProducts": {
+                    "example": "any"
+                  },
+                  "discount": {
+                    "example": "any"
+                  },
+                  "status": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/document/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }

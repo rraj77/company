@@ -11,7 +11,6 @@
 export namespace Company {
   /**
    * No description
-   * @tags Company/User
    * @name UserDetail
    * @request GET:/company/user/{id}
    */
@@ -24,7 +23,6 @@ export namespace Company {
   }
   /**
    * No description
-   * @tags Company
    * @name CompanyList
    * @request GET:/company/
    */
@@ -37,20 +35,25 @@ export namespace Company {
   }
   /**
    * No description
-   * @tags Company
    * @name CompanyCreate
    * @request POST:/company/
    */
   export namespace CompanyCreate {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = {
+      name?: any;
+      email?: any;
+      phone?: any;
+      pan?: any;
+      gst?: any;
+      cin?: any;
+    };
     export type RequestHeaders = { userid?: string };
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Company
    * @name CompanyDetail
    * @request GET:/company/{id}
    */
@@ -63,20 +66,25 @@ export namespace Company {
   }
   /**
    * No description
-   * @tags Company
    * @name CompanyUpdate
    * @request PUT:/company/{id}
    */
   export namespace CompanyUpdate {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = {
+      name?: any;
+      email?: any;
+      phone?: any;
+      pan?: any;
+      gst?: any;
+      cin?: any;
+    };
     export type RequestHeaders = {};
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Company
    * @name CompanyDelete
    * @request DELETE:/company/{id}
    */
@@ -92,7 +100,6 @@ export namespace Company {
 export namespace Gst {
   /**
    * No description
-   * @tags Gst
    * @name GetGst
    * @request GET:/gst/
    */
@@ -105,20 +112,18 @@ export namespace Gst {
   }
   /**
    * No description
-   * @tags Gst
    * @name PostGst
    * @request POST:/gst/
    */
   export namespace PostGst {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { name?: any; description?: any; tax?: any };
     export type RequestHeaders = { companyid?: string };
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Gst
    * @name GetGst2
    * @request GET:/gst/{id}
    * @originalName getGst
@@ -133,20 +138,18 @@ export namespace Gst {
   }
   /**
    * No description
-   * @tags Gst
    * @name PutGst
    * @request PUT:/gst/{id}
    */
   export namespace PutGst {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { name?: any; description?: any; tax?: any };
     export type RequestHeaders = { companyid?: string };
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Gst
    * @name DeleteGst
    * @request DELETE:/gst/{id}
    */
@@ -162,7 +165,6 @@ export namespace Gst {
 export namespace Product {
   /**
    * No description
-   * @tags Product
    * @name ProductList
    * @request GET:/product/
    */
@@ -175,20 +177,18 @@ export namespace Product {
   }
   /**
    * No description
-   * @tags Product
    * @name ProductCreate
    * @request POST:/product/
    */
   export namespace ProductCreate {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { name?: any; description?: any; quantity?: any; direction?: any };
     export type RequestHeaders = { categoryid?: string; gstid?: string; companyid?: string };
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Product
    * @name ProductDetail
    * @request GET:/product/{id}
    */
@@ -201,20 +201,18 @@ export namespace Product {
   }
   /**
    * No description
-   * @tags Product
    * @name ProductUpdate
    * @request PUT:/product/{id}
    */
   export namespace ProductUpdate {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { name?: any; description?: any };
     export type RequestHeaders = { categoryid?: string; gstid?: string; companyid?: string };
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Product
    * @name ProductDelete
    * @request DELETE:/product/{id}
    */
@@ -230,7 +228,6 @@ export namespace Product {
 export namespace User {
   /**
    * No description
-   * @tags User
    * @name UserList
    * @request GET:/user/
    */
@@ -243,33 +240,30 @@ export namespace User {
   }
   /**
    * No description
-   * @tags User
    * @name UserCreate
    * @request POST:/user/
    */
   export namespace UserCreate {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { password?: any; email?: any; avatar?: any; name?: any };
     export type RequestHeaders = {};
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags User
    * @name UserUpdate
    * @request PUT:/user/{id}
    */
   export namespace UserUpdate {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { email?: any; password?: any };
     export type RequestHeaders = {};
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags User
    * @name UserDelete
    * @request DELETE:/user/{id}
    */
@@ -285,33 +279,30 @@ export namespace User {
 export namespace Category {
   /**
    * No description
-   * @tags Category
    * @name CategoryList
    * @request GET:/category/
    */
   export namespace CategoryList {
     export type RequestParams = {};
-    export type RequestQuery = {};
+    export type RequestQuery = { parentId?: string };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Category
    * @name CategoryCreate
    * @request POST:/category/
    */
   export namespace CategoryCreate {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = { companyid?: string };
+    export type RequestBody = { name?: any };
+    export type RequestHeaders = { parentid?: string; companyid?: string };
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Category
    * @name CategoryDetail
    * @request GET:/category/{id}
    */
@@ -324,20 +315,18 @@ export namespace Category {
   }
   /**
    * No description
-   * @tags Category
    * @name CategoryUpdate
    * @request PUT:/category/{id}
    */
   export namespace CategoryUpdate {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { name?: any };
     export type RequestHeaders = { companyid?: string };
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Category
    * @name CategoryDelete
    * @request DELETE:/category/{id}
    */
@@ -353,7 +342,6 @@ export namespace Category {
 export namespace Role {
   /**
    * No description
-   * @tags Role
    * @name RoleList
    * @request GET:/role/
    */
@@ -366,20 +354,18 @@ export namespace Role {
   }
   /**
    * No description
-   * @tags Role
    * @name RoleCreate
    * @request POST:/role/
    */
   export namespace RoleCreate {
     export type RequestParams = {};
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { role?: any };
     export type RequestHeaders = {};
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Role
    * @name RoleDetail
    * @request GET:/role/{id}
    */
@@ -392,20 +378,18 @@ export namespace Role {
   }
   /**
    * No description
-   * @tags Role
    * @name RoleUpdate
    * @request PUT:/role/{id}
    */
   export namespace RoleUpdate {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
-    export type RequestBody = never;
+    export type RequestBody = { role?: any };
     export type RequestHeaders = {};
     export type ResponseBody = void;
   }
   /**
    * No description
-   * @tags Role
    * @name RoleDelete
    * @request DELETE:/role/{id}
    */
@@ -421,7 +405,34 @@ export namespace Role {
 export namespace Document {
   /**
    * No description
-   * @tags Document
+   * @name DocumentList
+   * @request GET:/document/
+   */
+  export namespace DocumentList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
+   * @name DocumentCreate
+   * @request POST:/document/
+   */
+  export namespace DocumentCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = { documentProducts?: any; discount?: any; status?: any };
+    export type RequestHeaders = {
+      createdby?: string;
+      companyid?: string;
+      documenttypeid?: string;
+    };
+    export type ResponseBody = void;
+  }
+  /**
+   * No description
    * @name DocumentDetail
    * @request GET:/document/{id}
    */
@@ -430,23 +441,6 @@ export namespace Document {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = void;
-  }
-  /**
-   * No description
-   * @tags Document
-   * @name DocumentCreate
-   * @request POST:/document/
-   */
-  export namespace DocumentCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {
-      createdby?: string;
-      companyid?: string;
-      documenttypeid?: string;
-    };
     export type ResponseBody = void;
   }
 }
@@ -502,7 +496,10 @@ export class HttpClient<SecurityDataType = unknown> {
     format,
     ...axiosConfig
   }: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || '' });
+    this.instance = axios.create({
+      ...axiosConfig,
+      baseURL: axiosConfig.baseURL || 'http://localhost:4000'
+    });
     this.secure = secure;
     this.format = format;
     this.securityWorker = securityWorker;
@@ -577,19 +574,21 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title company api
+ * @title REST API
  * @version 1.0.0
+ * @baseUrl http://localhost:4000
+ *
+ * company api
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   company = {
     /**
      * No description
      *
-     * @tags Company/User
      * @name UserDetail
      * @request GET:/company/user/{id}
      */
-    userDetail: (id: any, params: RequestParams = {}) =>
+    userDetail: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/company/user/${id}`,
         method: 'GET',
@@ -599,7 +598,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Company
      * @name CompanyList
      * @request GET:/company/
      */
@@ -613,25 +611,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Company
      * @name CompanyCreate
      * @request POST:/company/
      */
-    companyCreate: (params: RequestParams = {}) =>
+    companyCreate: (
+      data: { name?: any; email?: any; phone?: any; pan?: any; gst?: any; cin?: any },
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/company/`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Company
      * @name CompanyDetail
      * @request GET:/company/{id}
      */
-    companyDetail: (id: any, params: RequestParams = {}) =>
+    companyDetail: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/company/${id}`,
         method: 'GET',
@@ -641,25 +642,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Company
      * @name CompanyUpdate
      * @request PUT:/company/{id}
      */
-    companyUpdate: (id: any, params: RequestParams = {}) =>
+    companyUpdate: (
+      id: string,
+      data: { name?: any; email?: any; phone?: any; pan?: any; gst?: any; cin?: any },
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/company/${id}`,
         method: 'PUT',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Company
      * @name CompanyDelete
      * @request DELETE:/company/{id}
      */
-    companyDelete: (id: any, params: RequestParams = {}) =>
+    companyDelete: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/company/${id}`,
         method: 'DELETE',
@@ -670,7 +675,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Gst
      * @name GetGst
      * @request GET:/gst/
      */
@@ -684,27 +688,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Gst
      * @name PostGst
      * @request POST:/gst/
      */
-    postGst: (params: RequestParams = {}) =>
+    postGst: (data: { name?: any; description?: any; tax?: any }, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/gst/`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Gst
      * @name GetGst2
      * @request GET:/gst/{id}
      * @originalName getGst
      * @duplicate
      */
-    getGst2: (id: any, params: RequestParams = {}) =>
+    getGst2: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/gst/${id}`,
         method: 'GET',
@@ -714,25 +718,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Gst
      * @name PutGst
      * @request PUT:/gst/{id}
      */
-    putGst: (id: any, params: RequestParams = {}) =>
+    putGst: (
+      id: string,
+      data: { name?: any; description?: any; tax?: any },
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/gst/${id}`,
         method: 'PUT',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Gst
      * @name DeleteGst
      * @request DELETE:/gst/{id}
      */
-    deleteGst: (id: any, params: RequestParams = {}) =>
+    deleteGst: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/gst/${id}`,
         method: 'DELETE',
@@ -743,7 +751,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Product
      * @name ProductList
      * @request GET:/product/
      */
@@ -757,25 +764,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Product
      * @name ProductCreate
      * @request POST:/product/
      */
-    productCreate: (params: RequestParams = {}) =>
+    productCreate: (
+      data: { name?: any; description?: any; quantity?: any; direction?: any },
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/product/`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Product
      * @name ProductDetail
      * @request GET:/product/{id}
      */
-    productDetail: (id: any, params: RequestParams = {}) =>
+    productDetail: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/product/${id}`,
         method: 'GET',
@@ -785,25 +795,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Product
      * @name ProductUpdate
      * @request PUT:/product/{id}
      */
-    productUpdate: (id: any, params: RequestParams = {}) =>
+    productUpdate: (
+      id: string,
+      data: { name?: any; description?: any },
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/product/${id}`,
         method: 'PUT',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Product
      * @name ProductDelete
      * @request DELETE:/product/{id}
      */
-    productDelete: (id: any, params: RequestParams = {}) =>
+    productDelete: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/product/${id}`,
         method: 'DELETE',
@@ -814,7 +828,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags User
      * @name UserList
      * @request GET:/user/
      */
@@ -828,39 +841,43 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags User
      * @name UserCreate
      * @request POST:/user/
      */
-    userCreate: (params: RequestParams = {}) =>
+    userCreate: (
+      data: { password?: any; email?: any; avatar?: any; name?: any },
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/user/`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags User
      * @name UserUpdate
      * @request PUT:/user/{id}
      */
-    userUpdate: (id: any, params: RequestParams = {}) =>
+    userUpdate: (id: string, data: { email?: any; password?: any }, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/user/${id}`,
         method: 'PUT',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags User
      * @name UserDelete
      * @request DELETE:/user/{id}
      */
-    userDelete: (id: any, params: RequestParams = {}) =>
+    userDelete: (id: string, params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/user/${id}`,
         method: 'DELETE',
@@ -871,39 +888,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Category
      * @name CategoryList
      * @request GET:/category/
      */
-    categoryList: (params: RequestParams = {}) =>
+    categoryList: (query?: { parentId?: string }, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/category/`,
         method: 'GET',
+        query: query,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Category
      * @name CategoryCreate
      * @request POST:/category/
      */
-    categoryCreate: (params: RequestParams = {}) =>
+    categoryCreate: (data: { name?: any }, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/category/`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Category
      * @name CategoryDetail
      * @request GET:/category/{id}
      */
-    categoryDetail: (id: any, params: RequestParams = {}) =>
+    categoryDetail: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/category/${id}`,
         method: 'GET',
@@ -913,25 +930,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Category
      * @name CategoryUpdate
      * @request PUT:/category/{id}
      */
-    categoryUpdate: (id: any, params: RequestParams = {}) =>
+    categoryUpdate: (id: string, data: { name?: any }, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/category/${id}`,
         method: 'PUT',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Category
      * @name CategoryDelete
      * @request DELETE:/category/{id}
      */
-    categoryDelete: (id: any, params: RequestParams = {}) =>
+    categoryDelete: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/category/${id}`,
         method: 'DELETE',
@@ -942,7 +959,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Role
      * @name RoleList
      * @request GET:/role/
      */
@@ -956,25 +972,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Role
      * @name RoleCreate
      * @request POST:/role/
      */
-    roleCreate: (params: RequestParams = {}) =>
+    roleCreate: (data: { role?: any }, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/role/`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Role
      * @name RoleDetail
      * @request GET:/role/{id}
      */
-    roleDetail: (id: any, params: RequestParams = {}) =>
+    roleDetail: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/role/${id}`,
         method: 'GET',
@@ -984,25 +1000,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Role
      * @name RoleUpdate
      * @request PUT:/role/{id}
      */
-    roleUpdate: (id: any, params: RequestParams = {}) =>
+    roleUpdate: (id: string, data: { role?: any }, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/role/${id}`,
         method: 'PUT',
+        body: data,
+        type: ContentType.Json,
         ...params
       }),
 
     /**
      * No description
      *
-     * @tags Role
      * @name RoleDelete
      * @request DELETE:/role/{id}
      */
-    roleDelete: (id: any, params: RequestParams = {}) =>
+    roleDelete: (id: string, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/role/${id}`,
         method: 'DELETE',
@@ -1013,13 +1029,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Document
-     * @name DocumentDetail
-     * @request GET:/document/{id}
+     * @name DocumentList
+     * @request GET:/document/
      */
-    documentDetail: (id: any, params: RequestParams = {}) =>
+    documentList: (params: RequestParams = {}) =>
       this.request<void, void>({
-        path: `/document/${id}`,
+        path: `/document/`,
         method: 'GET',
         ...params
       }),
@@ -1027,14 +1042,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
-     * @tags Document
      * @name DocumentCreate
      * @request POST:/document/
      */
-    documentCreate: (params: RequestParams = {}) =>
+    documentCreate: (
+      data: { documentProducts?: any; discount?: any; status?: any },
+      params: RequestParams = {}
+    ) =>
       this.request<void, void>({
         path: `/document/`,
         method: 'POST',
+        body: data,
+        type: ContentType.Json,
+        ...params
+      }),
+
+    /**
+     * No description
+     *
+     * @name DocumentDetail
+     * @request GET:/document/{id}
+     */
+    documentDetail: (id: string, params: RequestParams = {}) =>
+      this.request<void, void>({
+        path: `/document/${id}`,
+        method: 'GET',
         ...params
       })
   };
