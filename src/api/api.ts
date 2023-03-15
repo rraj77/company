@@ -722,8 +722,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/gst/{id}
      */
     putGst: (
-      id: string,
-      data: { name?: any; description?: any; tax?: any },
+      id: number,
+      data: { name: string; description: string; tax: number },
       params: RequestParams = {}
     ) =>
       this.request<void, void>({
@@ -740,7 +740,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name DeleteGst
      * @request DELETE:/gst/{id}
      */
-    deleteGst: (id: string, params: RequestParams = {}) =>
+    deleteGst: (id: number, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/gst/${id}`,
         method: 'DELETE',
