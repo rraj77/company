@@ -6,14 +6,14 @@ export async function addDocument(invoice: IInvoice) {
     status: 'completed',
     discount: invoice.discount,
     total: invoice.total,
-    documentProducts: invoice.invoiceProducts
+    documentProducts: invoice.invoiceProducts,
+    documentTypeId:invoice.documentTypeId
   };
 
   const setHeaders = {
     headers: {
       createdBy: 1,
       companyId: 1,
-      documentTypeId: 1
     }
   };
   return await axios.post(

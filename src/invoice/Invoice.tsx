@@ -11,8 +11,10 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
 import { addDocument } from '../api-calls/invoiceProductsApi';
 import { useNavigate } from 'react-router-dom';
+import InvoiceType from './InvoiceType';
 
 function Invoice() {
+  const [invoiceTypeId, setInvoiceTypeId] = useState<number>(0);
   const navigate = useNavigate();
   const newInvoiceProduct: IInvoiceProduct = {
     id: 0,
@@ -47,7 +49,8 @@ function Invoice() {
     id: Math.random(),
     invoiceProducts: invoiceProducts,
     discount: 0,
-    total: 0
+    total: 0,
+    documentTypeId: invoiceTypeId
   });
 
   const [discount, setDiscount] = useState<number>(0);
@@ -94,6 +97,10 @@ function Invoice() {
 
   return (
     <>
+      <Box className={styles.title}>
+        <Typography variant="h5">Create Invoice</Typography>
+      </Box>
+      <InvoiceType setInvoiceTypeId={setInvoiceTypeId} />
       <Table>
         <TableHead>
           <TableRow>
@@ -178,8 +185,7 @@ function Invoice() {
             size="small"
             variant="contained"
             className={styles.save_button}
-            onClick={onSaveInvoice}
-          >
+            onClick={onSaveInvoice}>
             Save
           </Button>
         ) : (
