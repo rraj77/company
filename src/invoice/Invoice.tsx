@@ -8,13 +8,25 @@ import styles from '../styles/styles.module.scss';
 import InvoiceProductForm from './InvoiceProductForm';
 import InvoiceProduct from './InvoiceProduct';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
-import { addDocument } from '../api-calls/invoiceProductsApi';
+import {
+  IInvoice,
+  IInvoiceProduct,
+  IInvoiceTypeSelected,
+  ISearchCustomer
+} from '../interfaces/invoice';
+import { addDocument } from '../api/invoiceProductsApi';
 import { useNavigate } from 'react-router-dom';
 import InvoiceType from './InvoiceType';
+import CustomerSearch from './CustomerSearch';
+import CustomerDetails from './CustomerDetailes';
 
 function Invoice() {
-  const [invoiceTypeId, setInvoiceTypeId] = useState<number>(0);
+  const [invoiceTypeSelected, setInvoiceTypeSelected] = useState<IInvoiceTypeSelected>({
+    id: 0,
+    type: '',
+    quantity: 0,
+    amount: 0
+  });
   const navigate = useNavigate();
   const newInvoiceProduct: IInvoiceProduct = {
     id: 0,
@@ -50,8 +62,12 @@ function Invoice() {
     invoiceProducts: invoiceProducts,
     discount: 0,
     total: 0,
-    documentTypeId: invoiceTypeId
+    documentTypeId: 0
   });
+
+  useEffect(() => {
+    setInvoice({ ...invoice, documentTypeId: invoiceTypeSelected.id });
+  }, [invoiceTypeSelected]);
 
   const [discount, setDiscount] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
@@ -87,20 +103,45 @@ function Invoice() {
     }
   };
   const onSaveInvoice = async () => {
-    const data = await addDocument(invoice);
-    if (data.status === 200) {
-      setTimeout(() => {
-        navigate('/invoice-create');
-      }, 100);
+    try {
+      const data = await addDocument(invoice, selectedCustomer);
+      if (data.status === 200) {
+        setTimeout(() => {
+          navigate('/invoice-create');
+        }, 100);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
+  const [selectedCustomer, setSelectedCustomer] = useState<ISearchCustomer>({
+    id: 0,
+    name: '',
+    email: '',
+    phone: '',
+    pan: '',
+    gst: '',
+    cin: '',
+    address: '',
+    type: ''
+  });
 
   return (
     <>
       <Box className={styles.title}>
         <Typography variant="h5">Create Invoice</Typography>
       </Box>
-      <InvoiceType setInvoiceTypeId={setInvoiceTypeId} />
+      <Box className={styles.display_flex + ' ' + styles.input_field}>
+        <InvoiceType
+          setInvoiceTypeSelected={setInvoiceTypeSelected}
+          invoiceTypeSelected={invoiceTypeSelected}
+        />
+        <CustomerSearch setSelectedCustomer={setSelectedCustomer} />
+      </Box>
+      <Box className={styles.display_flex}>
+        {selectedCustomer.id !== 0 ? <CustomerDetails selectedCustomer={selectedCustomer} /> : null}
+      </Box>
       <Table>
         <TableHead>
           <TableRow>

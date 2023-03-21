@@ -1,12 +1,13 @@
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { getAllInvoiceType } from '../api/invoiceType';
-import { IInvoiceType } from '../interfaces/invoice';
-interface invouceTypeProp {
-  setInvoiceTypeId: React.Dispatch<React.SetStateAction<number>>;
-}
+import { IInvoiceType, invouceTypeProp } from '../interfaces/invoice';
+import styles from '../styles/styles.module.scss';
 
-export default function invoiceType({ setInvoiceTypeId }: invouceTypeProp) {
+export default function invoiceType({
+  setInvoiceTypeSelected,
+  invoiceTypeSelected
+}: invouceTypeProp) {
   const [invoiceType, setInvoiceType] = useState<IInvoiceType[]>([]);
 
   const getInvoiceTypes = async () => {
@@ -20,7 +21,7 @@ export default function invoiceType({ setInvoiceTypeId }: invouceTypeProp) {
   const onSelectType = (e: { target: { value: string } }) => {
     const invoicetype = invoiceType.find((item) => item.type === e.target.value);
     if (invoicetype !== undefined) {
-      setInvoiceTypeId(invoicetype.id);
+      setInvoiceTypeSelected(invoicetype);
     }
   };
 
@@ -29,9 +30,9 @@ export default function invoiceType({ setInvoiceTypeId }: invouceTypeProp) {
   }, []);
 
   return (
-    <FormControl sx={{ marginBottom: '1rem', width: '50%' }} size="small">
+    <FormControl fullWidth className={styles.padding_right} size="small">
       <InputLabel>Invoice Type </InputLabel>
-      <Select label="Invoice Type" onChange={onSelectType}>
+      <Select label="Invoice Type" onChange={onSelectType} value={invoiceTypeSelected.type}>
         {invoiceType.map((row) => (
           <MenuItem key={row.id} value={row.type}>
             {row.type}

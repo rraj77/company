@@ -7,8 +7,12 @@ export default function InvoiceList() {
   const [invoices, setInvoices] = useState<IInvoices[]>([]);
 
   const getAllInvoice = async () => {
-    const data = await getAllDocument();
-    setInvoices(data);
+    try {
+      const data = await getAllDocument();
+      setInvoices(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
