@@ -37,11 +37,11 @@ export default function Gst() {
         list.push(values);
         setData(list);
       } else {
-        data.map((datas) => {
-          if (datas.id === values.id) {
-            datas.name = values.name;
-            datas.tax = values.tax;
-            datas.description = values.description;
+        data.map((item) => {
+          if (item.id === values.id) {
+            item.name = values.name;
+            item.tax = values.tax;
+            item.description = values.description;
           }
         });
       }
@@ -136,7 +136,7 @@ export default function Gst() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data?.map((d, index: number) => (
+            {data.map((d, index: number) => (
               <TableRow key={index}>
                 <TableCell className={styles.tableCellBody}>{d.name}</TableCell>
                 <TableCell className={styles.tableCellBody}>{d.description}</TableCell>
@@ -171,7 +171,7 @@ export default function Gst() {
       <Grid xs={6} lg={6} md={6}>
         <Box className={styles.title}>
           <Typography variant="h5">
-            {!Number.isNaN(editData.id) ? 'Edit' + ' ' + editData.name : 'Add Gst'}
+            {editData.id !== 0 ? 'Edit' + ' ' + editData.name : 'Add Gst'}
           </Typography>
         </Box>
         <Box component="form" onSubmit={onFormSubmit}>

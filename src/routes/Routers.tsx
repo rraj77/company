@@ -10,5 +10,6 @@ export const NavLinks: ILinks[] = [
   { name: 'Customer', to: '/customer' },
   { name: 'Gst', to: '/gst' },
   { name: 'Category and subcategy', to: '/category-subcategory' },
-  { name: 'Drive', to: '/drive' }
+  { name: 'Drive', to: '/drive' },
+  { name: 'Invoice', to: '/invoice' }
 ];

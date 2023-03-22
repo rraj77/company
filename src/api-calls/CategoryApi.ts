@@ -1,31 +1,43 @@
 import axios from 'axios';
-export const getCategory = () => {
-  return axios
-    .get('http://localhost:4000/category')
-    .then((data) => data.data)
-    .catch((error) => error);
+export const getCategory = async () => {
+  try {
+    const url = process.env.REACT_APP_API_URL;
+    const path = process.env.REACT_APP_CATEGORY_API_BASE_PATH;
+    const data = await axios.get(`${url}${path}`);
+    return data.data;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const AddCategory = () => {
+export const AddCategory = async () => {
   const categoryData = {
     name: 'hshudhj',
     parentId: 1
   };
-  return axios
-    .post('http://localhost:4000/category', categoryData, {
+  try {
+    const url = process.env.REACT_APP_API_URL;
+    const path = process.env.REACT_APP_CATEGORY_API_BASE_PATH;
+    const data = await axios.post(`${url}${path}`, categoryData, {
       headers: {
         companyId: 1
       }
-    })
-    .then((data) => data.data)
-    .catch((error) => error);
+    });
+    return data.data;
+  } catch (error) {
+    return error;
+  }
 };
 
-export const DeleteCategory = (id: number) => {
-  return axios
-    .delete(`http://localhost:4000/category/${id}`)
-    .then((data) => data.data)
-    .catch((error) => error);
+export const DeleteCategory = async (id: number) => {
+  try {
+    const url = process.env.REACT_APP_API_URL;
+    const path = process.env.REACT_APP_CATEGORY_API_BASE_PATH;
+    const data = await axios.delete(`${url}${path}/${id}`);
+    return data.data;
+  } catch (error) {
+    return error;
+  }
 };
 
 export const UpdateCategory = async () => {
@@ -35,9 +47,13 @@ export const UpdateCategory = async () => {
   };
   const id = 2;
 
-  return await axios.put(`http://localhost:4000/category/${id}`, categoryData, {
-    headers: {
-      companyId: 1
+  return await axios.put(
+    `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_CATEGORY_API_BASE_PATH}/${id}`,
+    categoryData,
+    {
+      headers: {
+        companyId: 1
+      }
     }
-  });
+  );
 };

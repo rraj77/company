@@ -99,20 +99,14 @@ export default function AddCustomerForm({
     });
   };
   return (
-    <Box
-      sx={{ paddingLeft: '1rem' }}
-      component="form"
-      onSubmit={CustomerSubmit}
-      noValidate
-      autoComplete="off"
-    >
+    <Box component="form" onSubmit={CustomerSubmit} noValidate autoComplete="off">
       <Box className={style.title}>
         <Typography variant="h5">
-          {!Number.isNaN(userCustomer.id) ? 'Edit' + ' ' + userCustomer.first_name : 'Add Customer'}
+          {userCustomer.id !== 0 ? 'Edit' + ' ' + userCustomer.first_name : 'Add Customer'}
         </Typography>
       </Box>
       <Box component="form">
-        <Typography variant="h5">Upload photo</Typography>
+        <Typography>Upload photo</Typography>
         {file !== '' ? <Box component="img" src={file} className={style.img} /> : ''}
 
         <Box className={style.input_field}>

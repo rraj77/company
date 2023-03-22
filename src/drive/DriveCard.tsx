@@ -2,7 +2,8 @@ import React from 'react';
 import { Card, Menu, MenuItem, IconButton } from '@mui/material';
 import { CardMedia, CardContent, Typography } from '@mui/material';
 import style from '../styles/drive.module.scss';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 import { DriveCardProps } from '../interfaces/drive';
 
 const DriveCard = ({ cardDetails }: DriveCardProps) => {
@@ -32,7 +33,8 @@ const DriveCard = ({ cardDetails }: DriveCardProps) => {
         aria-owns={anchorEl ? 'simple-menu' : undefined}
         aria-haspopup="true"
         onMouseEnter={mouseInHandler}
-        onMouseLeave={mouseOutHandler}>
+        onMouseLeave={mouseOutHandler}
+      >
         <CardMedia sx={{ height: 110 }} image={cardDetails.image} title={cardDetails.title} />
 
         <CardContent className={style.card_content}>
@@ -47,7 +49,8 @@ const DriveCard = ({ cardDetails }: DriveCardProps) => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit">
+                color="inherit"
+              >
                 <MoreVertIcon />
               </IconButton>
               <Menu
@@ -63,7 +66,8 @@ const DriveCard = ({ cardDetails }: DriveCardProps) => {
                   horizontal: 'right'
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}>
+                onClose={handleClose}
+              >
                 <MenuItem onClick={handleClose}>Download</MenuItem>
                 <MenuItem onClick={handleClose}>Delete</MenuItem>
               </Menu>

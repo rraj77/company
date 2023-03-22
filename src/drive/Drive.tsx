@@ -34,7 +34,8 @@ function Drive() {
         onClose={ModelClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className={style.modal}>
+        className={style.modal}
+      >
         <Box className={style.popup_style}>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Folder Name
@@ -53,7 +54,8 @@ function Drive() {
               variant="contained"
               onClick={ModelClose}
               color="error"
-              sx={{ marginRight: '7px' }}>
+              sx={{ marginRight: '7px' }}
+            >
               Cancel
             </Button>
             <Button variant="contained" onClick={() => getName(name)} color="success">
@@ -67,7 +69,8 @@ function Drive() {
           variant="contained"
           onClick={() => setOpen(true)}
           size="small"
-          className={style.create_button}>
+          className={style.create_button}
+        >
           Create Folder
         </Button>
         <Button variant="contained" size="small" className={style.upload_button}>

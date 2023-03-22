@@ -1,7 +1,6 @@
 import React, { createContext, ReactNode, useState } from 'react';
-import { ContextProps } from '../interfaces/context';
 
-export const contextProvider = createContext<ContextProps | boolean>(false);
+export const contextProvider = createContext<any>(false);
 
 const Context = ({ children }: { children: ReactNode }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);

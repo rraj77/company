@@ -8,7 +8,8 @@ export const ProductList: IProduct[] = [
     subCategory: 'desad',
     description: 'dsjf',
     tax: 4,
-    discount: 5
+    discount: 5,
+    price: 23
   },
   {
     id: 2,
@@ -17,7 +18,8 @@ export const ProductList: IProduct[] = [
     subCategory: 'cdvf',
     description: 'sgjf',
     tax: 3,
-    discount: 3
+    discount: 3,
+    price: 21
   },
   {
     id: 3,
@@ -26,7 +28,8 @@ export const ProductList: IProduct[] = [
     subCategory: 'fdvfdv',
     description: 'dfn',
     tax: 3,
-    discount: 6
+    discount: 6,
+    price: 27
   },
   {
     id: 4,
@@ -35,7 +38,8 @@ export const ProductList: IProduct[] = [
     subCategory: 'fvdgf',
     description: 'dfn',
     tax: 5,
-    discount: 4
+    discount: 4,
+    price: 22
   },
   {
     id: 5,
@@ -44,6 +48,7 @@ export const ProductList: IProduct[] = [
     subCategory: 'fgfdh',
     description: 'djfg',
     tax: 5,
-    discount: 4
+    discount: 4,
+    price: 25
   }
 ];
