@@ -30,6 +30,7 @@ export interface IInvoice {
   invoiceProducts: IInvoiceProduct[];
   discount: number;
   total: number;
+  documentTypeId: number;
 }
 
 export interface IInvoices {
@@ -37,6 +38,42 @@ export interface IInvoices {
   status: 'active' | 'paid' | 'completed' | 'cancel';
   number: number;
   documentDate: number;
-  discount: GLfloat;
-  total: GLfloat;
+  discount: number;
+  total: number;
+}
+
+export interface IInvoiceType {
+  id: number;
+  type: 'invoice-out' | 'invoice-in' | 'waybill-in' | 'waybill-out';
+  quantity: number;
+  amount: number;
+}
+
+export interface ISearchCustomer {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  pan: string;
+  gst: string;
+  cin: string;
+  address: string;
+  type: string;
+}
+
+export interface IAutoComplete {
+  setSelectedCustomer: React.Dispatch<React.SetStateAction<ISearchCustomer>>;
+}
+
+export interface IInvoiceTypeSelected {
+  id: number;
+  type: string;
+  quantity: number;
+  amount: number;
+}
+export interface invouceTypeProp {
+  invoiceTypeSelected:IInvoiceTypeSelected;
+  setInvoiceTypeSelected:React.Dispatch<React.SetStateAction<IInvoiceTypeSelected>>}
+export interface ICustomerDetails {
+  selectedCustomer: ISearchCustomer;
 }

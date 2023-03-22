@@ -632,7 +632,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name CompanyDetail
      * @request GET:/company/{id}
      */
-    companyDetail: (id: string, params: RequestParams = {}) =>
+    companyDetail: (id: number, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/company/${id}`,
         method: 'GET',
@@ -646,7 +646,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/company/{id}
      */
     companyUpdate: (
-      id: string,
+      id: number,
       data: { name?: any; email?: any; phone?: any; pan?: any; gst?: any; cin?: any },
       params: RequestParams = {}
     ) =>
@@ -664,7 +664,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name CompanyDelete
      * @request DELETE:/company/{id}
      */
-    companyDelete: (id: string, params: RequestParams = {}) =>
+    companyDelete: (id: number, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/company/${id}`,
         method: 'DELETE',
@@ -722,8 +722,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/gst/{id}
      */
     putGst: (
-      id: string,
-      data: { name?: any; description?: any; tax?: any },
+      id: number,
+      data: { name: string; description: string; tax: number },
       params: RequestParams = {}
     ) =>
       this.request<void, void>({
@@ -740,7 +740,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name DeleteGst
      * @request DELETE:/gst/{id}
      */
-    deleteGst: (id: string, params: RequestParams = {}) =>
+    deleteGst: (id: number, params: RequestParams = {}) =>
       this.request<void, void>({
         path: `/gst/${id}`,
         method: 'DELETE',

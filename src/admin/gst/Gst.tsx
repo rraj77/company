@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button, IconButton, Modal, Table } from '@mui/material';
 import { TableBody, TableCell, Typography } from '@mui/material';
@@ -10,6 +10,7 @@ import styles from '../../styles/styles.module.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { IGst } from '../../interfaces/gst';
+import { addGst, deleteGst, getGstAll, updateGst } from '../../api/gstApi';
 
 export default function Gst() {
   const [data, setData] = useState<IGst[]>([]);
@@ -30,20 +31,25 @@ export default function Gst() {
   const formik = useFormik({
     initialValues,
     validationSchema: vatTableSchema,
-    onSubmit: (values, action) => {
+    onSubmit: async (values, action) => {
+      const list = [...data];
       if (values.id === 0) {
-        const list = data;
-        values.id = Math.random();
-        list.push(values);
-        setData(list);
+        const gstData = await addGst(values);
+        if (gstData.status === 200) {
+          setData([...data, values]);
+        }
       } else {
-        data.map((item) => {
-          if (item.id === values.id) {
-            item.name = values.name;
-            item.tax = values.tax;
-            item.description = values.description;
-          }
-        });
+        const gstData = await updateGst(values.id, values);
+        if (gstData.status === 200) {
+          list.map((item) => {
+            if (item.id === values.id) {
+              item.name = values.name;
+              item.tax = values.tax;
+              item.description = values.description;
+            }
+          });
+          setData(list);
+        }
       }
       action.resetForm();
       onNewForm();
@@ -62,8 +68,14 @@ export default function Gst() {
   };
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(e);
-    setEditdata({ ...editData, [e.target.name]: e.target.value });
+    const name = e.target.name;
+    if (name === 'tax' && Number(e.target.value) <= 100) {
+      handleChange(e);
+      setEditdata({ ...editData, [e.target.name]: Number(e.target.value) });
+    } else if (name !== 'tax') {
+      handleChange(e);
+      setEditdata({ ...editData, [e.target.name]: e.target.value });
+    }
   };
 
   const onNewForm = () => {
@@ -77,7 +89,7 @@ export default function Gst() {
   };
 
   const [open, setOpen] = React.useState(false);
-  const [onDelete, setOnDelete] = useState<number>();
+  const [onDelete, setOnDelete] = useState<number>(0);
   const handleOpen = (id: number) => {
     setOpen(true);
     setOnDelete(id);
@@ -87,28 +99,34 @@ export default function Gst() {
     setOpen(false);
   };
 
-  const onDeleteVat = () => {
-    const deleteData = data.filter((datas) => datas.id !== onDelete);
-    setData(deleteData);
+  const getAllGst = async () => {
+    const data = await getGstAll();
+    setData(data);
+  };
+
+  useEffect(() => {
+    getAllGst();
+  }, []);
+
+  const onDeleteVat = async () => {
+    const gstData = await deleteGst(onDelete);
+    if (gstData.status === 200) {
+      const deleteData = data.filter((item) => item.id !== onDelete);
+      setData(deleteData);
+    }
     setOpen(false);
   };
+
   return (
     <Grid container spacing={2}>
       <Grid xs={12} lg={6} md={6}>
-        <Modal
-          open={open}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
+        <Modal open={open}>
           <Box className={styles.popup_style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              delete confirmation
-            </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Are u sure you want to delete data?
-            </Typography>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button size="small" onClick={onDeleteVat}>
+            <Typography variant="h6">Are u sure you want to delete?</Typography>
+            <Button onClick={handleClose} size="small">
+              Cancel
+            </Button>
+            <Button size="small" color="error" onClick={onDeleteVat}>
               Delete
             </Button>
           </Box>
@@ -119,8 +137,7 @@ export default function Gst() {
             variant="contained"
             size="small"
             className={styles.margin_left + ' ' + styles.margin_left}
-            onClick={onNewForm}
-          >
+            onClick={onNewForm}>
             new
           </Button>
         </Box>
@@ -148,8 +165,7 @@ export default function Gst() {
                       onClick={() => {
                         setEditdata(d);
                         formik.resetForm();
-                      }}
-                    >
+                      }}>
                       <EditIcon />
                     </IconButton>
 
@@ -157,8 +173,7 @@ export default function Gst() {
                       color="error"
                       onClick={() => {
                         handleOpen(d.id);
-                      }}
-                    >
+                      }}>
                       <DeleteIcon />
                     </IconButton>
                   </Box>
@@ -194,7 +209,7 @@ export default function Gst() {
             </Box>
             <Box className={styles.width_100}>
               <TextField
-                type="text"
+                type="number"
                 variant="outlined"
                 name="tax"
                 label="Enter tax"

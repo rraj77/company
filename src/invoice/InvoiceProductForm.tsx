@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IInvoiceProduct, IInvoiceProductForm } from '../interfaces/invoice';
-import { invoiceProductList } from '../api-calls/invoiceProductsApi';
+import { invoiceProductList } from '../api/invoiceProductsApi';
 
 export default function InvoiceProductForm({
   invoiceProduct,

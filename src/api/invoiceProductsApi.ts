@@ -1,26 +1,25 @@
-import axios from 'axios';
-import { IInvoice, IInvoiceProduct } from '../interfaces/invoice';
+import { IInvoice, IInvoiceProduct, ISearchCustomer } from '../interfaces/invoice';
+import { Api } from './api';
 
-export async function addDocument(invoice: IInvoice) {
+const api = new Api();
+
+export async function addDocument(invoice: IInvoice, selectedCustomer: ISearchCustomer) {
   const invoiceData = {
     status: 'completed',
     discount: invoice.discount,
     total: invoice.total,
-    documentProducts: invoice.invoiceProducts
+    documentProducts: invoice.invoiceProducts,
+    documentTypeId: invoice.documentTypeId,
+    documentCustomer: selectedCustomer
   };
 
   const setHeaders = {
     headers: {
       createdBy: 1,
-      companyId: 1,
-      documentTypeId: 1
+      companyId: 1
     }
   };
-  return await axios.post(
-    `${process.env.REACT_APP_API_URL}${process.env.REACT_APP_DOCUMENT_API_BASE_PATH}`,
-    invoiceData,
-    setHeaders
-  );
+  return await api.document.documentCreate(invoiceData, setHeaders);
 }
 
 export const invoiceProductList: IInvoiceProduct[] = [
