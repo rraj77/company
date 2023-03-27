@@ -83,7 +83,8 @@ export default function UploadFile({
                 className={styles.save_button}
                 variant="contained"
                 type="button"
-                onClick={save}>
+                onClick={save}
+              >
                 save
               </Button>
             </Box>

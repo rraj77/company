@@ -10,7 +10,8 @@ export default function DriveBreadcrumb({ breadPath, handleClick }: IDriveBreadC
     <Typography
       className={styles.cursor_pointer}
       key={breadcrumb.id}
-      onClick={() => handleClick(breadcrumb.id)}>
+      onClick={() => handleClick(breadcrumb.id)}
+    >
       {breadcrumb.name}
     </Typography>
   ));

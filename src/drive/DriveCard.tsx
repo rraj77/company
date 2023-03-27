@@ -33,7 +33,8 @@ const DriveCard = ({ cardDetails, onDeleteFile, onOpenFileFolder }: DriveCardPro
         aria-owns={anchorEl ? 'simple-menu' : undefined}
         aria-haspopup="true"
         onMouseEnter={mouseInHandler}
-        onMouseLeave={mouseOutHandler}>
+        onMouseLeave={mouseOutHandler}
+      >
         <CardMedia
           sx={{ height: 110 }}
           image={cardDetails.path}
@@ -53,7 +54,8 @@ const DriveCard = ({ cardDetails, onDeleteFile, onOpenFileFolder }: DriveCardPro
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit">
+                color="inherit"
+              >
                 <MoreVertIcon />
               </IconButton>
               <Menu
@@ -69,7 +71,8 @@ const DriveCard = ({ cardDetails, onDeleteFile, onOpenFileFolder }: DriveCardPro
                   horizontal: 'right'
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}>
+                onClose={handleClose}
+              >
                 <MenuItem onClick={handleClose}>Download</MenuItem>
                 <MenuItem onClick={() => onDeleteFile(cardDetails.id)}>Delete</MenuItem>
               </Menu>

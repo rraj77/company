@@ -26,7 +26,6 @@ function Drive() {
     getFiles();
   }, []);
 
-
   return (
     <>
       <Box sx={{ textAlign: 'end', display: 'flex', justifyContent: 'space-between' }}>
@@ -34,14 +33,16 @@ function Drive() {
           variant="contained"
           onClick={() => setOpen(true)}
           size="small"
-          className={styles.create_button}>
+          className={styles.create_button}
+        >
           Create Folder
         </Button>
         <Button
           variant="contained"
           size="small"
           className={styles.upload_button}
-          onClick={() => setUploadFile(true)}>
+          onClick={() => setUploadFile(true)}
+        >
           Upload
         </Button>
       </Box>
