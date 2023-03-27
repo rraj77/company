@@ -4,7 +4,7 @@ import styles from '../styles/styles.module.scss';
 
 export default function CustomerDetails({ selectedCustomer }: ICustomerDetails) {
   return (
-    <Box className={styles.footer_total + ' ' + styles.input_field} key={Math.random()} >
+    <Box className={styles.footer_total + ' ' + styles.input_field} key={Math.random()}>
       <Typography variant="h5"> Customer details </Typography>
       {selectedCustomer.name != '' ? (
         <Typography className={styles.padding_right}>Name : {selectedCustomer.name}</Typography>
