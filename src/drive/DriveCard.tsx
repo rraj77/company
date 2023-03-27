@@ -6,7 +6,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { DriveCardProps } from '../interfaces/drive';
 
-const DriveCard = ({ cardDetails }: DriveCardProps) => {
+const DriveCard = ({ cardDetails, onDeleteFile, onOpenFileFolder }: DriveCardProps) => {
   const [toggleButton, setToggleButton] = React.useState<boolean>(false);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -35,11 +35,16 @@ const DriveCard = ({ cardDetails }: DriveCardProps) => {
         onMouseEnter={mouseInHandler}
         onMouseLeave={mouseOutHandler}
       >
-        <CardMedia sx={{ height: 110 }} image={cardDetails.image} title={cardDetails.title} />
+        <CardMedia
+          sx={{ height: 110 }}
+          image={cardDetails.path}
+          title={cardDetails.path}
+          onClick={() => onOpenFileFolder(cardDetails)}
+        />
 
         <CardContent className={style.card_content}>
           <Typography gutterBottom variant="body2" component="div">
-            {cardDetails.title}
+            {cardDetails.name}
           </Typography>
           {toggleButton ? (
             <>
@@ -69,7 +74,7 @@ const DriveCard = ({ cardDetails }: DriveCardProps) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Download</MenuItem>
-                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                <MenuItem onClick={() => onDeleteFile(cardDetails.id)}>Delete</MenuItem>
               </Menu>
             </>
           ) : null}

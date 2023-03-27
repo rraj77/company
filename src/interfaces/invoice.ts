@@ -72,8 +72,9 @@ export interface IInvoiceTypeSelected {
   amount: number;
 }
 export interface invouceTypeProp {
-  invoiceTypeSelected:IInvoiceTypeSelected;
-  setInvoiceTypeSelected:React.Dispatch<React.SetStateAction<IInvoiceTypeSelected>>}
+  invoiceTypeSelected: IInvoiceTypeSelected;
+  setInvoiceTypeSelected: React.Dispatch<React.SetStateAction<IInvoiceTypeSelected>>;
+}
 export interface ICustomerDetails {
   selectedCustomer: ISearchCustomer;
 }

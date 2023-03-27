@@ -80,7 +80,8 @@ export default function CompanyList() {
               variant="contained"
               size="small"
               className={styles.margin_left}
-              onClick={() => newFormRef.current?.onNewForm()}>
+              onClick={() => newFormRef.current?.onNewForm()}
+            >
               New
             </Button>
           </Box>
@@ -113,7 +114,8 @@ export default function CompanyList() {
                         color="primary"
                         onClick={() => {
                           setEditCompany(company);
-                        }}>
+                        }}
+                      >
                         <EditIcon />
                       </IconButton>
 

@@ -137,7 +137,8 @@ export default function Gst() {
             variant="contained"
             size="small"
             className={styles.margin_left + ' ' + styles.margin_left}
-            onClick={onNewForm}>
+            onClick={onNewForm}
+          >
             new
           </Button>
         </Box>
@@ -165,7 +166,8 @@ export default function Gst() {
                       onClick={() => {
                         setEditdata(d);
                         formik.resetForm();
-                      }}>
+                      }}
+                    >
                       <EditIcon />
                     </IconButton>
 
@@ -173,7 +175,8 @@ export default function Gst() {
                       color="error"
                       onClick={() => {
                         handleOpen(d.id);
-                      }}>
+                      }}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </Box>
