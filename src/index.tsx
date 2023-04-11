@@ -5,12 +5,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Context from './context/Context';
+import { ToastContainer } from 'react-toastify';
 
 render(
   <Router>
     <Context>
       <React.StrictMode>
         <App />
+        <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        />
       </React.StrictMode>
     </Context>
   </Router>,
