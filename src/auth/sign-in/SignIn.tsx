@@ -1,12 +1,15 @@
 import React from 'react';
 import { Button, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate} from 'react-router-dom';
 import { useFormik } from 'formik';
 import styles from './../../styles/styles.module.scss';
 import { signInSchema } from './SignInSchema';
+import { userLogin } from '../../api/userApi';
+
 
 export default function SignIn() {
+   const navigate = useNavigate();
   const initialValues = {
     email: '',
     password: ''
@@ -15,7 +18,17 @@ export default function SignIn() {
   const formik = useFormik({
     initialValues,
     validationSchema: signInSchema,
-    onSubmit: (__, action) => {
+    onSubmit: async (values, action) => {
+      const data = await userLogin(values);
+    
+      localStorage.setItem('userData', JSON.stringify(data.data.user));
+      localStorage.setItem('token', data.data.token);
+      
+      if(data.status===200){
+         navigate('/');        
+      }
+      
+      
       action.resetForm();
     }
   });
@@ -70,12 +83,13 @@ export default function SignIn() {
           <b>Forgot password?</b>
         </p>
         <p>
-          <span>Don&apos;t have an account? &nbsp;</span>
+          <span>Dont have an account? &nbsp;</span>
           <b>
             <NavLink to="/SignUp">Sign up here</NavLink>
           </b>
         </p>
       </Box>
+     
     </Box>
   );
 }

@@ -1,12 +1,14 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { Button, TextField } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import {  NavLink, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import styles from './../../styles/styles.module.scss';
 import { signUpSchema } from './SignUpSchema';
+import { addUser } from '../../api/userApi';
 
 export default function SignUp() {
+    const navigate=useNavigate();
   const initialValues = {
     name: '',
     email: '',
@@ -17,7 +19,16 @@ export default function SignUp() {
   const formik = useFormik({
     initialValues,
     validationSchema: signUpSchema,
-    onSubmit: (__, action) => {
+    onSubmit: async (values, action) => {
+     
+        const data = await addUser(values);
+       
+       if(data.status===200){
+        navigate('/SignIn')
+       
+        
+      }
+      
       action.resetForm();
     }
   });
